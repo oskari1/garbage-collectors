@@ -61,11 +61,15 @@ public class Verifier extends AVerifier {
 
 	protected void runNumericalAnalysis(VerificationProperty property) {
 		// TODO: FILL THIS OUT
+		// Create the abstracts that will be needed to construct the polyhedron? 
+		// Call whatever method will add the constraints to the polyhedron? 
+		// Save the result in the this.numericalAnalysis field. 
 	}
 
 	@Override
 	public boolean checksNonNegative() {
 		// TODO: FILL THIS OUT
+		// Retrieve the the content of this.numericalAnalysis and check if the property is correct
 		return true;
 	}
 

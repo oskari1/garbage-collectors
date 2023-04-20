@@ -52,8 +52,15 @@ public class EnvironmentGenerator {
 		this.pointsTo = pointsTo;
 
 		// populate this.ints
-
 		// TODO: FILL THIS OUT
+
+		Chain<Local> locals = method.getActiveBody().getLocals(); 
+		Iterator localItr = locals.iterator(); 
+
+		while (localItr.hasNext()){
+			Local curLocal = (Local)localItr.next(); 
+			this.ints.add(curLocal.getName()); 
+		}
 
 		String ints_arr[] = Iterables.toArray(this.ints, String.class);
 		
