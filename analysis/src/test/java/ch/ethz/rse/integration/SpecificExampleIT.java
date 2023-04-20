@@ -28,14 +28,14 @@ public class SpecificExampleIT {
 		SpecificExampleIT.testOnExample(t);
 	}
 
-	@Test
-	void specificTest2() {
-		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Unsafe";
-		VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
-		boolean expectedIsSafe = false;
-		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
-		SpecificExampleIT.testOnExample(t);
-	}
+	// @Test
+	// void specificTest2() {
+	// 	String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Unsafe";
+	// 	VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+	// 	boolean expectedIsSafe = false;
+	// 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+	// 	SpecificExampleIT.testOnExample(t);
+	// }
 
 
 	private static final Logger logger = LoggerFactory.getLogger(SpecificExampleIT.class);

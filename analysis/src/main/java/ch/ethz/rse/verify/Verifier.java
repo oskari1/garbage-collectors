@@ -51,6 +51,8 @@ public class Verifier extends AVerifier {
 	 * @param c class to verify
 	 */
 	public Verifier(SootClass c) {
+		//Adding a new test comment
+
 		logger.debug("Analyzing {}", c.getName());
 
 		this.c = c;
