@@ -21,7 +21,6 @@ public class SpecificExampleIT {
 	 */
 	@Test
 	void specificTest() {
-		// added test comment 
 		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Safe";
 		VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
 		boolean expectedIsSafe = true;
