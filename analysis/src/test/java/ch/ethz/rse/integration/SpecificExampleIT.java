@@ -28,14 +28,50 @@ public class SpecificExampleIT {
 		SpecificExampleIT.testOnExample(t);
 	}
 
-	// @Test
-	// void specificTest2() {
-	// 	String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Unsafe";
-	// 	VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
-	// 	boolean expectedIsSafe = false;
-	// 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
-	// 	SpecificExampleIT.testOnExample(t);
-	// }
+	@Test
+	void constantTestTrue() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Constant_Safe";
+		VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+		boolean expectedIsSafe = true;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void constantTestFalse() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Constant_Unsafe";
+		VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+		boolean expectedIsSafe = false;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void variableTestTrue() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Variable_Safe";
+		VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+		boolean expectedIsSafe = true;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void variableTestFalse() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Variable_Unsafe";
+		VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+		boolean expectedIsSafe = false;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void specificTest2() {
+	 	String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Unsafe";
+	 	VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+	 	boolean expectedIsSafe = false;
+	 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
 
 
 	private static final Logger logger = LoggerFactory.getLogger(SpecificExampleIT.class);

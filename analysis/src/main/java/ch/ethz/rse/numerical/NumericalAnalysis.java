@@ -193,6 +193,14 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		// merge the two states from w1 and w2 and store the result into w3
 		logger.debug("in merge: " + succNode);
 
+		logger.info("We are using merge"); 
+		try {
+			w3 = w1.join(w2);
+		} catch (ApronException e) {
+			// TODO Auto-generated catch block
+			logger.info("Merge Failed");
+			e.printStackTrace();
+		} 
 		// TODO: FILL THIS OUT
 	}
 
@@ -266,6 +274,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				// handle if
 
 				// TODO: FILL THIS OUT
+				logger.info("We are using JIfStmt"); 
 
 			} else if (s instanceof JInvokeStmt) {
 				// handle invocations
@@ -315,6 +324,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	// returns state of in after assignment
 	private void handleDef(NumericalStateWrapper outWrapper, Value left, Value right) throws ApronException {
 		// TODO: FILL THIS OUT
+		logger.info("We are using handleDef"); 
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
