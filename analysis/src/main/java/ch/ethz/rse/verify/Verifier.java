@@ -28,6 +28,17 @@ import soot.jimple.internal.JSpecialInvokeExpr;
 import soot.jimple.internal.JVirtualInvokeExpr;
 import soot.toolkits.graph.UnitGraph;
 
+// Added imports
+import java.util.*;
+import soot.jimple.IntConstant;
+import soot.jimple.internal.JimpleLocal;
+import apron.Abstract1;
+import apron.ApronException;
+import apron.Environment;
+import apron.Interval;
+import apron.Manager;
+import apron.Tcons1;
+
 /**
  * Main class handling verification
  * 
@@ -61,11 +72,68 @@ public class Verifier extends AVerifier {
 
 	protected void runNumericalAnalysis(VerificationProperty property) {
 		// TODO: FILL THIS OUT
+		// here we need to construct an appropriate NumericalAnalysis-object 
+		// we assume the class we analyze only has a single method (see project description)
+		for(SootMethod method : c.getMethods()) {
+			// note that each class has two methods, the method we are analyzing and the constructor
+			// which according to description always has name <init>
+			NumericalAnalysis an = new NumericalAnalysis(method, property, this.pointsTo); 
+			numericalAnalysis.put(method, an);
+		}
 	}
 
 	@Override
 	public boolean checksNonNegative() {
 		// TODO: FILL THIS OUT
+		logger.debug("running checksNonNegative");
+		for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
+			logger.debug("entered for-loop");
+			// goal: iterate through CFG of the analyzed method
+			// and in each node of the CFG, check if it's a
+			// call to get_delivery(v) and if so, check that v >= 0
+			SootMethod m = entry.getKey();
+			NumericalAnalysis an = entry.getValue();
+			Manager man = an.man;
+			Environment env = an.env;
+			UnitGraph g = SootHelper.getUnitGraph(m);
+			Iterator<Unit> i = g.iterator();
+			while(i.hasNext()) {
+				logger.debug("entered while-loop");
+				Unit u = (Unit) i.next();
+				logger.debug("u's class name: {}", u.getClass().getName());
+				if(is_call_to_get_delivery(u)) {
+					logger.debug("is_call_to_get_delivery is true");
+
+					// get_delivery only has single argument
+					Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
+
+					if (arg instanceof IntConstant) {
+						logger.debug("arg instanceof IntConstant");
+						return ((IntConstant) arg).value >= 0; 
+					} else if (arg instanceof JimpleLocal) {
+						logger.debug("arg instanceof JimpleLocal");
+						Abstract1 in = an.getFlowBefore(u).get();
+						String arg_name = ((JimpleLocal) arg).getName();
+						try {
+							Texpr1Node arg_var = new Texpr1VarNode(arg_name); 
+							Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, arg_var);
+							return in.satisfy(man, constraint);
+						} catch (ApronException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+					// needed for arguments that are not constants:
+					//NumericalStateWrapper in = an.getFlowBefore(u);
+					// want to check if args are >= 0, according to analysis
+
+
+				}
+
+			}
+		}
+		logger.debug("returning true in checksNonNegative");
 		return true;
 	}
 
@@ -82,5 +150,12 @@ public class Verifier extends AVerifier {
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
+	private boolean is_call_to_get_delivery(Unit u) {
+		if (u instanceof JInvokeStmt) {
+			return (((((JInvokeStmt) u).getInvokeExpr()).getMethod()).getName()).equals("get_delivery");
+		} else {
+			return false;
+		}
+	}
 
 }
