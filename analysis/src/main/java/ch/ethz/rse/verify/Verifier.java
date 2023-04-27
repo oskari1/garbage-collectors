@@ -77,6 +77,7 @@ public class Verifier extends AVerifier {
 		for(SootMethod method : c.getMethods()) {
 			// note that each class has two methods, the method we are analyzing and the constructor
 			// which according to description always has name <init>
+			// note that constructing the NumericalAnalysis object automatically start the analysis
 			NumericalAnalysis an = new NumericalAnalysis(method, property, this.pointsTo); 
 			numericalAnalysis.put(method, an);
 		}
@@ -114,9 +115,13 @@ public class Verifier extends AVerifier {
 						logger.debug("arg instanceof JimpleLocal");
 						Abstract1 in = an.getFlowBefore(u).get();
 						String arg_name = ((JimpleLocal) arg).getName();
+						logger.debug("arg_name = {}", arg_name);
 						try {
+							logger.debug("right before Texpr1Node");
 							Texpr1Node arg_var = new Texpr1VarNode(arg_name); 
+							logger.debug("right before Tcons1");
 							Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, arg_var);
+							logger.debug("right before in.satisfy()");
 							return in.satisfy(man, constraint);
 						} catch (ApronException e) {
 							// TODO Auto-generated catch block

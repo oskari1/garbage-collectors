@@ -13,6 +13,11 @@ public class Var_Test_Safe {
     Store s = new Store(2, 4);
     int a = 0;
     int b = a;
-    s.get_delivery(a+b);
+    int c = b+a;
+    // note that by directly passing a or b, the Verifier goes into the case
+    // IntConstant. The only reason I can imagine for this is that during the 
+    // translation to Jimple, some sort of optimization happens. But it's weird
+    // nevertheless...
+    s.get_delivery(c);
   }
 }
