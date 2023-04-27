@@ -42,6 +42,7 @@ import soot.jimple.InvokeExpr;
 import soot.jimple.internal.JInvokeStmt;
 import soot.jimple.internal.JSpecialInvokeExpr;
 import soot.jimple.internal.JVirtualInvokeExpr;
+import soot.jimple.internal.JimpleLocal;
 import soot.toolkits.graph.UnitGraph;
 import soot.util.Chain;
 import soot.util.Cons;
@@ -119,25 +120,32 @@ public class Verifier extends AVerifier {
 						// Get all the arguments
 						List<Value> arguments = ((JInvokeStmt)unit).getInvokeExpr().getArgs(); 
 						for (Value argument : arguments){
-
+							logger.info("Argument" + argument.getClass().getName().toString()); 
 							// If the arguments are constant - compare to 0. If not, do some other fancy things. 
 							if (argument instanceof IntConstant){
 								if (((IntConstant)argument).value<0){
 									return false;
 								}
 							
-							} else if (argument instanceof Local){
-								Local arg = (Local) argument; 
+							} else if (argument instanceof JimpleLocal){
+								JimpleLocal arg = (JimpleLocal) argument; 
 								String arg_name = arg.getName(); 
 								logger.info("Arg_name is: " + arg_name); 
+
+								// Get the value of the unit (get_delivery()) after the flow-analysis
 								Abstract1 nswa = lfp.getFallFlowAfter(unit).get(); 
+
+								// Print the bound of the variable we are currently looking at - for debugging purposes
 								try {
 									logger.info("Bound: " + (nswa.getBound(man, arg_name)).toString());
 								} catch (ApronException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
 								} 
+
+								// Tester is (a representation of) the variable we are currently looking at
 								Texpr1Node tester = new Texpr1VarNode(arg_name);
+								// encode tester >= 0
 								Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, tester);
 								try {
 									if (!(nswa.satisfy(man, constraint))){
@@ -148,7 +156,6 @@ public class Verifier extends AVerifier {
 									e.printStackTrace();
 								}
 							}
-							
 						}
 					}
 				}

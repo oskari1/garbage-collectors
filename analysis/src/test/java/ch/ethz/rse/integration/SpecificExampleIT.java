@@ -38,6 +38,24 @@ public class SpecificExampleIT {
 	}
 
 	@Test
+	void constantAdditionTestTrue() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Constant_Addition_Safe";
+		VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+		boolean expectedIsSafe = true;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void constantAdditionTestFalse() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Constant_Addition_Unsafe";
+		VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+		boolean expectedIsSafe = false;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
 	void constantTestFalse() {
 		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Constant_Unsafe";
 		VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
