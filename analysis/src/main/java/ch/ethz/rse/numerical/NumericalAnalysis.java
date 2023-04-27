@@ -315,6 +315,21 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	// returns state of in after assignment
 	private void handleDef(NumericalStateWrapper outWrapper, Value left, Value right) throws ApronException {
 		// TODO: FILL THIS OUT
+		logger.debug("Handling: " + left.toString() + " = " + right.toString());
+		Abstract1 e = outWrapper.get();
+
+		
+		Texpr1Node right_expr;
+		// make case distinction over the input right
+		if(right instanceof IntConstant) {
+			right_expr = new Texpr1CstNode(new MpqScalar(((IntConstant) right).value));
+		} else {
+			Texpr1Node lAr = 
+			Texpr1Node rAr = 
+			right_expr = new Texpr1BinNode(Texpr1BinNode.OP_ADD, lAr, rAr);
+		}
+
+		outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods

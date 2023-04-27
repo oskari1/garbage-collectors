@@ -122,6 +122,7 @@ public class Verifier extends AVerifier {
 							logger.debug("right before Tcons1");
 							Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, arg_var);
 							logger.debug("right before in.satisfy()");
+							logger.debug("Bound: " + in.getBound(man, arg_name).toString());
 							return in.satisfy(man, constraint);
 						} catch (ApronException e) {
 							// TODO Auto-generated catch block
