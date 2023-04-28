@@ -318,29 +318,24 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		logger.debug("Handling: " + left.toString() + " = " + right.toString());
 		Abstract1 e = outWrapper.get();
 
-		
-		Texpr1Node right_expr;
-		// make case distinction over the input right
-		if(right instanceof IntConstant) {
-			right_expr = new Texpr1CstNode(new MpqScalar(((IntConstant) right).value));
-		} else if (right instanceof JimpleLocal) {
-			// not dealt with yet
-			throw new RuntimeException();
-		} else if (right instanceof JAddExpr) {
-			logger.debug("right instanceof JaddExpr true");
-			Value op1 = ((JAddExpr) right).getOp1();
-			Value op2 = ((JAddExpr) right).getOp2();
-			Texpr1Node op1_exp = new Texpr1CstNode(new MpqScalar(((IntConstant) op1).value));   
-			Texpr1Node op2_exp = new Texpr1CstNode(new MpqScalar(((IntConstant) op2).value));   
-			right_expr = new Texpr1BinNode(Texpr1BinNode.OP_ADD, op1_exp, op2_exp);
-		} else {
-			// right now, we're only handling the case where the rhs of an assignment is 
-			// a constant, a local variable or an addition expression
-			throw new RuntimeException();
-		}
-
+		Texpr1Node right_expr = exprOfValue(right);
 		outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
+	private Texpr1Node exprOfValue(Value val) {
+		if(val instanceof IntConstant) {
+			return new Texpr1CstNode(new MpqScalar(((IntConstant) val).value));
+		} else if(val instanceof JimpleLocal) {
+			return new Texpr1VarNode(((JimpleLocal) val).getName());
+		} else if(val instanceof JAddExpr) {
+			Value op1 = ((JAddExpr) val).getOp1();
+			Value op2 = ((JAddExpr) val).getOp1();
+			Texpr1Node op1_exp = exprOfValue(op1);
+			Texpr1Node op2_exp = exprOfValue(op2);
+			return new Texpr1BinNode(Texpr1BinNode.OP_ADD, op1_exp, op2_exp);
+		} else {
+			throw new RuntimeException();
+		}
+	}
 }

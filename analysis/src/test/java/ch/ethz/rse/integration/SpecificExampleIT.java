@@ -31,12 +31,16 @@ public class SpecificExampleIT {
 		// boolean expectedIsSafe = false;
 		// VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
 		// SpecificExampleIT.testOnExample(t);
-		String packageName = "ch.ethz.rse.integration.tests.Var_Test_Safe";
+		// String packageName = "ch.ethz.rse.integration.tests.Var_Test_Safe";
+		// VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+		// boolean expectedIsSafe = true;
+		// VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		// SpecificExampleIT.testOnExample(t);
+		String packageName = "ch.ethz.rse.integration.tests.Var_Test_2_Safe";
 		VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
 		boolean expectedIsSafe = true;
 		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
 		SpecificExampleIT.testOnExample(t);
-
 	}
 
 	private static final Logger logger = LoggerFactory.getLogger(SpecificExampleIT.class);
