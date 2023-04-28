@@ -323,10 +323,20 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		// make case distinction over the input right
 		if(right instanceof IntConstant) {
 			right_expr = new Texpr1CstNode(new MpqScalar(((IntConstant) right).value));
+		} else if (right instanceof JimpleLocal) {
+			// not dealt with yet
+			throw new RuntimeException();
+		} else if (right instanceof JAddExpr) {
+			logger.debug("right instanceof JaddExpr true");
+			Value op1 = ((JAddExpr) right).getOp1();
+			Value op2 = ((JAddExpr) right).getOp2();
+			Texpr1Node op1_exp = new Texpr1CstNode(new MpqScalar(((IntConstant) op1).value));   
+			Texpr1Node op2_exp = new Texpr1CstNode(new MpqScalar(((IntConstant) op2).value));   
+			right_expr = new Texpr1BinNode(Texpr1BinNode.OP_ADD, op1_exp, op2_exp);
 		} else {
-			Texpr1Node lAr = 
-			Texpr1Node rAr = 
-			right_expr = new Texpr1BinNode(Texpr1BinNode.OP_ADD, lAr, rAr);
+			// right now, we're only handling the case where the rhs of an assignment is 
+			// a constant, a local variable or an addition expression
+			throw new RuntimeException();
 		}
 
 		outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
