@@ -328,14 +328,20 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			return new Texpr1CstNode(new MpqScalar(((IntConstant) val).value));
 		} else if(val instanceof JimpleLocal) {
 			return new Texpr1VarNode(((JimpleLocal) val).getName());
-		} else if(val instanceof JAddExpr) {
-			Value op1 = ((JAddExpr) val).getOp1();
-			Value op2 = ((JAddExpr) val).getOp1();
+		} else {
+			Value op1 = ((AbstractBinopExpr) val).getOp1();
+			Value op2 = ((AbstractBinopExpr) val).getOp2();
 			Texpr1Node op1_exp = exprOfValue(op1);
 			Texpr1Node op2_exp = exprOfValue(op2);
-			return new Texpr1BinNode(Texpr1BinNode.OP_ADD, op1_exp, op2_exp);
-		} else {
-			throw new RuntimeException();
+			int op;
+			if(val instanceof JAddExpr) {
+				op = Texpr1BinNode.OP_ADD; 
+			} else if (val instanceof JSubExpr) {
+				op = Texpr1BinNode.OP_SUB; 
+			} else {
+				op = Texpr1BinNode.OP_MUL; 
+			}
+			return new Texpr1BinNode(op, op1_exp, op2_exp);
 		}
 	}
 }
