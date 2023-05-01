@@ -99,6 +99,7 @@ public class Verifier extends AVerifier {
 			UnitGraph g = SootHelper.getUnitGraph(m);
 			Iterator<Unit> i = g.iterator();
 			while(i.hasNext()) {
+
 				logger.debug("entered while-loop");
 				Unit u = (Unit) i.next();
 				logger.debug("u's class name: {}", u.getClass().getName());
@@ -127,13 +128,10 @@ public class Verifier extends AVerifier {
 						} catch (ApronException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
+						} 
+					} else {
+						throw new RuntimeException("Unhandled case for arg of get_delivery");
 					}
-					
-					// needed for arguments that are not constants:
-					//NumericalStateWrapper in = an.getFlowBefore(u);
-					// want to check if args are >= 0, according to analysis
-
 
 				}
 
