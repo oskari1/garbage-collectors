@@ -69,6 +69,12 @@ public class EnvironmentGenerator {
 			this.ints.add(local.getName());
 		}
 
+		// This should add the method-parameters to the ints
+		// In the description, we assume they can only be of type int, thus we just add all
+		String param = method.getBytecodeParms();
+		logger.debug("Added method parameters are " + param);
+		this.ints.add(param);
+
 		String ints_arr[] = Iterables.toArray(this.ints, String.class);
 		
 		String reals[] = {}; // we are not analyzing real numbers
