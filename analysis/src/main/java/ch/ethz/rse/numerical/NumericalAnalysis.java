@@ -288,9 +288,6 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				values.removeIf(val -> !(val instanceof JimpleLocal || val instanceof ParameterRef));
 				for(Value var : values) {
 					assert(var instanceof JimpleLocal || var instanceof ParameterRef);
-					// String cond_var_name = "i0";
-					// Texpr1Node expr = new Texpr1VarNode(cond_var_name);
-					// Tcons1 cond_true = new Tcons1(env, Tcons1.SUPEQ, expr); 
 					Tcons1 cond_true = cons1OfValue(cond);
 					// Tcons1 cond_false = new Tcons1(env, Tcons1.SUP, expr); 
 
