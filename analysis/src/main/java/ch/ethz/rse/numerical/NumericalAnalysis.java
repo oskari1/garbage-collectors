@@ -19,6 +19,7 @@ import apron.Texpr1BinNode;
 import apron.Texpr1CstNode;
 import apron.Texpr1Intern;
 import apron.Texpr1Node;
+import apron.Texpr1UnNode;
 import apron.Texpr1VarNode;
 import ch.ethz.rse.VerificationProperty;
 import ch.ethz.rse.pointer.StoreInitializer;
@@ -276,34 +277,27 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				// therefore, we can simply construct a Texpr1Node from this and add it
 				// to the branchOutWrapper (cond is true) as well as the negation of the 
 				// conditional to the fallOutWrapper (cond is false) 
-				Abstract1 eb = branchOutWrapper.get();
-				Abstract1 ef = fallOutWrapper.get();
+				Abstract1 e_branch = branchOutWrapper.get();
+				Abstract1 e_fall = fallOutWrapper.get();
 
 				// need to check if cond contains a local variable or ParametricRef
 				// if not, the if-statement has no effect on the abstract state
-		
 				List<Value> values = ((JIfStmt) s).getUseBoxes().stream().map(b -> b.getValue()).collect(Collectors.toList());
+
 				// only keep the values that correspond to local variables/parameter references
 				values.removeIf(val -> !(val instanceof JimpleLocal || val instanceof ParameterRef));
 				for(Value var : values) {
-					logger.debug("entered for-loop of JIfStmt with var = " + var.toString());
 					assert(var instanceof JimpleLocal || var instanceof ParameterRef);
-					// Value op1 = ((JLeExpr) cond).getOp1();
-					Value op2 = ((AbstractBinopExpr) cond).getOp1();
-					// String cond_var_name = ((JimpleLocal) op2).getName();
-					String cond_var_name = "i0";
-					logger.debug("variable in conditional is " + cond_var_name);
-					// Texpr1Node expr = new Texpr1VarNode(var.toString());
-					// Texpr1Node expr = new Texpr1VarNode(((JimpleLocal) op2).getName());
-					Texpr1Node expr = new Texpr1VarNode(cond_var_name);
-					Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, expr); 
-					logger.debug("expected: " + var.toString() + " >= 0 but got " + constraint.toString());
-					logger.debug("old constraint: " + constraint);
-					Abstract1 new_const =eb.meetCopy(man, constraint);
-					Abstract1 new_const_f =ef.meetCopy(man, constraint);
-					logger.debug("new constraint: " + new_const.toString(man));
-					branchOutWrapper.set(new_const);
-					fallOutWrapper.set(new_const_f);
+					// String cond_var_name = "i0";
+					// Texpr1Node expr = new Texpr1VarNode(cond_var_name);
+					// Tcons1 cond_true = new Tcons1(env, Tcons1.SUPEQ, expr); 
+					Tcons1 cond_true = cons1OfValue(cond);
+					// Tcons1 cond_false = new Tcons1(env, Tcons1.SUP, expr); 
+
+					// Abstract1 branchOutConstr =e_branch.meetCopy(man, cond_false);
+					Abstract1 fallOutConstr =e_fall.meetCopy(man, cond_true);
+					// branchOutWrapper.set(branchOutConstr);
+					fallOutWrapper.set(fallOutConstr);
 				}
 				
 			} else if (s instanceof JInvokeStmt) {
@@ -389,5 +383,38 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			logger.debug("this.method.getBytecodeParms() = " + arg_name);
 			return new Texpr1VarNode(arg_name);
 		}
+	}
+
+	private Texpr1Node normalFormExpr(Value val) {
+		assert(val instanceof AbstractBinopExpr);
+		Value op1 = ((AbstractBinopExpr) val).getOp1();
+		Value op2 = ((AbstractBinopExpr) val).getOp2();
+		if (val instanceof JLeExpr || val instanceof JLtExpr) {
+			Value tmp = op1;
+			op1 = op2;
+			op2 = tmp;
+		}	
+		// assumes that op1 > op2 or op1 >= op2, i.e., JGt or JGe
+		// such that we can transform it into an expression of the form op1 - op2 >/>= 0 
+		return new Texpr1BinNode(Texpr1BinNode.OP_SUB,
+								 Texpr1BinNode.RTYPE_INT, 
+								 Texpr1BinNode.RDIR_ZERO,
+								 exprOfValue(op2),
+								 exprOfValue(op1));
+	}
+
+	private Tcons1 cons1OfValue(Value cond) {
+		int bool_op;
+		if (cond instanceof JEqExpr) {
+			bool_op = Tcons1.EQ;
+		} else if(cond instanceof JGeExpr || cond instanceof JLeExpr) {
+			bool_op = Tcons1.SUPEQ;
+		} else if (cond instanceof JGtExpr || cond instanceof JLtExpr) {
+			bool_op = Tcons1.SUP;
+		} else {
+			bool_op = Tcons1.DISEQ;
+		}
+		Texpr1Node expr = normalFormExpr(cond); 
+		return new Tcons1(env, bool_op, expr);
 	}
 }
