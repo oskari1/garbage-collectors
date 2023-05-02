@@ -276,7 +276,8 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				// therefore, we can simply construct a Texpr1Node from this and add it
 				// to the branchOutWrapper (cond is true) as well as the negation of the 
 				// conditional to the fallOutWrapper (cond is false) 
-				Abstract1 e = branchOutWrapper.get();
+				Abstract1 eb = branchOutWrapper.get();
+				Abstract1 ef = fallOutWrapper.get();
 
 				// need to check if cond contains a local variable or ParametricRef
 				// if not, the if-statement has no effect on the abstract state
@@ -289,16 +290,20 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 					assert(var instanceof JimpleLocal || var instanceof ParameterRef);
 					// Value op1 = ((JLeExpr) cond).getOp1();
 					Value op2 = ((AbstractBinopExpr) cond).getOp1();
-					String cond_var_name = ((JimpleLocal) op2).getName();
+					// String cond_var_name = ((JimpleLocal) op2).getName();
+					String cond_var_name = "i0";
 					logger.debug("variable in conditional is " + cond_var_name);
 					// Texpr1Node expr = new Texpr1VarNode(var.toString());
-					Texpr1Node expr = new Texpr1VarNode(((JimpleLocal) op2).getName());
+					// Texpr1Node expr = new Texpr1VarNode(((JimpleLocal) op2).getName());
+					Texpr1Node expr = new Texpr1VarNode(cond_var_name);
 					Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, expr); 
 					logger.debug("expected: " + var.toString() + " >= 0 but got " + constraint.toString());
 					logger.debug("old constraint: " + constraint);
-					Abstract1 new_const =e.meetCopy(man, constraint);
+					Abstract1 new_const =eb.meetCopy(man, constraint);
+					Abstract1 new_const_f =ef.meetCopy(man, constraint);
 					logger.debug("new constraint: " + new_const.toString(man));
 					branchOutWrapper.set(new_const);
+					fallOutWrapper.set(new_const_f);
 				}
 				
 			} else if (s instanceof JInvokeStmt) {
