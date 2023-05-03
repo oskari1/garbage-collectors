@@ -4,16 +4,16 @@ package ch.ethz.rse.integration.tests;
 import ch.ethz.rse.Store;
 
 // expected results:
-// NON_NEGATIVE UNSAFE
+// NON_NEGATIVE SAFE
 // FITS_IN_TROLLEY UNSAFE
 // FITS_IN_RESERVE UNSAFE
 
-public class NonNeg_If_Unsafe_2 {
+public class NonNeg_If_Safe_3 {
 
 	public void m2(int j) {
 		Store s = new Store(1, 2);
-		if(-1 <= j) {
-		// if(-1 < j) {
+		int i = 0;
+		if(j >= i) {
 		  s.get_delivery(j);
 		}
 	  }

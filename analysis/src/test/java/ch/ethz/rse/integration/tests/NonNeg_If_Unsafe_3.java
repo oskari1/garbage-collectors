@@ -8,13 +8,13 @@ import ch.ethz.rse.Store;
 // FITS_IN_TROLLEY UNSAFE
 // FITS_IN_RESERVE UNSAFE
 
-public class NonNeg_If_Unsafe_2 {
+public class NonNeg_If_Unsafe_3 {
 
-	public void m2(int j) {
+	public void m2(int k) {
 		Store s = new Store(1, 2);
-		if(-1 <= j) {
-		// if(-1 < j) {
-		  s.get_delivery(j);
+		int i = 1;
+		if(0 <= i+k) { // true if k = -1 
+		  s.get_delivery(k); // here k is in [-1, +oo]
 		}
 	  }
 }

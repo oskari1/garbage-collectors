@@ -271,6 +271,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 				// TODO: FILL THIS OUT
 				Value cond = ((JIfStmt) s).getCondition();
+				logger.debug("entered JIfStmt with conditional: " + cond.toString());
 				// according to the project description, we assume cond is a boolean expr
 				// consisting only of J | {Eq, Ge, Gt, Le, Lt, Ne} | Expr that only relate
 				// integer constants or local variables
@@ -288,12 +289,46 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				values.removeIf(val -> !(val instanceof JimpleLocal || val instanceof ParameterRef));
 				for(Value var : values) {
 					assert(var instanceof JimpleLocal || var instanceof ParameterRef);
-					Tcons1 cond_true = cons1OfValue(cond);
-					// Tcons1 cond_false = new Tcons1(env, Tcons1.SUP, expr); 
 
-					// Abstract1 branchOutConstr =e_branch.meetCopy(man, cond_false);
+
+					logger.debug("entered cons1OfValue with cond = " + cond.toString());
+					int bool_op_true;
+					int bool_op_false;
+					// given: predicate like -1 <= j corresponding to -1 > i0 in Jimple
+					// sought: constraint of the form i0+1 >= 0
+					// right now, it outputs a constraint of the form i0 + 1 > 0
+					if (cond instanceof JEqExpr) {
+						bool_op_true = Tcons1.DISEQ;
+						bool_op_false = Tcons1.EQ;
+					} else if(cond instanceof JGeExpr || cond instanceof JLeExpr) {
+						logger.debug("case SUPEQ in cons1OfValue");
+						bool_op_true = Tcons1.SUP;
+						bool_op_false = Tcons1.SUPEQ;
+					} else if (cond instanceof JGtExpr || cond instanceof JLtExpr) {
+						logger.debug("case SUP in cons1OfValue");
+						bool_op_true = Tcons1.SUPEQ;
+						bool_op_false = Tcons1.SUP;
+					} else {
+						bool_op_true = Tcons1.EQ;
+						bool_op_false = Tcons1.DISEQ;
+					}
+					// transforms op1 >= op2 to op1 - op2 >= 0
+					Texpr1Node expr = normalFormExpr(cond); 
+					logger.debug("right at the end of cons1OfValue");
+					// this is a subtle detail. The fallOutConstr should contain the 
+					// negated version of the conditional
+					// in other words, if in java we have if(-1 <= j) then in Jimple 
+					// we have (-1 > i0) and thus we need the negated expression -1 <= i0
+					// in normal form, i.e., 0 <= i0 + 1 in cond_true which is added to
+					// fallOutConstr (corresponding to java-if statement is true)
+					Tcons1 cond_true = new Tcons1(env, bool_op_true, expr);;
+					Tcons1 cond_false = new Tcons1(env, bool_op_false, new Texpr1UnNode(Texpr1UnNode.OP_NEG, expr)); 
+
 					Abstract1 fallOutConstr =e_fall.meetCopy(man, cond_true);
-					// branchOutWrapper.set(branchOutConstr);
+					logger.debug("e_fall: " + fallOutConstr.toString(man));
+					Abstract1 branchOutConstr =e_branch.meetCopy(man, cond_false);
+					logger.debug("e_branch: " + branchOutConstr.toString(man));
+					branchOutWrapper.set(branchOutConstr);
 					fallOutWrapper.set(fallOutConstr);
 				}
 				
@@ -383,35 +418,23 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	}
 
 	private Texpr1Node normalFormExpr(Value val) {
+		// transforms -1 > i0 into i0 - (-1) 
 		assert(val instanceof AbstractBinopExpr);
 		Value op1 = ((AbstractBinopExpr) val).getOp1();
 		Value op2 = ((AbstractBinopExpr) val).getOp2();
-		if (val instanceof JLeExpr || val instanceof JLtExpr) {
+		// if op1 >= op2 or op1 > op2 then we transform it into op2 >= op1 or op2 > op1
+		if (val instanceof JGeExpr || val instanceof JGtExpr) {
 			Value tmp = op1;
 			op1 = op2;
 			op2 = tmp;
 		}	
-		// assumes that op1 > op2 or op1 >= op2, i.e., JGt or JGe
-		// such that we can transform it into an expression of the form op1 - op2 >/>= 0 
+		// assumes that op2 >= op1 or op2 > op1, i.e., JGt or JGe
+		// such that we can transform it into an expression of the form op2 - op2 >/>= 0 
 		return new Texpr1BinNode(Texpr1BinNode.OP_SUB,
 								 Texpr1BinNode.RTYPE_INT, 
 								 Texpr1BinNode.RDIR_ZERO,
-								 exprOfValue(op2),
-								 exprOfValue(op1));
+								 exprOfValue(op1),
+								 exprOfValue(op2));
 	}
 
-	private Tcons1 cons1OfValue(Value cond) {
-		int bool_op;
-		if (cond instanceof JEqExpr) {
-			bool_op = Tcons1.EQ;
-		} else if(cond instanceof JGeExpr || cond instanceof JLeExpr) {
-			bool_op = Tcons1.SUPEQ;
-		} else if (cond instanceof JGtExpr || cond instanceof JLtExpr) {
-			bool_op = Tcons1.SUP;
-		} else {
-			bool_op = Tcons1.DISEQ;
-		}
-		Texpr1Node expr = normalFormExpr(cond); 
-		return new Tcons1(env, bool_op, expr);
-	}
 }
