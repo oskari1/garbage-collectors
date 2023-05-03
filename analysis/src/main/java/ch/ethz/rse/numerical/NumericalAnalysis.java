@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.ObjectUtils.Null;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,6 +68,9 @@ import soot.jimple.toolkits.annotation.logic.Loop;
 import soot.toolkits.graph.LoopNestTree;
 import soot.toolkits.graph.UnitGraph;
 import soot.toolkits.scalar.ForwardBranchedFlowAnalysis;
+
+// added imports
+import java.util.stream.Collectors;
 
 /**
  * Convenience class running a numerical analysis on a given {@link SootMethod}
@@ -189,19 +193,65 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	}
 
 	@Override
-	protected void merge(Unit succNode, NumericalStateWrapper w1, NumericalStateWrapper w2, NumericalStateWrapper w3) {
+	protected void merge(Unit succNode, NumericalStateWrapper w1, NumericalStateWrapper w2, NumericalStateWrapper w3){
 		// merge the two states from w1 and w2 and store the result into w3
 		logger.debug("in merge: " + succNode);
 
 		logger.info("We are using merge"); 
-		try {
-			w3 = w1.join(w2);
-		} catch (ApronException e) {
-			// TODO Auto-generated catch block
-			logger.info("Merge Failed");
-			e.printStackTrace();
-		} 
-		// TODO: FILL THIS OUT
+
+		IntegerWrapper loop_count = loopHeads.get(succNode); 
+		
+		// loopHeads only gets initialized for loops - if we are not in a loop it will not be initialized and thus null. In this case, merge normally 
+		if (loop_count == null){
+			try {
+				w3 = w1.join(w2);
+			} catch (ApronException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+
+		} else if (loop_count.value<WIDENING_THRESHOLD){
+			// WIDENING_THRESHOLD not reached - merge, increase counter and save new state
+			loop_count.value+=1; 
+			try {
+				w3 = w1.join(w2);
+			} catch (ApronException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			loopHeadState.put(succNode, w3); 
+			// Not sure if the line above works. if not, use new IntegerWrapper(loop_count.value+1)
+			
+		} else {
+			// Widening threshold was reached - widen
+			// First, calculate another merge
+			NumericalStateWrapper w3_new = null;
+			try {
+				w3_new = w1.join(w2);
+			} catch (ApronException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			NumericalStateWrapper w3_old = loopHeadState.get(succNode); 
+
+			// Then, compare the new and the old w3 and widen appropriately 
+			Abstract1 w3_old_abstr = w3_old.get(); 
+			Abstract1 w3_new_abstr = w3_new.get(); 
+			Abstract1 w3_abstr = null;
+			try {
+				w3_abstr = w3_old_abstr.widening(man, w3_new_abstr);
+			} catch (ApronException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			w3 = new NumericalStateWrapper(man, w3_abstr); 
+
+			// Don't know if this is actually necessary
+			loopHeadState.put(succNode, w3); 
+			loop_count.value+=1; 
+
+			
+		}
 	}
 
 	@Override
@@ -274,8 +324,43 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				// handle if
 
 				// TODO: FILL THIS OUT
-				logger.info("We are using JIfStmt"); 
+				Value cond = ((JIfStmt) s).getCondition();
+				// according to the project description, we assume cond is a boolean expr
+				// consisting only of J | {Eq, Ge, Gt, Le, Lt, Ne} | Expr that only relate
+				// integer constants or local variables
+				// therefore, we can simply construct a Texpr1Node from this and add it
+				// to the branchOutWrapper (cond is true) as well as the negation of the 
+				// conditional to the fallOutWrapper (cond is false) 
+				Abstract1 eb = branchOutWrapper.get();
+				Abstract1 ef = fallOutWrapper.get();
 
+				// need to check if cond contains a local variable or ParametricRef
+				// if not, the if-statement has no effect on the abstract state
+		
+				List<Value> values = ((JIfStmt) s).getUseBoxes().stream().map(b -> b.getValue()).collect(Collectors.toList());
+				// only keep the values that correspond to local variables/parameter references
+				values.removeIf(val -> !(val instanceof JimpleLocal || val instanceof ParameterRef));
+				for(Value var : values) {
+					logger.debug("entered for-loop of JIfStmt with var = " + var.toString());
+					assert(var instanceof JimpleLocal || var instanceof ParameterRef);
+					// Value op1 = ((JLeExpr) cond).getOp1();
+					Value op2 = ((AbstractBinopExpr) cond).getOp1();
+					// String cond_var_name = ((JimpleLocal) op2).getName();
+					String cond_var_name = "i0";
+					logger.debug("variable in conditional is " + cond_var_name);
+					// Texpr1Node expr = new Texpr1VarNode(var.toString());
+					// Texpr1Node expr = new Texpr1VarNode(((JimpleLocal) op2).getName());
+					Texpr1Node expr = new Texpr1VarNode(cond_var_name);
+					Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, expr); 
+					logger.debug("expected: " + var.toString() + " >= 0 but got " + constraint.toString());
+					logger.debug("old constraint: " + constraint);
+					Abstract1 new_const =eb.meetCopy(man, constraint);
+					Abstract1 new_const_f =ef.meetCopy(man, constraint);
+					logger.debug("new constraint: " + new_const.toString(man));
+					branchOutWrapper.set(new_const);
+					fallOutWrapper.set(new_const_f);
+				}
+				
 			} else if (s instanceof JInvokeStmt) {
 				// handle invocations
 				JInvokeStmt jInvStmt = (JInvokeStmt) s;
@@ -324,8 +409,42 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	// returns state of in after assignment
 	private void handleDef(NumericalStateWrapper outWrapper, Value left, Value right) throws ApronException {
 		// TODO: FILL THIS OUT
-		logger.info("We are using handleDef"); 
+		logger.debug("Handling: " + left.toString() + " = " + right.toString());
+		Abstract1 e = outWrapper.get();
+
+		Texpr1Node right_expr = exprOfValue(right);
+		logger.debug("about to update outWrapper in handleDef");
+		outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
+		logger.debug("updated outWrapper in handleDef");
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
+	private Texpr1Node exprOfValue(Value val) {
+		if(val instanceof IntConstant) {
+			return new Texpr1CstNode(new MpqScalar(((IntConstant) val).value));
+		} else if(val instanceof JimpleLocal) {
+			return new Texpr1VarNode(((JimpleLocal) val).getName());
+		} else if (val instanceof AbstractBinopExpr) {
+			Value op1 = ((AbstractBinopExpr) val).getOp1();
+			Value op2 = ((AbstractBinopExpr) val).getOp2();
+			Texpr1Node op1_exp = exprOfValue(op1);
+			Texpr1Node op2_exp = exprOfValue(op2);
+			int op;
+			if(val instanceof JAddExpr) {
+				op = Texpr1BinNode.OP_ADD; 
+			} else if (val instanceof JSubExpr) {
+				op = Texpr1BinNode.OP_SUB; 
+			} else if (val instanceof JMulExpr){
+				op = Texpr1BinNode.OP_MUL; 
+			} else {
+				throw new IllegalStateException("None of the handled expressions matched - got something else (dik how to print the type, it gives me errors)");
+			}
+			return new Texpr1BinNode(op, op1_exp, op2_exp);
+		} else {
+			logger.debug("val instanceof ParameterRef true");
+			String arg_name = this.method.getBytecodeParms();
+			logger.debug("this.method.getBytecodeParms() = " + arg_name);
+			return new Texpr1VarNode(arg_name);
+		}
+	}
 }
