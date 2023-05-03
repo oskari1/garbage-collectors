@@ -271,7 +271,6 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 				// TODO: FILL THIS OUT
 				Value cond = ((JIfStmt) s).getCondition();
-				logger.debug("entered JIfStmt with conditional: " + cond.toString());
 				// according to the project description, we assume cond is a boolean expr
 				// consisting only of J | {Eq, Ge, Gt, Le, Lt, Ne} | Expr that only relate
 				// integer constants or local variables
@@ -291,7 +290,6 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 					assert(var instanceof JimpleLocal || var instanceof ParameterRef);
 
 
-					logger.debug("entered cons1OfValue with cond = " + cond.toString());
 					int bool_op_true;
 					int bool_op_false;
 					// given: predicate like -1 <= j corresponding to -1 > i0 in Jimple
@@ -301,11 +299,9 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 						bool_op_true = Tcons1.DISEQ;
 						bool_op_false = Tcons1.EQ;
 					} else if(cond instanceof JGeExpr || cond instanceof JLeExpr) {
-						logger.debug("case SUPEQ in cons1OfValue");
 						bool_op_true = Tcons1.SUP;
 						bool_op_false = Tcons1.SUPEQ;
 					} else if (cond instanceof JGtExpr || cond instanceof JLtExpr) {
-						logger.debug("case SUP in cons1OfValue");
 						bool_op_true = Tcons1.SUPEQ;
 						bool_op_false = Tcons1.SUP;
 					} else {
@@ -314,7 +310,6 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 					}
 					// transforms op1 >= op2 to op1 - op2 >= 0
 					Texpr1Node expr = normalFormExpr(cond); 
-					logger.debug("right at the end of cons1OfValue");
 					// this is a subtle detail. The fallOutConstr should contain the 
 					// negated version of the conditional
 					// in other words, if in java we have if(-1 <= j) then in Jimple 
@@ -325,9 +320,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 					Tcons1 cond_false = new Tcons1(env, bool_op_false, new Texpr1UnNode(Texpr1UnNode.OP_NEG, expr)); 
 
 					Abstract1 fallOutConstr =e_fall.meetCopy(man, cond_true);
-					logger.debug("e_fall: " + fallOutConstr.toString(man));
 					Abstract1 branchOutConstr =e_branch.meetCopy(man, cond_false);
-					logger.debug("e_branch: " + branchOutConstr.toString(man));
 					branchOutWrapper.set(branchOutConstr);
 					fallOutWrapper.set(fallOutConstr);
 				}
@@ -380,13 +373,10 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	// returns state of in after assignment
 	private void handleDef(NumericalStateWrapper outWrapper, Value left, Value right) throws ApronException {
 		// TODO: FILL THIS OUT
-		logger.debug("Handling: " + left.toString() + " = " + right.toString());
 		Abstract1 e = outWrapper.get();
 
 		Texpr1Node right_expr = exprOfValue(right);
-		logger.debug("about to update outWrapper in handleDef");
 		outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
-		logger.debug("updated outWrapper in handleDef");
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
@@ -410,9 +400,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			}
 			return new Texpr1BinNode(op, op1_exp, op2_exp);
 		} else {
-			logger.debug("val instanceof ParameterRef true");
 			String arg_name = this.method.getBytecodeParms();
-			logger.debug("this.method.getBytecodeParms() = " + arg_name);
 			return new Texpr1VarNode(arg_name);
 		}
 	}

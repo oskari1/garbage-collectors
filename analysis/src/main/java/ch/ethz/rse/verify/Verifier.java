@@ -86,9 +86,7 @@ public class Verifier extends AVerifier {
 	@Override
 	public boolean checksNonNegative() {
 		// TODO: FILL THIS OUT
-		logger.debug("running checksNonNegative");
 		for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
-			logger.debug("entered for-loop");
 			// goal: iterate through CFG of the analyzed method
 			// and in each node of the CFG, check if it's a
 			// call to get_delivery(v) and if so, check that v >= 0
@@ -100,29 +98,20 @@ public class Verifier extends AVerifier {
 			Iterator<Unit> i = g.iterator();
 			while(i.hasNext()) {
 
-				logger.debug("entered while-loop");
 				Unit u = (Unit) i.next();
-				logger.debug("u's class name: {}", u.getClass().getName());
 				if(is_call_to_get_delivery(u)) {
-					logger.debug("is_call_to_get_delivery is true");
 
 					// get_delivery only has single argument
 					Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
 
 					if (arg instanceof IntConstant) {
-						logger.debug("arg instanceof IntConstant");
 						return ((IntConstant) arg).value >= 0; 
 					} else if (arg instanceof JimpleLocal) {
-						logger.debug("arg instanceof JimpleLocal");
 						Abstract1 in = an.getFlowBefore(u).get();
 						String arg_name = ((JimpleLocal) arg).getName();
-						logger.debug("arg_name = {}", arg_name);
 						try {
-							logger.debug("right before Texpr1Node");
 							Texpr1Node arg_var = new Texpr1VarNode(arg_name); 
-							logger.debug("right before Tcons1");
 							Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, arg_var);
-							logger.debug("right before in.satisfy()");
 							logger.debug("Bound: " + in.getBound(man, arg_name).toString());
 							logger.debug("Abstract state in: " + in.toString(man));
 							return in.satisfy(man, constraint);
@@ -138,7 +127,6 @@ public class Verifier extends AVerifier {
 
 			}
 		}
-		logger.debug("returning true in checksNonNegative");
 		return true;
 	}
 

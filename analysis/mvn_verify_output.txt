@@ -1,0 +1,1787 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------------------< [0;36mch.ethz.rse:analysis[0;1m >------------------------[m
+[[1;34mINFO[m] [1mBuilding analysis 0.0.1[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mjacoco-maven-plugin:0.8.5:prepare-agent[m [1m(before-unit-test-execution)[m @ [36manalysis[0;1m ---[m
+[[1;34mINFO[m] surefire.jacoco.args set to -javaagent:/root/.m2/repository/org/jacoco/org.jacoco.agent/0.8.5/org.jacoco.agent-0.8.5-runtime.jar=destfile=/workspaces/garbage-collectors/analysis/target/jacoco-output/jacoco-unit-tests.exec
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:resources[m [1m(default-resources)[m @ [36manalysis[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Copying 2 resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.1:compile[m [1m(default-compile)[m @ [36manalysis[0;1m ---[m
+[[1;34mINFO[m] Changes detected - recompiling the module!
+[[1;34mINFO[m] Compiling 23 source files to /workspaces/garbage-collectors/analysis/target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:testResources[m [1m(default-testResources)[m @ [36manalysis[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] skip non existing resourceDirectory /workspaces/garbage-collectors/analysis/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.1:testCompile[m [1m(default-testCompile)[m @ [36manalysis[0;1m ---[m
+[[1;34mINFO[m] Changes detected - recompiling the module!
+[[1;34mINFO[m] Compiling 28 source files to /workspaces/garbage-collectors/analysis/target/test-classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:3.0.0-M5:test[m [1m(default-test)[m @ [36manalysis[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m]  T E S T S
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m] Running ch.ethz.rse.integration.[1mVerificationTestCaseCollectorTest[m
+09:28:39.068 [main] INFO c.e.r.t.VerificationTestCaseCollector: Collected 63 tests from /workspaces/garbage-collectors/analysis/src/test/java/ch/ethz/rse/integration/tests
+09:28:39.080 [main] INFO c.e.r.t.VerificationTestCaseCollector: NON_NEGATIVE  :  9 SAFE + 12 UNSAFE
+09:28:39.081 [main] INFO c.e.r.t.VerificationTestCaseCollector: FITS_IN_TROLLEY: 10 SAFE + 11 UNSAFE
+09:28:39.082 [main] INFO c.e.r.t.VerificationTestCaseCollector: FITS_IN_RESERVE: 10 SAFE + 11 UNSAFE
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.883 s - in ch.ethz.rse.integration.[1mVerificationTestCaseCollectorTest[m
+[[1;34mINFO[m] Running ch.ethz.rse.pointer.[1mPointsToAnalysisWrapperTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.281 s - in ch.ethz.rse.pointer.[1mPointsToAnalysisWrapperTest[m
+[[1;34mINFO[m] Running soot.[1mSootHelperTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.635 s - in soot.[1mSootHelperTest[m
+[[1;34mINFO[m] Running apron.[1mApronTest[m
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m14[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.219 s - in apron.[1mApronTest[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] Results:
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1;32mTests run: 18, Failures: 0, Errors: 0, Skipped: 0[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mjacoco-maven-plugin:0.8.5:report[m [1m(after-unit-test-execution)[m @ [36manalysis[0;1m ---[m
+[[1;34mINFO[m] Loading execution data file /workspaces/garbage-collectors/analysis/target/jacoco-output/jacoco-unit-tests.exec
+[[1;34mINFO[m] Analyzed bundle 'analysis' with 24 classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-jar-plugin:2.4:jar[m [1m(default-jar)[m @ [36manalysis[0;1m ---[m
+[[1;34mINFO[m] Building jar: /workspaces/garbage-collectors/analysis/target/analysis-0.0.1.jar
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mjacoco-maven-plugin:0.8.5:prepare-agent[m [1m(before-integration-test-execution)[m @ [36manalysis[0;1m ---[m
+[[1;34mINFO[m] failsafe.jacoco.args set to -javaagent:/root/.m2/repository/org/jacoco/org.jacoco.agent/0.8.5/org.jacoco.agent-0.8.5-runtime.jar=destfile=/workspaces/garbage-collectors/analysis/target/jacoco-output/jacoco-integration-tests.exec
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-failsafe-plugin:3.0.0-M5:integration-test[m [1m(default)[m @ [36manalysis[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m]  T E S T S
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m] Running ch.ethz.rse.integration.[1mSpecificExampleIT[m
+09:29:00.098 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_If_Unsafe_4:NON_NEGATIVE
+09:29:09.003 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:29:09.026 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:29:09.028 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:29:09.129 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:09.148 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:29:09.159 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 => ?
+09:29:09.166 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 =>[fallout] <Top>
+09:29:09.167 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:29:09.167 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:29:09.167 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:09.173 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are I
+09:29:09.178 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m2 in ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:29:09.179 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r2 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 => ?
+09:29:09.179 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r2 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 =>[fallout] <Top>
+09:29:09.180 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i0 := @parameter0: int => ?
+09:29:09.183 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i0 := @parameter0: int =>[fallout] {  -1I +1i0 = 0 }
+09:29:09.183 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store => ?
+09:29:09.184 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store =>[fallout] {  -1I +1i0 = 0 }
+09:29:09.185 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(1, 2) => ?
+09:29:09.186 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(1, 2) =>[fallout] {  -1I +1i0 = 0 }
+09:29:09.186 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:29:09.197 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:29:09.200 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[branchout] {  -1I +1i0 = 0;  1I >= 0 }
+09:29:09.201 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  1I >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:29:09.201 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  1I >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  1I >= 0 }
+09:29:09.202 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:29:09.202 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:29:09.203 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } goto [?= return] => ?
+09:29:09.204 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } goto [?= return] =>[branchout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:29:09.205 [main] DEBUG c.e.r.n.NumericalAnalysis: in merge: return
+09:29:09.205 [main] DEBUG c.e.r.n.NumericalAnalysis: <empty> return => ?
+09:29:09.217 [main] DEBUG c.e.r.v.Verifier: Bound: [-oo,-1]
+09:29:09.217 [main] DEBUG c.e.r.v.Verifier: Abstract state in: {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:29:09.218 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property NON_NEGATIVE in 189ms
+09:29:09.218 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_If_Unsafe_4:NON_NEGATIVE in 9128ms
+09:29:09.221 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_If_Unsafe_4:NON_NEGATIVE (expected:UNSAFE,got:UNSAFE)               : CORRECT
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.844 s - in ch.ethz.rse.integration.[1mSpecificExampleIT[m
+[[1;34mINFO[m] Running ch.ethz.rse.integration.[1mAllExamplesIT[m
+09:29:09.887 [main] INFO c.e.r.t.VerificationTestCaseCollector: Collected 63 tests from /workspaces/garbage-collectors/analysis/src/test/java/ch/ethz/rse/integration/tests
+09:29:09.890 [main] INFO c.e.r.t.VerificationTestCaseCollector: NON_NEGATIVE  :  9 SAFE + 12 UNSAFE
+09:29:09.891 [main] INFO c.e.r.t.VerificationTestCaseCollector: FITS_IN_TROLLEY: 10 SAFE + 11 UNSAFE
+09:29:09.892 [main] INFO c.e.r.t.VerificationTestCaseCollector: FITS_IN_RESERVE: 10 SAFE + 11 UNSAFE
+09:29:10.020 [main] DEBUG c.e.rse.main.Runner: Verifying Basic_Test_Safe:NON_NEGATIVE
+09:29:15.185 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Basic_Test_Safe
+09:29:15.186 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Basic_Test_Safe
+09:29:15.187 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Basic_Test_Safe
+09:29:15.189 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:15.190 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Basic_Test_Safe
+09:29:15.190 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Basic_Test_Safe => ?
+09:29:15.191 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Basic_Test_Safe =>[fallout] <Top>
+09:29:15.191 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:29:15.191 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:29:15.191 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:15.194 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:15.194 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Basic_Test_Safe
+09:29:15.195 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:29:15.195 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:29:15.195 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:29:15.195 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:29:15.196 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(2) => ?
+09:29:15.196 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(2) =>[fallout] <Top>
+09:29:15.198 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(1) => ?
+09:29:15.199 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(1) =>[fallout] <Top>
+09:29:15.199 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r2 = new ch.ethz.rse.Store => ?
+09:29:15.199 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r2 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:29:15.200 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r2.<ch.ethz.rse.Store: void <init>(int,int)>(4, 4) => ?
+09:29:15.200 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r2.<ch.ethz.rse.Store: void <init>(int,int)>(4, 4) =>[fallout] <Top>
+09:29:15.200 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> virtualinvoke $r2.<ch.ethz.rse.Store: void get_delivery(int)>(4) => ?
+09:29:15.201 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> virtualinvoke $r2.<ch.ethz.rse.Store: void get_delivery(int)>(4) =>[fallout] <Top>
+09:29:15.201 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:15.206 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property NON_NEGATIVE in 18ms
+09:29:15.206 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Basic_Test_Safe:NON_NEGATIVE in 5185ms
+09:29:15.206 [main] INFO c.e.r.i.SpecificExampleIT: Basic_Test_Safe:NON_NEGATIVE (expected:SAFE,got:SAFE)                      : CORRECT
+09:29:15.262 [main] DEBUG c.e.rse.main.Runner: Verifying Basic_Test_Safe:FITS_IN_TROLLEY
+09:29:20.122 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Basic_Test_Safe
+09:29:20.123 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Basic_Test_Safe
+09:29:20.123 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Basic_Test_Safe
+09:29:20.126 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:20.127 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Basic_Test_Safe
+09:29:20.128 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Basic_Test_Safe => ?
+09:29:20.128 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Basic_Test_Safe =>[fallout] <Top>
+09:29:20.128 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:29:20.129 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:29:20.129 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:20.132 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:20.133 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Basic_Test_Safe
+09:29:20.134 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:29:20.134 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:29:20.134 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:29:20.134 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:29:20.134 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(2) => ?
+09:29:20.135 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(2) =>[fallout] <Top>
+09:29:20.135 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(1) => ?
+09:29:20.135 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(1) =>[fallout] <Top>
+09:29:20.135 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r2 = new ch.ethz.rse.Store => ?
+09:29:20.135 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r2 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:29:20.135 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r2.<ch.ethz.rse.Store: void <init>(int,int)>(4, 4) => ?
+09:29:20.136 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r2.<ch.ethz.rse.Store: void <init>(int,int)>(4, 4) =>[fallout] <Top>
+09:29:20.136 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> virtualinvoke $r2.<ch.ethz.rse.Store: void get_delivery(int)>(4) => ?
+09:29:20.136 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> virtualinvoke $r2.<ch.ethz.rse.Store: void get_delivery(int)>(4) =>[fallout] <Top>
+09:29:20.136 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:20.138 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_TROLLEY in 14ms
+09:29:20.138 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Basic_Test_Safe:FITS_IN_TROLLEY in 4876ms
+09:29:20.139 [main] INFO c.e.r.i.SpecificExampleIT: Basic_Test_Safe:FITS_IN_TROLLEY (expected:SAFE,got:SAFE)                   : CORRECT
+09:29:20.219 [main] DEBUG c.e.rse.main.Runner: Verifying Basic_Test_Safe:FITS_IN_RESERVE
+09:29:24.565 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Basic_Test_Safe
+09:29:24.566 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Basic_Test_Safe
+09:29:24.567 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Basic_Test_Safe
+09:29:24.570 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:24.570 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Basic_Test_Safe
+09:29:24.571 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Basic_Test_Safe => ?
+09:29:24.572 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Basic_Test_Safe =>[fallout] <Top>
+09:29:24.572 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:29:24.573 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:29:24.574 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:24.578 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:24.578 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Basic_Test_Safe
+09:29:24.579 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:29:24.579 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:29:24.580 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:29:24.580 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:29:24.580 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(2) => ?
+09:29:24.581 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(2) =>[fallout] <Top>
+09:29:24.583 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(1) => ?
+09:29:24.584 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(1) =>[fallout] <Top>
+09:29:24.584 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r2 = new ch.ethz.rse.Store => ?
+09:29:24.585 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r2 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:29:24.585 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r2.<ch.ethz.rse.Store: void <init>(int,int)>(4, 4) => ?
+09:29:24.586 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r2.<ch.ethz.rse.Store: void <init>(int,int)>(4, 4) =>[fallout] <Top>
+09:29:24.587 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> virtualinvoke $r2.<ch.ethz.rse.Store: void get_delivery(int)>(4) => ?
+09:29:24.588 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> virtualinvoke $r2.<ch.ethz.rse.Store: void get_delivery(int)>(4) =>[fallout] <Top>
+09:29:24.589 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:24.589 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_RESERVE in 21ms
+09:29:24.589 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Basic_Test_Safe:FITS_IN_RESERVE in 4369ms
+09:29:24.590 [main] INFO c.e.r.i.SpecificExampleIT: Basic_Test_Safe:FITS_IN_RESERVE (expected:SAFE,got:SAFE)                   : CORRECT
+09:29:24.704 [main] DEBUG c.e.rse.main.Runner: Verifying Const_Test_Unsafe:NON_NEGATIVE
+09:29:29.559 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Const_Test_Unsafe
+09:29:29.559 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Const_Test_Unsafe
+09:29:29.560 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Const_Test_Unsafe
+09:29:29.564 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:29.566 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Const_Test_Unsafe
+09:29:29.567 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Const_Test_Unsafe => ?
+09:29:29.567 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Const_Test_Unsafe =>[fallout] <Top>
+09:29:29.568 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:29:29.568 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:29:29.568 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:29.572 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:29.575 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Const_Test_Unsafe
+09:29:29.575 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:29:29.577 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:29:29.577 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:29:29.578 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:29:29.578 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(-1) => ?
+09:29:29.578 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(-1) =>[fallout] <Top>
+09:29:29.579 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:29.580 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property NON_NEGATIVE in 19ms
+09:29:29.581 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Const_Test_Unsafe:NON_NEGATIVE in 4877ms
+09:29:29.582 [main] INFO c.e.r.i.SpecificExampleIT: Const_Test_Unsafe:NON_NEGATIVE (expected:UNSAFE,got:UNSAFE)                : CORRECT
+09:29:29.590 [main] DEBUG c.e.rse.main.Runner: Verifying Const_Test_Unsafe:FITS_IN_TROLLEY
+09:29:34.442 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Const_Test_Unsafe
+09:29:34.443 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Const_Test_Unsafe
+09:29:34.444 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Const_Test_Unsafe
+09:29:34.445 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:34.446 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Const_Test_Unsafe
+09:29:34.446 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Const_Test_Unsafe => ?
+09:29:34.446 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Const_Test_Unsafe =>[fallout] <Top>
+09:29:34.447 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:29:34.447 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:29:34.447 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:34.449 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:34.450 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Const_Test_Unsafe
+09:29:34.450 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:29:34.450 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:29:34.455 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:29:34.456 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:29:34.457 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(-1) => ?
+09:29:34.457 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(-1) =>[fallout] <Top>
+09:29:34.457 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:34.457 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_TROLLEY in 13ms
+09:29:34.458 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Const_Test_Unsafe:FITS_IN_TROLLEY in 4867ms
+09:29:34.458 [main] INFO c.e.r.i.SpecificExampleIT: Const_Test_Unsafe:FITS_IN_TROLLEY (expected:SAFE,got:SAFE)                 : CORRECT
+09:29:34.465 [main] DEBUG c.e.rse.main.Runner: Verifying Const_Test_Unsafe:FITS_IN_RESERVE
+09:29:39.219 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Const_Test_Unsafe
+09:29:39.225 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Const_Test_Unsafe
+09:29:39.225 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Const_Test_Unsafe
+09:29:39.227 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:39.228 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Const_Test_Unsafe
+09:29:39.228 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Const_Test_Unsafe => ?
+09:29:39.228 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Const_Test_Unsafe =>[fallout] <Top>
+09:29:39.229 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:29:39.229 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:29:39.229 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:39.231 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:39.231 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Const_Test_Unsafe
+09:29:39.232 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:29:39.232 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:29:39.232 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:29:39.233 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:29:39.233 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(-1) => ?
+09:29:39.234 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(-1) =>[fallout] <Top>
+09:29:39.234 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:39.235 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_RESERVE in 9ms
+09:29:39.235 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Const_Test_Unsafe:FITS_IN_RESERVE in 4770ms
+09:29:39.236 [main] INFO c.e.r.i.SpecificExampleIT: Const_Test_Unsafe:FITS_IN_RESERVE (expected:SAFE,got:SAFE)                 : CORRECT
+09:29:39.449 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_If_Safe_4:NON_NEGATIVE
+09:29:43.630 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_If_Safe_4
+09:29:43.631 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_If_Safe_4
+09:29:43.631 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_If_Safe_4
+09:29:43.633 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:43.634 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_If_Safe_4
+09:29:43.634 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Safe_4 => ?
+09:29:43.634 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Safe_4 =>[fallout] <Top>
+09:29:43.634 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:29:43.635 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:29:43.635 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:43.637 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are I
+09:29:43.638 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m2 in ch.ethz.rse.integration.tests.NonNeg_If_Safe_4
+09:29:43.638 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r2 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Safe_4 => ?
+09:29:43.639 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r2 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Safe_4 =>[fallout] <Top>
+09:29:43.639 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i0 := @parameter0: int => ?
+09:29:43.640 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i0 := @parameter0: int =>[fallout] {  -1I +1i0 = 0 }
+09:29:43.641 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store => ?
+09:29:43.641 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store =>[fallout] {  -1I +1i0 = 0 }
+09:29:43.642 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(1, 2) => ?
+09:29:43.642 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(1, 2) =>[fallout] {  -1I +1i0 = 0 }
+09:29:43.643 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:29:43.644 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:29:43.645 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[branchout] {  -1I +1i0 = 0;  1I >= 0 }
+09:29:43.645 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  1I >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:29:43.646 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  1I >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  1I >= 0 }
+09:29:43.647 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } goto [?= return] => ?
+09:29:43.647 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } goto [?= return] =>[branchout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:29:43.648 [main] DEBUG c.e.r.n.NumericalAnalysis: in merge: return
+09:29:43.648 [main] DEBUG c.e.r.n.NumericalAnalysis: <empty> return => ?
+09:29:43.651 [main] DEBUG c.e.r.v.Verifier: Bound: [0,+oo]
+09:29:43.652 [main] DEBUG c.e.r.v.Verifier: Abstract state in: {  -1I +1i0 = 0;  1I >= 0 }
+09:29:43.652 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property NON_NEGATIVE in 20ms
+09:29:43.653 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_If_Safe_4:NON_NEGATIVE in 4203ms
+09:29:43.653 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_If_Safe_4:NON_NEGATIVE (expected:SAFE,got:SAFE)                     : CORRECT
+09:29:43.656 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_If_Safe_4:FITS_IN_TROLLEY
+09:29:48.078 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_If_Safe_4
+09:29:48.079 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_If_Safe_4
+09:29:48.079 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_If_Safe_4
+09:29:48.080 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:48.081 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_If_Safe_4
+09:29:48.082 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Safe_4 => ?
+09:29:48.082 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Safe_4 =>[fallout] <Top>
+09:29:48.083 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:29:48.085 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:29:48.085 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:48.088 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are I
+09:29:48.089 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m2 in ch.ethz.rse.integration.tests.NonNeg_If_Safe_4
+09:29:48.089 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r2 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Safe_4 => ?
+09:29:48.089 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r2 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Safe_4 =>[fallout] <Top>
+09:29:48.090 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i0 := @parameter0: int => ?
+09:29:48.091 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i0 := @parameter0: int =>[fallout] {  -1I +1i0 = 0 }
+09:29:48.091 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store => ?
+09:29:48.092 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store =>[fallout] {  -1I +1i0 = 0 }
+09:29:48.094 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(1, 2) => ?
+09:29:48.094 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(1, 2) =>[fallout] {  -1I +1i0 = 0 }
+09:29:48.095 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:29:48.098 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:29:48.098 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[branchout] {  -1I +1i0 = 0;  1I >= 0 }
+09:29:48.098 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  1I >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:29:48.099 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  1I >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  1I >= 0 }
+09:29:48.099 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } goto [?= return] => ?
+09:29:48.099 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } goto [?= return] =>[branchout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:29:48.100 [main] DEBUG c.e.r.n.NumericalAnalysis: in merge: return
+09:29:48.100 [main] DEBUG c.e.r.n.NumericalAnalysis: <empty> return => ?
+09:29:48.100 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_TROLLEY in 21ms
+09:29:48.100 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_If_Safe_4:FITS_IN_TROLLEY in 4444ms
+09:29:48.100 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_If_Safe_4:FITS_IN_TROLLEY (expected:UNSAFE,got:SAFE)                : UNSOUND
+09:29:48.112 [main] ERROR c.e.r.i.SpecificExampleIT: Exception for example NonNeg_If_Safe_4:FITS_IN_TROLLEY: {}
+org.opentest4j.AssertionFailedError: expected: <UNSAFE> but was: <SAFE>
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
+	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
+	at ch.ethz.rse.integration.SpecificExampleIT.testOnExample(SpecificExampleIT.java:42)
+	at ch.ethz.rse.integration.AllExamplesIT.testExampleClass(AllExamplesIT.java:28)
+	at sun.reflect.GeneratedMethodAccessor1.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestTemplateMethod(TimeoutExtension.java:92)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:210)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:206)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:131)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:65)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask$DefaultDynamicTestExecutor.execute(NodeTestTask.java:212)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask$DefaultDynamicTestExecutor.execute(NodeTestTask.java:192)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.execute(TestTemplateTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.lambda$execute$2(TestTemplateTestDescriptor.java:107)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.util.stream.ReferencePipeline$11$1.accept(ReferencePipeline.java:440)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.LinkedList$LLSpliterator.forEachRemaining(LinkedList.java:1235)
+	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:647)
+	at java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:272)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:485)
+	at java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:272)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:485)
+	at java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:272)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:485)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.execute(TestTemplateTestDescriptor.java:107)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.execute(TestTemplateTestDescriptor.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at java.util.ArrayList.forEach(ArrayList.java:1259)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at java.util.ArrayList.forEach(ArrayList.java:1259)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:96)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:75)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:188)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:154)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:128)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:428)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:562)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:548)
+09:29:48.121 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_If_Safe_4:FITS_IN_RESERVE
+09:29:53.712 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_If_Safe_4
+09:29:53.713 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_If_Safe_4
+09:29:53.713 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_If_Safe_4
+09:29:53.719 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:29:53.720 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_If_Safe_4
+09:29:53.720 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Safe_4 => ?
+09:29:53.720 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Safe_4 =>[fallout] <Top>
+09:29:53.721 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:29:53.721 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:29:53.721 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:29:53.725 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are I
+09:29:53.726 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m2 in ch.ethz.rse.integration.tests.NonNeg_If_Safe_4
+09:29:53.726 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r2 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Safe_4 => ?
+09:29:53.727 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r2 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Safe_4 =>[fallout] <Top>
+09:29:53.727 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i0 := @parameter0: int => ?
+09:29:53.728 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i0 := @parameter0: int =>[fallout] {  -1I +1i0 = 0 }
+09:29:53.728 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store => ?
+09:29:53.728 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store =>[fallout] {  -1I +1i0 = 0 }
+09:29:53.729 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(1, 2) => ?
+09:29:53.729 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(1, 2) =>[fallout] {  -1I +1i0 = 0 }
+09:29:53.731 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:29:53.732 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:29:53.732 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[branchout] {  -1I +1i0 = 0;  1I >= 0 }
+09:29:53.733 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  1I >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:29:53.733 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  1I >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  1I >= 0 }
+09:29:53.737 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } goto [?= return] => ?
+09:29:53.738 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } goto [?= return] =>[branchout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:29:53.739 [main] DEBUG c.e.r.n.NumericalAnalysis: in merge: return
+09:29:53.740 [main] DEBUG c.e.r.n.NumericalAnalysis: <empty> return => ?
+09:29:53.740 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_RESERVE in 25ms
+09:29:53.740 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_If_Safe_4:FITS_IN_RESERVE in 5618ms
+09:29:53.740 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_If_Safe_4:FITS_IN_RESERVE (expected:UNSAFE,got:SAFE)                : UNSOUND
+09:29:53.742 [main] ERROR c.e.r.i.SpecificExampleIT: Exception for example NonNeg_If_Safe_4:FITS_IN_RESERVE: {}
+org.opentest4j.AssertionFailedError: expected: <UNSAFE> but was: <SAFE>
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
+	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
+	at ch.ethz.rse.integration.SpecificExampleIT.testOnExample(SpecificExampleIT.java:42)
+	at ch.ethz.rse.integration.AllExamplesIT.testExampleClass(AllExamplesIT.java:28)
+	at sun.reflect.GeneratedMethodAccessor1.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestTemplateMethod(TimeoutExtension.java:92)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:210)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:206)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:131)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:65)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask$DefaultDynamicTestExecutor.execute(NodeTestTask.java:212)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask$DefaultDynamicTestExecutor.execute(NodeTestTask.java:192)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.execute(TestTemplateTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.lambda$execute$2(TestTemplateTestDescriptor.java:107)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.util.stream.ReferencePipeline$11$1.accept(ReferencePipeline.java:440)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.LinkedList$LLSpliterator.forEachRemaining(LinkedList.java:1235)
+	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:647)
+	at java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:272)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:485)
+	at java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:272)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:485)
+	at java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:272)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:485)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.execute(TestTemplateTestDescriptor.java:107)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.execute(TestTemplateTestDescriptor.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at java.util.ArrayList.forEach(ArrayList.java:1259)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at java.util.ArrayList.forEach(ArrayList.java:1259)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:96)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:75)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:188)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:154)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:128)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:428)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:562)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:548)
+09:29:53.789 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_If_Test_1_Safe:NON_NEGATIVE
+09:30:00.011 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe
+09:30:00.011 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe
+09:30:00.011 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe
+09:30:00.013 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:00.014 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe
+09:30:00.014 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe => ?
+09:30:00.015 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe =>[fallout] <Top>
+09:30:00.016 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:00.016 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:00.017 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:00.018 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:00.019 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe
+09:30:00.021 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:30:00.023 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:30:00.024 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:30:00.024 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:30:00.024 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $i2 = 1 + -1 => ?
+09:30:00.025 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $i2 = 1 + -1 =>[fallout] {  1$i2 = 0 }
+09:30:00.025 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 => ?
+09:30:00.028 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 =>[fallout] {  1$i3 = 0;  1$i2 = 0 }
+09:30:00.029 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } $i4 = -1 + $i3 => ?
+09:30:00.032 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } $i4 = -1 + $i3 =>[fallout] {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:00.033 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) => ?
+09:30:00.034 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) =>[fallout] {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:00.034 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } return => ?
+09:30:00.037 [main] DEBUG c.e.r.v.Verifier: Bound: [-1,-1]
+09:30:00.037 [main] DEBUG c.e.r.v.Verifier: Abstract state in: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:00.037 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property NON_NEGATIVE in 25ms
+09:30:00.038 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_If_Test_1_Safe:NON_NEGATIVE in 6248ms
+09:30:00.038 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_If_Test_1_Safe:NON_NEGATIVE (expected:UNSAFE,got:UNSAFE)            : CORRECT
+09:30:00.047 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_If_Test_1_Safe:FITS_IN_TROLLEY
+09:30:04.244 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe
+09:30:04.245 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe
+09:30:04.245 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe
+09:30:04.247 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:04.247 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe
+09:30:04.247 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe => ?
+09:30:04.248 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe =>[fallout] <Top>
+09:30:04.248 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:04.248 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:04.248 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:04.250 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:04.251 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe
+09:30:04.251 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:30:04.251 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:30:04.252 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:30:04.252 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:30:04.253 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $i2 = 1 + -1 => ?
+09:30:04.253 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $i2 = 1 + -1 =>[fallout] {  1$i2 = 0 }
+09:30:04.254 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 => ?
+09:30:04.255 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 =>[fallout] {  1$i3 = 0;  1$i2 = 0 }
+09:30:04.255 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } $i4 = -1 + $i3 => ?
+09:30:04.256 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } $i4 = -1 + $i3 =>[fallout] {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:04.257 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) => ?
+09:30:04.258 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) =>[fallout] {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:04.259 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } return => ?
+09:30:04.259 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_TROLLEY in 14ms
+09:30:04.260 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_If_Test_1_Safe:FITS_IN_TROLLEY in 4212ms
+09:30:04.260 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_If_Test_1_Safe:FITS_IN_TROLLEY (expected:SAFE,got:SAFE)             : CORRECT
+09:30:04.281 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_If_Test_1_Safe:FITS_IN_RESERVE
+09:30:08.161 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe
+09:30:08.161 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe
+09:30:08.161 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe
+09:30:08.163 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:08.164 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe
+09:30:08.164 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe => ?
+09:30:08.164 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe =>[fallout] <Top>
+09:30:08.164 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:08.164 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:08.165 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:08.167 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:08.167 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.NonNeg_If_Test_1_Safe
+09:30:08.167 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:30:08.168 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:30:08.168 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:30:08.168 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:30:08.168 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $i2 = 1 + -1 => ?
+09:30:08.169 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $i2 = 1 + -1 =>[fallout] {  1$i2 = 0 }
+09:30:08.169 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 => ?
+09:30:08.170 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 =>[fallout] {  1$i3 = 0;  1$i2 = 0 }
+09:30:08.170 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } $i4 = -1 + $i3 => ?
+09:30:08.171 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } $i4 = -1 + $i3 =>[fallout] {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:08.172 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) => ?
+09:30:08.172 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) =>[fallout] {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:08.173 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } return => ?
+09:30:08.174 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_RESERVE in 12ms
+09:30:08.174 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_If_Test_1_Safe:FITS_IN_RESERVE in 3892ms
+09:30:08.174 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_If_Test_1_Safe:FITS_IN_RESERVE (expected:SAFE,got:SAFE)             : CORRECT
+09:30:08.325 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_If_Unsafe_4:NON_NEGATIVE
+09:30:12.107 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:30:12.107 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:30:12.107 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:30:12.109 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:12.109 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:30:12.110 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 => ?
+09:30:12.110 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 =>[fallout] <Top>
+09:30:12.110 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:12.110 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:12.111 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:12.113 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are I
+09:30:12.113 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m2 in ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:30:12.114 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r2 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 => ?
+09:30:12.114 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r2 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 =>[fallout] <Top>
+09:30:12.114 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i0 := @parameter0: int => ?
+09:30:12.115 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i0 := @parameter0: int =>[fallout] {  -1I +1i0 = 0 }
+09:30:12.115 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store => ?
+09:30:12.115 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store =>[fallout] {  -1I +1i0 = 0 }
+09:30:12.116 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(1, 2) => ?
+09:30:12.116 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(1, 2) =>[fallout] {  -1I +1i0 = 0 }
+09:30:12.117 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:30:12.118 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:30:12.118 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[branchout] {  -1I +1i0 = 0;  1I >= 0 }
+09:30:12.119 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  1I >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:30:12.119 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  1I >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  1I >= 0 }
+09:30:12.120 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:30:12.121 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:30:12.121 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } goto [?= return] => ?
+09:30:12.122 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } goto [?= return] =>[branchout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:30:12.122 [main] DEBUG c.e.r.n.NumericalAnalysis: in merge: return
+09:30:12.122 [main] DEBUG c.e.r.n.NumericalAnalysis: <empty> return => ?
+09:30:12.125 [main] DEBUG c.e.r.v.Verifier: Bound: [-oo,-1]
+09:30:12.126 [main] DEBUG c.e.r.v.Verifier: Abstract state in: {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:30:12.126 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property NON_NEGATIVE in 18ms
+09:30:12.126 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_If_Unsafe_4:NON_NEGATIVE in 3801ms
+09:30:12.126 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_If_Unsafe_4:NON_NEGATIVE (expected:UNSAFE,got:UNSAFE)               : CORRECT
+09:30:12.150 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_If_Unsafe_4:FITS_IN_TROLLEY
+09:30:16.298 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:30:16.299 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:30:16.299 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:30:16.302 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:16.303 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:30:16.304 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 => ?
+09:30:16.304 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 =>[fallout] <Top>
+09:30:16.304 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:16.305 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:16.305 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:16.307 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are I
+09:30:16.308 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m2 in ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:30:16.310 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r2 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 => ?
+09:30:16.316 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r2 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 =>[fallout] <Top>
+09:30:16.317 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i0 := @parameter0: int => ?
+09:30:16.317 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i0 := @parameter0: int =>[fallout] {  -1I +1i0 = 0 }
+09:30:16.318 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store => ?
+09:30:16.318 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store =>[fallout] {  -1I +1i0 = 0 }
+09:30:16.318 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(1, 2) => ?
+09:30:16.319 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(1, 2) =>[fallout] {  -1I +1i0 = 0 }
+09:30:16.324 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:30:16.329 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:30:16.330 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[branchout] {  -1I +1i0 = 0;  1I >= 0 }
+09:30:16.331 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  1I >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:30:16.331 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  1I >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  1I >= 0 }
+09:30:16.331 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:30:16.332 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:30:16.332 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } goto [?= return] => ?
+09:30:16.332 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } goto [?= return] =>[branchout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:30:16.333 [main] DEBUG c.e.r.n.NumericalAnalysis: in merge: return
+09:30:16.333 [main] DEBUG c.e.r.n.NumericalAnalysis: <empty> return => ?
+09:30:16.333 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_TROLLEY in 33ms
+09:30:16.333 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_If_Unsafe_4:FITS_IN_TROLLEY in 4183ms
+09:30:16.333 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_If_Unsafe_4:FITS_IN_TROLLEY (expected:UNSAFE,got:SAFE)              : UNSOUND
+09:30:16.334 [main] ERROR c.e.r.i.SpecificExampleIT: Exception for example NonNeg_If_Unsafe_4:FITS_IN_TROLLEY: {}
+org.opentest4j.AssertionFailedError: expected: <UNSAFE> but was: <SAFE>
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
+	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
+	at ch.ethz.rse.integration.SpecificExampleIT.testOnExample(SpecificExampleIT.java:42)
+	at ch.ethz.rse.integration.AllExamplesIT.testExampleClass(AllExamplesIT.java:28)
+	at sun.reflect.GeneratedMethodAccessor1.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestTemplateMethod(TimeoutExtension.java:92)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:210)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:206)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:131)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:65)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask$DefaultDynamicTestExecutor.execute(NodeTestTask.java:212)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask$DefaultDynamicTestExecutor.execute(NodeTestTask.java:192)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.execute(TestTemplateTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.lambda$execute$2(TestTemplateTestDescriptor.java:107)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.util.stream.ReferencePipeline$11$1.accept(ReferencePipeline.java:440)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.LinkedList$LLSpliterator.forEachRemaining(LinkedList.java:1235)
+	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:647)
+	at java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:272)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:485)
+	at java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:272)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:485)
+	at java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:272)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:485)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.execute(TestTemplateTestDescriptor.java:107)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.execute(TestTemplateTestDescriptor.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at java.util.ArrayList.forEach(ArrayList.java:1259)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at java.util.ArrayList.forEach(ArrayList.java:1259)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:96)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:75)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:188)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:154)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:128)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:428)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:562)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:548)
+09:30:16.344 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_If_Unsafe_4:FITS_IN_RESERVE
+09:30:21.817 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:30:21.818 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:30:21.818 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:30:21.820 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:21.820 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:30:21.821 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 => ?
+09:30:21.821 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 =>[fallout] <Top>
+09:30:21.821 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:21.821 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:21.821 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:21.824 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are I
+09:30:21.825 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m2 in ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4
+09:30:21.826 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r2 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 => ?
+09:30:21.827 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r2 := @this: ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4 =>[fallout] <Top>
+09:30:21.827 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i0 := @parameter0: int => ?
+09:30:21.829 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i0 := @parameter0: int =>[fallout] {  -1I +1i0 = 0 }
+09:30:21.830 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store => ?
+09:30:21.831 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store =>[fallout] {  -1I +1i0 = 0 }
+09:30:21.832 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(1, 2) => ?
+09:30:21.833 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(1, 2) =>[fallout] {  -1I +1i0 = 0 }
+09:30:21.833 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:30:21.834 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:30:21.840 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } if 0 <= i0 goto virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[branchout] {  -1I +1i0 = 0;  1I >= 0 }
+09:30:21.840 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  1I >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:30:21.840 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  1I >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  1I >= 0 }
+09:30:21.841 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:30:21.841 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:30:21.841 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } goto [?= return] => ?
+09:30:21.842 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0;  -1I -1 >= 0 } goto [?= return] =>[branchout] {  -1I +1i0 = 0;  -1I -1 >= 0 }
+09:30:21.842 [main] DEBUG c.e.r.n.NumericalAnalysis: in merge: return
+09:30:21.842 [main] DEBUG c.e.r.n.NumericalAnalysis: <empty> return => ?
+09:30:21.842 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_RESERVE in 24ms
+09:30:21.843 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_If_Unsafe_4:FITS_IN_RESERVE in 5498ms
+09:30:21.843 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_If_Unsafe_4:FITS_IN_RESERVE (expected:UNSAFE,got:SAFE)              : UNSOUND
+09:30:21.843 [main] ERROR c.e.r.i.SpecificExampleIT: Exception for example NonNeg_If_Unsafe_4:FITS_IN_RESERVE: {}
+org.opentest4j.AssertionFailedError: expected: <UNSAFE> but was: <SAFE>
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
+	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
+	at ch.ethz.rse.integration.SpecificExampleIT.testOnExample(SpecificExampleIT.java:42)
+	at ch.ethz.rse.integration.AllExamplesIT.testExampleClass(AllExamplesIT.java:28)
+	at sun.reflect.GeneratedMethodAccessor1.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestTemplateMethod(TimeoutExtension.java:92)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:210)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:206)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:131)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:65)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask$DefaultDynamicTestExecutor.execute(NodeTestTask.java:212)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask$DefaultDynamicTestExecutor.execute(NodeTestTask.java:192)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.execute(TestTemplateTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.lambda$execute$2(TestTemplateTestDescriptor.java:107)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.util.stream.ReferencePipeline$11$1.accept(ReferencePipeline.java:440)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.LinkedList$LLSpliterator.forEachRemaining(LinkedList.java:1235)
+	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:647)
+	at java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:272)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:485)
+	at java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:272)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:485)
+	at java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:272)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:485)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.execute(TestTemplateTestDescriptor.java:107)
+	at org.junit.jupiter.engine.descriptor.TestTemplateTestDescriptor.execute(TestTemplateTestDescriptor.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at java.util.ArrayList.forEach(ArrayList.java:1259)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at java.util.ArrayList.forEach(ArrayList.java:1259)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:96)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:75)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:188)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:154)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:128)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:428)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:562)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:548)
+09:30:22.043 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_Test_1_Unsafe:NON_NEGATIVE
+09:30:27.222 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe
+09:30:27.223 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe
+09:30:27.223 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe
+09:30:27.224 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:27.225 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe
+09:30:27.225 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe => ?
+09:30:27.225 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe =>[fallout] <Top>
+09:30:27.226 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:27.226 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:27.226 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:27.228 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:27.229 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe
+09:30:27.229 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:30:27.229 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:30:27.230 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:30:27.230 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:30:27.230 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $i2 = 1 + -1 => ?
+09:30:27.230 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $i2 = 1 + -1 =>[fallout] {  1$i2 = 0 }
+09:30:27.232 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 => ?
+09:30:27.233 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 =>[fallout] {  1$i3 = 0;  1$i2 = 0 }
+09:30:27.233 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } i4 = -1 + $i3 => ?
+09:30:27.234 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } i4 = -1 + $i3 =>[fallout] {  1i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:27.234 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } $i5 = i4 + -1 => ?
+09:30:27.235 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } $i5 = i4 + -1 =>[fallout] {  1i4 +1 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:27.236 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } $i6 = $i5 * 1 => ?
+09:30:27.238 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } $i6 = $i5 * 1 =>[fallout] {  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:27.239 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } i7 = i4 + $i6 => ?
+09:30:27.240 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } i7 = i4 + $i6 =>[fallout] {  1i7 +3 = 0;  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:27.240 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } $i8 = i4 + i7 => ?
+09:30:27.241 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } $i8 = i4 + i7 =>[fallout] {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:27.242 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i8) => ?
+09:30:27.243 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i8) =>[fallout] {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:27.243 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } return => ?
+09:30:27.247 [main] DEBUG c.e.r.v.Verifier: Bound: [-4,-4]
+09:30:27.247 [main] DEBUG c.e.r.v.Verifier: Abstract state in: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:27.248 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property NON_NEGATIVE in 24ms
+09:30:27.248 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_Test_1_Unsafe:NON_NEGATIVE in 5204ms
+09:30:27.248 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_Test_1_Unsafe:NON_NEGATIVE (expected:UNSAFE,got:UNSAFE)             : CORRECT
+09:30:27.294 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_Test_1_Unsafe:FITS_IN_TROLLEY
+09:30:30.470 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe
+09:30:30.471 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe
+09:30:30.471 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe
+09:30:30.475 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:30.475 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe
+09:30:30.476 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe => ?
+09:30:30.481 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe =>[fallout] <Top>
+09:30:30.481 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:30.482 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:30.483 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:30.487 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:30.488 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe
+09:30:30.488 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:30:30.488 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:30:30.488 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:30:30.489 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:30:30.489 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $i2 = 1 + -1 => ?
+09:30:30.489 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $i2 = 1 + -1 =>[fallout] {  1$i2 = 0 }
+09:30:30.489 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 => ?
+09:30:30.490 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 =>[fallout] {  1$i3 = 0;  1$i2 = 0 }
+09:30:30.496 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } i4 = -1 + $i3 => ?
+09:30:30.497 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } i4 = -1 + $i3 =>[fallout] {  1i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:30.497 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } $i5 = i4 + -1 => ?
+09:30:30.498 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } $i5 = i4 + -1 =>[fallout] {  1i4 +1 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:30.499 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } $i6 = $i5 * 1 => ?
+09:30:30.499 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } $i6 = $i5 * 1 =>[fallout] {  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:30.500 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } i7 = i4 + $i6 => ?
+09:30:30.500 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } i7 = i4 + $i6 =>[fallout] {  1i7 +3 = 0;  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:30.501 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } $i8 = i4 + i7 => ?
+09:30:30.503 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } $i8 = i4 + i7 =>[fallout] {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:30.503 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i8) => ?
+09:30:30.505 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i8) =>[fallout] {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:30.506 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } return => ?
+09:30:30.506 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_TROLLEY in 35ms
+09:30:30.506 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_Test_1_Unsafe:FITS_IN_TROLLEY in 3212ms
+09:30:30.506 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_Test_1_Unsafe:FITS_IN_TROLLEY (expected:SAFE,got:SAFE)              : CORRECT
+09:30:30.527 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_Test_1_Unsafe:FITS_IN_RESERVE
+09:30:34.112 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe
+09:30:34.112 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe
+09:30:34.112 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe
+09:30:34.114 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:34.114 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe
+09:30:34.115 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe => ?
+09:30:34.115 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe =>[fallout] <Top>
+09:30:34.115 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:34.115 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:34.115 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:34.117 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:34.118 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.NonNeg_Test_1_Unsafe
+09:30:34.118 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:30:34.118 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:30:34.119 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:30:34.119 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:30:34.119 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $i2 = 1 + -1 => ?
+09:30:34.120 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $i2 = 1 + -1 =>[fallout] {  1$i2 = 0 }
+09:30:34.120 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 => ?
+09:30:34.120 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 =>[fallout] {  1$i3 = 0;  1$i2 = 0 }
+09:30:34.121 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } i4 = -1 + $i3 => ?
+09:30:34.121 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } i4 = -1 + $i3 =>[fallout] {  1i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:34.122 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } $i5 = i4 + -1 => ?
+09:30:34.123 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } $i5 = i4 + -1 =>[fallout] {  1i4 +1 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:34.123 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } $i6 = $i5 * 1 => ?
+09:30:34.124 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } $i6 = $i5 * 1 =>[fallout] {  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:34.124 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } i7 = i4 + $i6 => ?
+09:30:34.125 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } i7 = i4 + $i6 =>[fallout] {  1i7 +3 = 0;  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:34.126 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } $i8 = i4 + i7 => ?
+09:30:34.127 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } $i8 = i4 + i7 =>[fallout] {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:34.129 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i8) => ?
+09:30:34.130 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i8) =>[fallout] {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:34.130 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 +3 = 0;  1i4 +1 = 0;  1$i8 +4 = 0;  1$i6 +2 = 0;  1$i5 +2 = 0;  1$i3 = 0;  1$i2 = 0 } return => ?
+09:30:34.131 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_RESERVE in 17ms
+09:30:34.131 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_Test_1_Unsafe:FITS_IN_RESERVE in 3603ms
+09:30:34.131 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_Test_1_Unsafe:FITS_IN_RESERVE (expected:SAFE,got:SAFE)              : CORRECT
+09:30:34.151 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_Test_2_Unsafe:NON_NEGATIVE
+09:30:37.307 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe
+09:30:37.308 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe
+09:30:37.308 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe
+09:30:37.313 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:37.314 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe
+09:30:37.314 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe => ?
+09:30:37.314 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe =>[fallout] <Top>
+09:30:37.314 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:37.314 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:37.315 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:37.324 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:37.325 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe
+09:30:37.325 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:30:37.325 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:30:37.326 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:30:37.326 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:30:37.326 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $i2 = 1 + -1 => ?
+09:30:37.327 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $i2 = 1 + -1 =>[fallout] {  1$i2 = 0 }
+09:30:37.327 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 => ?
+09:30:37.327 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 =>[fallout] {  1$i3 = 0;  1$i2 = 0 }
+09:30:37.328 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } $i4 = -1 + $i3 => ?
+09:30:37.328 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } $i4 = -1 + $i3 =>[fallout] {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:37.329 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) => ?
+09:30:37.329 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) =>[fallout] {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:37.329 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } return => ?
+09:30:37.331 [main] DEBUG c.e.r.v.Verifier: Bound: [-1,-1]
+09:30:37.332 [main] DEBUG c.e.r.v.Verifier: Abstract state in: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:37.332 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property NON_NEGATIVE in 24ms
+09:30:37.332 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_Test_2_Unsafe:NON_NEGATIVE in 3182ms
+09:30:37.332 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_Test_2_Unsafe:NON_NEGATIVE (expected:UNSAFE,got:UNSAFE)             : CORRECT
+09:30:37.339 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_Test_2_Unsafe:FITS_IN_TROLLEY
+09:30:40.166 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe
+09:30:40.166 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe
+09:30:40.167 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe
+09:30:40.168 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:40.168 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe
+09:30:40.169 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe => ?
+09:30:40.169 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe =>[fallout] <Top>
+09:30:40.169 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:40.169 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:40.169 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:40.171 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:40.171 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe
+09:30:40.171 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:30:40.171 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:30:40.172 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:30:40.172 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:30:40.172 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $i2 = 1 + -1 => ?
+09:30:40.172 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $i2 = 1 + -1 =>[fallout] {  1$i2 = 0 }
+09:30:40.172 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 => ?
+09:30:40.173 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 =>[fallout] {  1$i3 = 0;  1$i2 = 0 }
+09:30:40.173 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } $i4 = -1 + $i3 => ?
+09:30:40.173 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } $i4 = -1 + $i3 =>[fallout] {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:40.174 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) => ?
+09:30:40.174 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) =>[fallout] {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:40.174 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } return => ?
+09:30:40.174 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_TROLLEY in 7ms
+09:30:40.174 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_Test_2_Unsafe:FITS_IN_TROLLEY in 2835ms
+09:30:40.174 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_Test_2_Unsafe:FITS_IN_TROLLEY (expected:SAFE,got:SAFE)              : CORRECT
+09:30:40.222 [main] DEBUG c.e.rse.main.Runner: Verifying NonNeg_Test_2_Unsafe:FITS_IN_RESERVE
+09:30:43.296 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe
+09:30:43.296 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe
+09:30:43.296 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe
+09:30:43.298 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:43.298 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe
+09:30:43.299 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe => ?
+09:30:43.299 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe =>[fallout] <Top>
+09:30:43.299 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:43.299 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:43.300 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:43.301 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:43.302 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.NonNeg_Test_2_Unsafe
+09:30:43.302 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:30:43.302 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:30:43.303 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:30:43.303 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:30:43.303 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $i2 = 1 + -1 => ?
+09:30:43.303 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $i2 = 1 + -1 =>[fallout] {  1$i2 = 0 }
+09:30:43.303 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 => ?
+09:30:43.304 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 = 0 } $i3 = $i2 * 1 =>[fallout] {  1$i3 = 0;  1$i2 = 0 }
+09:30:43.304 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } $i4 = -1 + $i3 => ?
+09:30:43.304 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 = 0;  1$i2 = 0 } $i4 = -1 + $i3 =>[fallout] {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:43.305 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) => ?
+09:30:43.305 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) =>[fallout] {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 }
+09:30:43.305 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i4 +1 = 0;  1$i3 = 0;  1$i2 = 0 } return => ?
+09:30:43.306 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_RESERVE in 9ms
+09:30:43.306 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified NonNeg_Test_2_Unsafe:FITS_IN_RESERVE in 3084ms
+09:30:43.306 [main] INFO c.e.r.i.SpecificExampleIT: NonNeg_Test_2_Unsafe:FITS_IN_RESERVE (expected:SAFE,got:SAFE)              : CORRECT
+09:30:43.308 [main] DEBUG c.e.rse.main.Runner: Verifying Var_Test_2_Safe:NON_NEGATIVE
+09:30:46.350 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Var_Test_2_Safe
+09:30:46.350 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Var_Test_2_Safe
+09:30:46.350 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Var_Test_2_Safe
+09:30:46.352 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:46.352 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Var_Test_2_Safe
+09:30:46.353 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_2_Safe => ?
+09:30:46.353 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_2_Safe =>[fallout] <Top>
+09:30:46.353 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:46.353 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:46.353 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:46.355 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:46.357 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Var_Test_2_Safe
+09:30:46.358 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:30:46.358 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:30:46.359 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:30:46.359 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:30:46.359 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i2 = 0 + 0 => ?
+09:30:46.360 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i2 = 0 + 0 =>[fallout] {  1i2 = 0 }
+09:30:46.360 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0 } $i4 = i2 + i2 => ?
+09:30:46.361 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0 } $i4 = i2 + i2 =>[fallout] {  1i2 = 0;  1$i4 = 0 }
+09:30:46.363 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0;  1$i4 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) => ?
+09:30:46.363 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0;  1$i4 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) =>[fallout] {  1i2 = 0;  1$i4 = 0 }
+09:30:46.364 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0;  1$i4 = 0 } return => ?
+09:30:46.368 [main] DEBUG c.e.r.v.Verifier: Bound: [0,0]
+09:30:46.368 [main] DEBUG c.e.r.v.Verifier: Abstract state in: {  1i2 = 0;  1$i4 = 0 }
+09:30:46.369 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property NON_NEGATIVE in 18ms
+09:30:46.369 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Var_Test_2_Safe:NON_NEGATIVE in 3060ms
+09:30:46.372 [main] INFO c.e.r.i.SpecificExampleIT: Var_Test_2_Safe:NON_NEGATIVE (expected:SAFE,got:SAFE)                      : CORRECT
+09:30:46.390 [main] DEBUG c.e.rse.main.Runner: Verifying Var_Test_2_Safe:FITS_IN_TROLLEY
+09:30:49.575 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Var_Test_2_Safe
+09:30:49.575 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Var_Test_2_Safe
+09:30:49.575 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Var_Test_2_Safe
+09:30:49.577 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:49.578 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Var_Test_2_Safe
+09:30:49.578 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_2_Safe => ?
+09:30:49.578 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_2_Safe =>[fallout] <Top>
+09:30:49.579 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:49.579 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:49.579 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:49.582 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:49.582 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Var_Test_2_Safe
+09:30:49.583 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:30:49.583 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:30:49.583 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:30:49.583 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:30:49.583 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i2 = 0 + 0 => ?
+09:30:49.584 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i2 = 0 + 0 =>[fallout] {  1i2 = 0 }
+09:30:49.584 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0 } $i4 = i2 + i2 => ?
+09:30:49.584 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0 } $i4 = i2 + i2 =>[fallout] {  1i2 = 0;  1$i4 = 0 }
+09:30:49.585 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0;  1$i4 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) => ?
+09:30:49.585 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0;  1$i4 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) =>[fallout] {  1i2 = 0;  1$i4 = 0 }
+09:30:49.585 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0;  1$i4 = 0 } return => ?
+09:30:49.585 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_TROLLEY in 10ms
+09:30:49.585 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Var_Test_2_Safe:FITS_IN_TROLLEY in 3195ms
+09:30:49.586 [main] INFO c.e.r.i.SpecificExampleIT: Var_Test_2_Safe:FITS_IN_TROLLEY (expected:SAFE,got:SAFE)                   : CORRECT
+09:30:49.608 [main] DEBUG c.e.rse.main.Runner: Verifying Var_Test_2_Safe:FITS_IN_RESERVE
+09:30:52.667 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Var_Test_2_Safe
+09:30:52.667 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Var_Test_2_Safe
+09:30:52.667 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Var_Test_2_Safe
+09:30:52.669 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:52.669 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Var_Test_2_Safe
+09:30:52.669 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_2_Safe => ?
+09:30:52.669 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_2_Safe =>[fallout] <Top>
+09:30:52.670 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:52.670 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:52.670 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:52.672 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:52.672 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Var_Test_2_Safe
+09:30:52.673 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:30:52.673 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:30:52.673 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:30:52.673 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:30:52.673 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i2 = 0 + 0 => ?
+09:30:52.674 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i2 = 0 + 0 =>[fallout] {  1i2 = 0 }
+09:30:52.674 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0 } $i4 = i2 + i2 => ?
+09:30:52.674 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0 } $i4 = i2 + i2 =>[fallout] {  1i2 = 0;  1$i4 = 0 }
+09:30:52.674 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0;  1$i4 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) => ?
+09:30:52.675 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0;  1$i4 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i4) =>[fallout] {  1i2 = 0;  1$i4 = 0 }
+09:30:52.675 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0;  1$i4 = 0 } return => ?
+09:30:52.675 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_RESERVE in 7ms
+09:30:52.675 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Var_Test_2_Safe:FITS_IN_RESERVE in 3067ms
+09:30:52.675 [main] INFO c.e.r.i.SpecificExampleIT: Var_Test_2_Safe:FITS_IN_RESERVE (expected:SAFE,got:SAFE)                   : CORRECT
+09:30:52.693 [main] DEBUG c.e.rse.main.Runner: Verifying Var_Test_3_Safe:NON_NEGATIVE
+09:30:55.491 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Var_Test_3_Safe
+09:30:55.491 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Var_Test_3_Safe
+09:30:55.491 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Var_Test_3_Safe
+09:30:55.493 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:55.493 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Var_Test_3_Safe
+09:30:55.493 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_3_Safe => ?
+09:30:55.494 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_3_Safe =>[fallout] <Top>
+09:30:55.494 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:55.494 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:55.494 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:55.496 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:55.497 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Var_Test_3_Safe
+09:30:55.497 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:30:55.497 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:30:55.498 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:30:55.498 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:30:55.499 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $i2 = 1 + 2 => ?
+09:30:55.499 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $i2 = 1 + 2 =>[fallout] {  1$i2 -3 = 0 }
+09:30:55.500 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 -3 = 0 } $i3 = $i2 * 1 => ?
+09:30:55.500 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 -3 = 0 } $i3 = $i2 * 1 =>[fallout] {  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:30:55.501 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 -3 = 0;  1$i2 -3 = 0 } i4 = 2 + $i3 => ?
+09:30:55.502 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 -3 = 0;  1$i2 -3 = 0 } i4 = 2 + $i3 =>[fallout] {  1i4 -5 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:30:55.503 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i5 = i4 + 2 => ?
+09:30:55.504 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i5 = i4 + 2 =>[fallout] {  1i4 -5 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:30:55.504 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i6 = $i5 * 2 => ?
+09:30:55.505 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i6 = $i5 * 2 =>[fallout] {  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:30:55.506 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } i7 = i4 + $i6 => ?
+09:30:55.507 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } i7 = i4 + $i6 =>[fallout] {  1i7 -19 = 0;  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:30:55.508 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i8 = i4 + i7 => ?
+09:30:55.509 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i8 = i4 + i7 =>[fallout] {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:30:55.510 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i8) => ?
+09:30:55.510 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i8) =>[fallout] {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:30:55.512 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } return => ?
+09:30:55.520 [main] DEBUG c.e.r.v.Verifier: Bound: [24,24]
+09:30:55.521 [main] DEBUG c.e.r.v.Verifier: Abstract state in: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:30:55.521 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property NON_NEGATIVE in 29ms
+09:30:55.521 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Var_Test_3_Safe:NON_NEGATIVE in 2826ms
+09:30:55.521 [main] INFO c.e.r.i.SpecificExampleIT: Var_Test_3_Safe:NON_NEGATIVE (expected:SAFE,got:SAFE)                      : CORRECT
+09:30:55.544 [main] DEBUG c.e.rse.main.Runner: Verifying Var_Test_3_Safe:FITS_IN_TROLLEY
+09:30:58.468 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Var_Test_3_Safe
+09:30:58.468 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Var_Test_3_Safe
+09:30:58.468 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Var_Test_3_Safe
+09:30:58.469 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:58.470 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Var_Test_3_Safe
+09:30:58.470 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_3_Safe => ?
+09:30:58.470 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_3_Safe =>[fallout] <Top>
+09:30:58.470 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:30:58.470 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:30:58.470 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:30:58.473 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:30:58.473 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Var_Test_3_Safe
+09:30:58.474 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:30:58.474 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:30:58.474 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:30:58.474 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:30:58.474 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $i2 = 1 + 2 => ?
+09:30:58.475 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $i2 = 1 + 2 =>[fallout] {  1$i2 -3 = 0 }
+09:30:58.475 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 -3 = 0 } $i3 = $i2 * 1 => ?
+09:30:58.476 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 -3 = 0 } $i3 = $i2 * 1 =>[fallout] {  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:30:58.476 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 -3 = 0;  1$i2 -3 = 0 } i4 = 2 + $i3 => ?
+09:30:58.477 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 -3 = 0;  1$i2 -3 = 0 } i4 = 2 + $i3 =>[fallout] {  1i4 -5 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:30:58.478 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i5 = i4 + 2 => ?
+09:30:58.478 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i5 = i4 + 2 =>[fallout] {  1i4 -5 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:30:58.482 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i6 = $i5 * 2 => ?
+09:30:58.483 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i6 = $i5 * 2 =>[fallout] {  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:30:58.483 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } i7 = i4 + $i6 => ?
+09:30:58.484 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } i7 = i4 + $i6 =>[fallout] {  1i7 -19 = 0;  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:30:58.484 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i8 = i4 + i7 => ?
+09:30:58.486 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i8 = i4 + i7 =>[fallout] {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:30:58.486 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i8) => ?
+09:30:58.487 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i8) =>[fallout] {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:30:58.487 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } return => ?
+09:30:58.487 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_TROLLEY in 18ms
+09:30:58.487 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Var_Test_3_Safe:FITS_IN_TROLLEY in 2943ms
+09:30:58.487 [main] INFO c.e.r.i.SpecificExampleIT: Var_Test_3_Safe:FITS_IN_TROLLEY (expected:SAFE,got:SAFE)                   : CORRECT
+09:30:58.503 [main] DEBUG c.e.rse.main.Runner: Verifying Var_Test_3_Safe:FITS_IN_RESERVE
+09:31:01.300 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Var_Test_3_Safe
+09:31:01.300 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Var_Test_3_Safe
+09:31:01.300 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Var_Test_3_Safe
+09:31:01.303 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:01.304 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Var_Test_3_Safe
+09:31:01.304 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_3_Safe => ?
+09:31:01.304 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_3_Safe =>[fallout] <Top>
+09:31:01.304 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:31:01.305 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:31:01.305 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:31:01.309 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:01.310 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Var_Test_3_Safe
+09:31:01.310 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:31:01.315 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:31:01.316 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:31:01.316 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:31:01.316 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $i2 = 1 + 2 => ?
+09:31:01.317 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $i2 = 1 + 2 =>[fallout] {  1$i2 -3 = 0 }
+09:31:01.317 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 -3 = 0 } $i3 = $i2 * 1 => ?
+09:31:01.318 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i2 -3 = 0 } $i3 = $i2 * 1 =>[fallout] {  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:31:01.319 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 -3 = 0;  1$i2 -3 = 0 } i4 = 2 + $i3 => ?
+09:31:01.319 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1$i3 -3 = 0;  1$i2 -3 = 0 } i4 = 2 + $i3 =>[fallout] {  1i4 -5 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:31:01.320 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i5 = i4 + 2 => ?
+09:31:01.320 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i5 = i4 + 2 =>[fallout] {  1i4 -5 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:31:01.320 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i6 = $i5 * 2 => ?
+09:31:01.321 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i6 = $i5 * 2 =>[fallout] {  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:31:01.321 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } i7 = i4 + $i6 => ?
+09:31:01.322 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } i7 = i4 + $i6 =>[fallout] {  1i7 -19 = 0;  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:31:01.323 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i8 = i4 + i7 => ?
+09:31:01.323 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } $i8 = i4 + i7 =>[fallout] {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:31:01.324 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i8) => ?
+09:31:01.324 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>($i8) =>[fallout] {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 }
+09:31:01.324 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i7 -19 = 0;  1i4 -5 = 0;  1$i8 -24 = 0;  1$i6 -14 = 0;  1$i5 -7 = 0;  1$i3 -3 = 0;  1$i2 -3 = 0 } return => ?
+09:31:01.324 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_RESERVE in 23ms
+09:31:01.325 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Var_Test_3_Safe:FITS_IN_RESERVE in 2822ms
+09:31:01.325 [main] INFO c.e.r.i.SpecificExampleIT: Var_Test_3_Safe:FITS_IN_RESERVE (expected:SAFE,got:SAFE)                   : CORRECT
+09:31:01.372 [main] DEBUG c.e.rse.main.Runner: Verifying Var_Test_Safe:NON_NEGATIVE
+09:31:04.327 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Var_Test_Safe
+09:31:04.327 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Var_Test_Safe
+09:31:04.328 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Var_Test_Safe
+09:31:04.329 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:04.330 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Var_Test_Safe
+09:31:04.330 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Safe => ?
+09:31:04.330 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Safe =>[fallout] <Top>
+09:31:04.330 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:31:04.330 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:31:04.335 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:31:04.337 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:04.337 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Var_Test_Safe
+09:31:04.337 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:31:04.338 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:31:04.338 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:31:04.338 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:31:04.338 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i2 = 0 + 0 => ?
+09:31:04.339 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i2 = 0 + 0 =>[fallout] {  1i2 = 0 }
+09:31:04.339 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i2) => ?
+09:31:04.339 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i2) =>[fallout] {  1i2 = 0 }
+09:31:04.340 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0 } return => ?
+09:31:04.341 [main] DEBUG c.e.r.v.Verifier: Bound: [0,0]
+09:31:04.341 [main] DEBUG c.e.r.v.Verifier: Abstract state in: {  1i2 = 0 }
+09:31:04.341 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property NON_NEGATIVE in 13ms
+09:31:04.342 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Var_Test_Safe:NON_NEGATIVE in 2969ms
+09:31:04.342 [main] INFO c.e.r.i.SpecificExampleIT: Var_Test_Safe:NON_NEGATIVE (expected:SAFE,got:SAFE)                        : CORRECT
+09:31:04.396 [main] DEBUG c.e.rse.main.Runner: Verifying Var_Test_Safe:FITS_IN_TROLLEY
+09:31:07.456 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Var_Test_Safe
+09:31:07.456 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Var_Test_Safe
+09:31:07.456 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Var_Test_Safe
+09:31:07.458 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:07.458 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Var_Test_Safe
+09:31:07.458 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Safe => ?
+09:31:07.458 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Safe =>[fallout] <Top>
+09:31:07.459 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:31:07.459 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:31:07.459 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:31:07.461 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:07.461 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Var_Test_Safe
+09:31:07.461 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:31:07.461 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:31:07.462 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:31:07.462 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:31:07.462 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i2 = 0 + 0 => ?
+09:31:07.462 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i2 = 0 + 0 =>[fallout] {  1i2 = 0 }
+09:31:07.463 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i2) => ?
+09:31:07.463 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i2) =>[fallout] {  1i2 = 0 }
+09:31:07.463 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0 } return => ?
+09:31:07.463 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_TROLLEY in 6ms
+09:31:07.463 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Var_Test_Safe:FITS_IN_TROLLEY in 3067ms
+09:31:07.463 [main] INFO c.e.r.i.SpecificExampleIT: Var_Test_Safe:FITS_IN_TROLLEY (expected:SAFE,got:SAFE)                     : CORRECT
+09:31:07.478 [main] DEBUG c.e.rse.main.Runner: Verifying Var_Test_Safe:FITS_IN_RESERVE
+09:31:10.476 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Var_Test_Safe
+09:31:10.476 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Var_Test_Safe
+09:31:10.476 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Var_Test_Safe
+09:31:10.477 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:10.478 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Var_Test_Safe
+09:31:10.478 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Safe => ?
+09:31:10.478 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Safe =>[fallout] <Top>
+09:31:10.478 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:31:10.478 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:31:10.479 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:31:10.480 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:10.480 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Var_Test_Safe
+09:31:10.481 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:31:10.481 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:31:10.481 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:31:10.481 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:31:10.481 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i2 = 0 + 0 => ?
+09:31:10.482 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i2 = 0 + 0 =>[fallout] {  1i2 = 0 }
+09:31:10.482 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i2) => ?
+09:31:10.482 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i2) =>[fallout] {  1i2 = 0 }
+09:31:10.482 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 = 0 } return => ?
+09:31:10.482 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_RESERVE in 6ms
+09:31:10.483 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Var_Test_Safe:FITS_IN_RESERVE in 3004ms
+09:31:10.483 [main] INFO c.e.r.i.SpecificExampleIT: Var_Test_Safe:FITS_IN_RESERVE (expected:SAFE,got:SAFE)                     : CORRECT
+09:31:10.490 [main] DEBUG c.e.rse.main.Runner: Verifying Var_Test_Unsafe:NON_NEGATIVE
+09:31:13.585 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Var_Test_Unsafe
+09:31:13.585 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Var_Test_Unsafe
+09:31:13.586 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Var_Test_Unsafe
+09:31:13.587 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:13.588 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Var_Test_Unsafe
+09:31:13.588 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Unsafe => ?
+09:31:13.588 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Unsafe =>[fallout] <Top>
+09:31:13.589 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:31:13.589 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:31:13.589 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:31:13.591 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:13.591 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Var_Test_Unsafe
+09:31:13.591 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:31:13.592 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:31:13.592 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:31:13.592 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:31:13.592 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i2 = 0 + -1 => ?
+09:31:13.593 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i2 = 0 + -1 =>[fallout] {  1i2 +1 = 0 }
+09:31:13.593 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 +1 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i2) => ?
+09:31:13.598 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 +1 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i2) =>[fallout] {  1i2 +1 = 0 }
+09:31:13.599 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 +1 = 0 } return => ?
+09:31:13.600 [main] DEBUG c.e.r.v.Verifier: Bound: [-1,-1]
+09:31:13.601 [main] DEBUG c.e.r.v.Verifier: Abstract state in: {  1i2 +1 = 0 }
+09:31:13.601 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property NON_NEGATIVE in 15ms
+09:31:13.601 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Var_Test_Unsafe:NON_NEGATIVE in 3111ms
+09:31:13.601 [main] INFO c.e.r.i.SpecificExampleIT: Var_Test_Unsafe:NON_NEGATIVE (expected:UNSAFE,got:UNSAFE)                  : CORRECT
+09:31:13.608 [main] DEBUG c.e.rse.main.Runner: Verifying Var_Test_Unsafe:FITS_IN_TROLLEY
+09:31:16.381 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Var_Test_Unsafe
+09:31:16.382 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Var_Test_Unsafe
+09:31:16.382 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Var_Test_Unsafe
+09:31:16.384 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:16.384 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Var_Test_Unsafe
+09:31:16.384 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Unsafe => ?
+09:31:16.385 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Unsafe =>[fallout] <Top>
+09:31:16.385 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:31:16.385 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:31:16.385 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:31:16.387 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:16.387 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Var_Test_Unsafe
+09:31:16.388 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:31:16.388 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:31:16.388 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:31:16.388 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:31:16.389 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i2 = 0 + -1 => ?
+09:31:16.389 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i2 = 0 + -1 =>[fallout] {  1i2 +1 = 0 }
+09:31:16.390 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 +1 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i2) => ?
+09:31:16.390 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 +1 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i2) =>[fallout] {  1i2 +1 = 0 }
+09:31:16.390 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 +1 = 0 } return => ?
+09:31:16.391 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_TROLLEY in 8ms
+09:31:16.391 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Var_Test_Unsafe:FITS_IN_TROLLEY in 2783ms
+09:31:16.391 [main] INFO c.e.r.i.SpecificExampleIT: Var_Test_Unsafe:FITS_IN_TROLLEY (expected:SAFE,got:SAFE)                   : CORRECT
+09:31:16.403 [main] DEBUG c.e.rse.main.Runner: Verifying Var_Test_Unsafe:FITS_IN_RESERVE
+09:31:19.044 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Var_Test_Unsafe
+09:31:19.044 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Var_Test_Unsafe
+09:31:19.044 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Var_Test_Unsafe
+09:31:19.048 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:19.049 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Var_Test_Unsafe
+09:31:19.049 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Unsafe => ?
+09:31:19.049 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Unsafe =>[fallout] <Top>
+09:31:19.049 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:31:19.049 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:31:19.049 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:31:19.052 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:19.052 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Var_Test_Unsafe
+09:31:19.053 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> $r0 = new ch.ethz.rse.Store => ?
+09:31:19.053 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> $r0 = new ch.ethz.rse.Store =>[fallout] <Top>
+09:31:19.053 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:31:19.053 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] <Top>
+09:31:19.053 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i2 = 0 + -1 => ?
+09:31:19.054 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i2 = 0 + -1 =>[fallout] {  1i2 +1 = 0 }
+09:31:19.054 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 +1 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i2) => ?
+09:31:19.054 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 +1 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i2) =>[fallout] {  1i2 +1 = 0 }
+09:31:19.054 [main] DEBUG c.e.r.n.NumericalAnalysis: {  1i2 +1 = 0 } return => ?
+09:31:19.054 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_RESERVE in 10ms
+09:31:19.055 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Var_Test_Unsafe:FITS_IN_RESERVE in 2651ms
+09:31:19.055 [main] INFO c.e.r.i.SpecificExampleIT: Var_Test_Unsafe:FITS_IN_RESERVE (expected:SAFE,got:SAFE)                   : CORRECT
+09:31:19.081 [main] DEBUG c.e.rse.main.Runner: Verifying Var_Test_Unsafe_1:NON_NEGATIVE
+09:31:22.128 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Var_Test_Unsafe_1
+09:31:22.128 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Var_Test_Unsafe_1
+09:31:22.128 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Var_Test_Unsafe_1
+09:31:22.130 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:22.130 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Var_Test_Unsafe_1
+09:31:22.130 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Unsafe_1 => ?
+09:31:22.131 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Unsafe_1 =>[fallout] <Top>
+09:31:22.131 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:31:22.131 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:31:22.131 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:31:22.133 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are I
+09:31:22.133 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Var_Test_Unsafe_1
+09:31:22.133 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i0 := @parameter0: int => ?
+09:31:22.134 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i0 := @parameter0: int =>[fallout] {  -1I +1i0 = 0 }
+09:31:22.134 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store => ?
+09:31:22.134 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store =>[fallout] {  -1I +1i0 = 0 }
+09:31:22.135 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:31:22.135 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] {  -1I +1i0 = 0 }
+09:31:22.135 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:31:22.136 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0 }
+09:31:22.136 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } return => ?
+09:31:22.138 [main] DEBUG c.e.r.v.Verifier: Bound: [-oo,+oo]
+09:31:22.139 [main] DEBUG c.e.r.v.Verifier: Abstract state in: {  -1I +1i0 = 0 }
+09:31:22.139 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property NON_NEGATIVE in 11ms
+09:31:22.139 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Var_Test_Unsafe_1:NON_NEGATIVE in 3058ms
+09:31:22.140 [main] INFO c.e.r.i.SpecificExampleIT: Var_Test_Unsafe_1:NON_NEGATIVE (expected:UNSAFE,got:UNSAFE)                : CORRECT
+09:31:22.166 [main] DEBUG c.e.rse.main.Runner: Verifying Var_Test_Unsafe_1:FITS_IN_TROLLEY
+09:31:24.773 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Var_Test_Unsafe_1
+09:31:24.773 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Var_Test_Unsafe_1
+09:31:24.773 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Var_Test_Unsafe_1
+09:31:24.777 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:24.777 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Var_Test_Unsafe_1
+09:31:24.778 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Unsafe_1 => ?
+09:31:24.778 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Unsafe_1 =>[fallout] <Top>
+09:31:24.779 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:31:24.779 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:31:24.779 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:31:24.781 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are I
+09:31:24.782 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Var_Test_Unsafe_1
+09:31:24.783 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i0 := @parameter0: int => ?
+09:31:24.783 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i0 := @parameter0: int =>[fallout] {  -1I +1i0 = 0 }
+09:31:24.784 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store => ?
+09:31:24.785 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store =>[fallout] {  -1I +1i0 = 0 }
+09:31:24.785 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:31:24.786 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] {  -1I +1i0 = 0 }
+09:31:24.786 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:31:24.787 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0 }
+09:31:24.788 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } return => ?
+09:31:24.788 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_TROLLEY in 14ms
+09:31:24.788 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Var_Test_Unsafe_1:FITS_IN_TROLLEY in 2621ms
+09:31:24.789 [main] INFO c.e.r.i.SpecificExampleIT: Var_Test_Unsafe_1:FITS_IN_TROLLEY (expected:SAFE,got:SAFE)                 : CORRECT
+09:31:24.806 [main] DEBUG c.e.rse.main.Runner: Verifying Var_Test_Unsafe_1:FITS_IN_RESERVE
+09:31:27.743 [main] DEBUG c.e.r.v.Verifier: Analyzing ch.ethz.rse.integration.tests.Var_Test_Unsafe_1
+09:31:27.744 [main] DEBUG c.e.r.p.PointsToInitializer: Running points-to analysis on ch.ethz.rse.integration.tests.Var_Test_Unsafe_1
+09:31:27.744 [main] DEBUG c.e.r.p.PointsToInitializer: Analyzing initializers in ch.ethz.rse.integration.tests.Var_Test_Unsafe_1
+09:31:27.746 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are 
+09:31:27.746 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing <init> in ch.ethz.rse.integration.tests.Var_Test_Unsafe_1
+09:31:27.746 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Unsafe_1 => ?
+09:31:27.747 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> r0 := @this: ch.ethz.rse.integration.tests.Var_Test_Unsafe_1 =>[fallout] <Top>
+09:31:27.747 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> specialinvoke r0.<java.lang.Object: void <init>()>() => ?
+09:31:27.747 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> specialinvoke r0.<java.lang.Object: void <init>()>() =>[fallout] <Top>
+09:31:27.747 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> return => ?
+09:31:27.749 [main] DEBUG c.e.r.v.EnvironmentGenerator: Added method parameters are I
+09:31:27.749 [main] INFO c.e.r.n.NumericalAnalysis: Analyzing m1 in ch.ethz.rse.integration.tests.Var_Test_Unsafe_1
+09:31:27.750 [main] DEBUG c.e.r.n.NumericalAnalysis: <Top> i0 := @parameter0: int => ?
+09:31:27.750 [main] DEBUG c.e.r.n.NumericalAnalysis: <universal> i0 := @parameter0: int =>[fallout] {  -1I +1i0 = 0 }
+09:31:27.750 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store => ?
+09:31:27.750 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } $r0 = new ch.ethz.rse.Store =>[fallout] {  -1I +1i0 = 0 }
+09:31:27.751 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) => ?
+09:31:27.751 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } specialinvoke $r0.<ch.ethz.rse.Store: void <init>(int,int)>(2, 4) =>[fallout] {  -1I +1i0 = 0 }
+09:31:27.751 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) => ?
+09:31:27.752 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } virtualinvoke $r0.<ch.ethz.rse.Store: void get_delivery(int)>(i0) =>[fallout] {  -1I +1i0 = 0 }
+09:31:27.752 [main] DEBUG c.e.r.n.NumericalAnalysis: {  -1I +1i0 = 0 } return => ?
+09:31:27.752 [main] DEBUG c.e.r.v.AVerifier: Runtime: Checked property FITS_IN_RESERVE in 8ms
+09:31:27.752 [main] DEBUG c.e.rse.main.Runner: Runtime: Verified Var_Test_Unsafe_1:FITS_IN_RESERVE in 2946ms
+09:31:27.752 [main] INFO c.e.r.i.SpecificExampleIT: Var_Test_Unsafe_1:FITS_IN_RESERVE (expected:SAFE,got:SAFE)                 : CORRECT
+[[1;31mERROR[m] [1;31mTests [0;1mrun: [0;1m63[m, [1;31mFailures: [0;1;31m4[m, Errors: 0, [1;33mSkipped: [0;1;33m27[m, Time elapsed: 138.312 s[1;31m <<< FAILURE![m - in ch.ethz.rse.integration.[1mAllExamplesIT[m
+[[1;31mERROR[m] ch.ethz.rse.integration.AllExamplesIT.testExampleClass(VerificationTestCase)[23]  Time elapsed: 4.462 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <UNSAFE> but was: <SAFE>
+	at ch.ethz.rse.integration.AllExamplesIT.testExampleClass(AllExamplesIT.java:28)
+
+[[1;31mERROR[m] ch.ethz.rse.integration.AllExamplesIT.testExampleClass(VerificationTestCase)[24]  Time elapsed: 5.628 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <UNSAFE> but was: <SAFE>
+	at ch.ethz.rse.integration.AllExamplesIT.testExampleClass(AllExamplesIT.java:28)
+
+[[1;31mERROR[m] ch.ethz.rse.integration.AllExamplesIT.testExampleClass(VerificationTestCase)[38]  Time elapsed: 4.2 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <UNSAFE> but was: <SAFE>
+	at ch.ethz.rse.integration.AllExamplesIT.testExampleClass(AllExamplesIT.java:28)
+
+[[1;31mERROR[m] ch.ethz.rse.integration.AllExamplesIT.testExampleClass(VerificationTestCase)[39]  Time elapsed: 5.508 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <UNSAFE> but was: <SAFE>
+	at ch.ethz.rse.integration.AllExamplesIT.testExampleClass(AllExamplesIT.java:28)
+
+[[1;34mINFO[m] 
+[[1;34mINFO[m] Results:
+[[1;34mINFO[m] 
+[[1;31mERROR[m] [1;31mFailures: [m
+[[1;31mERROR[m] [1;31m  AllExamplesIT.testExampleClass:28 expected: <UNSAFE> but was: <SAFE>[m
+[[1;31mERROR[m] [1;31m  AllExamplesIT.testExampleClass:28 expected: <UNSAFE> but was: <SAFE>[m
+[[1;31mERROR[m] [1;31m  AllExamplesIT.testExampleClass:28 expected: <UNSAFE> but was: <SAFE>[m
+[[1;31mERROR[m] [1;31m  AllExamplesIT.testExampleClass:28 expected: <UNSAFE> but was: <SAFE>[m
+[[1;34mINFO[m] 
+[[1;31mERROR[m] [1;31mTests run: 64, Failures: 4, Errors: 0, Skipped: 27[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mjacoco-maven-plugin:0.8.5:report[m [1m(after-integration-test-execution)[m @ [36manalysis[0;1m ---[m
+[[1;34mINFO[m] Loading execution data file /workspaces/garbage-collectors/analysis/target/jacoco-output/jacoco-integration-tests.exec
+[[1;34mINFO[m] Analyzed bundle 'analysis' with 24 classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mjacoco-maven-plugin:0.8.5:merge[m [1m(merge-unit-and-integration)[m @ [36manalysis[0;1m ---[m
+[[1;34mINFO[m] Loading execution data file /workspaces/garbage-collectors/analysis/target/jacoco-output/jacoco-unit-tests.exec
+[[1;34mINFO[m] Loading execution data file /workspaces/garbage-collectors/analysis/target/jacoco-output/jacoco-integration-tests.exec
+[[1;34mINFO[m] Writing merged execution data to /workspaces/garbage-collectors/analysis/target/jacoco-output/merged.exec
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mjacoco-maven-plugin:0.8.5:report[m [1m(create-merged-report)[m @ [36manalysis[0;1m ---[m
+[[1;34mINFO[m] Loading execution data file /workspaces/garbage-collectors/analysis/target/jacoco-output/merged.exec
+[[1;34mINFO[m] Analyzed bundle 'analysis' with 24 classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-failsafe-plugin:3.0.0-M5:verify[m [1m(default)[m @ [36manalysis[0;1m ---[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;31mBUILD FAILURE[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  03:01 min
+[[1;34mINFO[m] Finished at: 2023-05-03T09:31:29Z
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;31mERROR[m] Failed to execute goal [32morg.apache.maven.plugins:maven-failsafe-plugin:3.0.0-M5:verify[m [1m(default)[m on project [36manalysis[m: [1;31mThere are test failures.[m
+[[1;31mERROR[m] [1;31m[m
+[[1;31mERROR[m] [1;31mPlease refer to /workspaces/garbage-collectors/analysis/target/failsafe-reports for the individual test results.[m
+[[1;31mERROR[m] [1;31mPlease refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.[m
+[[1;31mERROR[m] -> [1m[Help 1][m
+[[1;31mERROR[m] 
+[[1;31mERROR[m] To see the full stack trace of the errors, re-run Maven with the [1m-e[m switch.
+[[1;31mERROR[m] Re-run Maven using the [1m-X[m switch to enable full debug logging.
+[[1;31mERROR[m] 
+[[1;31mERROR[m] For more information about the errors and possible solutions, please read the following articles:
+[[1;31mERROR[m] [1m[Help 1][m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
