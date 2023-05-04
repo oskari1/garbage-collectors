@@ -21,9 +21,9 @@ public class SpecificExampleIT {
 	 */
 	@Test
 	void specificTest() {
-		String packageName = "ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_4";
+		String packageName = "ch.ethz.rse.integration.tests.NonNeg_If_Safe_5";
 		VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
-		boolean expectedIsSafe = false;
+		boolean expectedIsSafe = true;
 		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
 		SpecificExampleIT.testOnExample(t);
 	}
