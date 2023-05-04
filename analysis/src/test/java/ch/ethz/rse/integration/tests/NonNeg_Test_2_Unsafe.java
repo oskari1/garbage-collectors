@@ -5,7 +5,7 @@ import ch.ethz.rse.Store;
 // expected results:
 // NON_NEGATIVE UNSAFE
 // FITS_IN_TROLLEY SAFE
-// FITS_IN_RESERVE SAFE
+// FITS_IN_RESERVE UNSAFE
 
 public class NonNeg_Test_2_Unsafe {
 

@@ -7,7 +7,7 @@ import ch.ethz.rse.Store;
 // FITS_IN_TROLLEY UNSAFE
 // FITS_IN_RESERVE UNSAFE
 
-public class NonNeg_If_Safe {
+public class NonNeg_If_Safe_0 {
 
 	public void m2(int j) {
 		Store s = new Store(1, 2);

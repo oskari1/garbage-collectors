@@ -4,8 +4,8 @@ import ch.ethz.rse.Store;
 
 // expected results:
 // NON_NEGATIVE SAFE
-// FITS_IN_TROLLEY UNSAFE
-// FITS_IN_RESERVE UNSAFE
+// FITS_IN_TROLLEY SAFE
+// FITS_IN_RESERVE SAFE
 
 public class NonNeg_If_Safe_2 {
 
