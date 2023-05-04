@@ -7,11 +7,16 @@ import ch.ethz.rse.Store;
 // FITS_IN_TROLLEY UNSAFE
 // FITS_IN_RESERVE UNSAFE
 
-public class Basic_Test_Unsafe {
+public class NonNeg_If_Unsafe_4 {
 
-	public void m2(int j) {
+	public void m2(int k) {
 		Store s = new Store(1, 2);
-		if(-1 <= j && j <= 3)
-		  s.get_delivery(j);
+		// if(0 <= k) { 
+		if(0 > k) { 
+			s.get_delivery(k); 
+		} else {
+			// here k is in [0, +oo]
+			s.get_delivery(k);
+		}
 	  }
 }

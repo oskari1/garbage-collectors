@@ -1,0 +1,20 @@
+package ch.ethz.rse.integration.tests;
+
+import ch.ethz.rse.Store;
+
+// expected results:
+// NON_NEGATIVE SAFE
+// FITS_IN_TROLLEY SAFE
+// FITS_IN_RESERVE SAFE
+
+public class NonNeg_If_Safe_2 {
+
+	public void m2() {
+		Store s = new Store(1, 2);
+		int a = 0;
+		int b = 0;
+		// int j = a*(a+b);
+		if(0 <= a*(a+b))
+		  s.get_delivery(a*(a+b));
+	  }
+}

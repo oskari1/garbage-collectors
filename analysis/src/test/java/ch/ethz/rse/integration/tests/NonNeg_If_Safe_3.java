@@ -3,15 +3,17 @@ package ch.ethz.rse.integration.tests;
 import ch.ethz.rse.Store;
 
 // expected results:
-// NON_NEGATIVE UNSAFE
+// NON_NEGATIVE SAFE
 // FITS_IN_TROLLEY UNSAFE
 // FITS_IN_RESERVE UNSAFE
 
-public class Basic_Test_Unsafe {
+public class NonNeg_If_Safe_3 {
 
 	public void m2(int j) {
 		Store s = new Store(1, 2);
-		if(-1 <= j && j <= 3)
+		int i = 0;
+		if(j >= i) {
 		  s.get_delivery(j);
+		}
 	  }
 }

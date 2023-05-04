@@ -53,6 +53,26 @@ public class EnvironmentGenerator {
 
 		// populate this.ints
 		// TODO: FILL THIS OUT
+		// note that List<String> ints stores the names of all integer variables
+		// Once I have successfully implemented this, the test case Var_Test_Safe.java
+		// might work since the environment includes the variables at that point
+		// However, it might be that I still have to implement parts of NumericalAnalysis.java
+		// such that the analysis captures the fact that v -> [0,0] after "int v = 0;""
+
+		// more concretely, here we probably just have to iterate through the CFG
+		// and for each DefinitionStmt we have to add the lhs to the ints-list
+		// it's easier to just use getActiveBody()
+
+		Chain<Local> locals = method.getActiveBody().getLocals();
+		for(Local local : locals) {
+			this.ints.add(local.getName());
+		}
+
+		// This should add the method-parameters to the ints
+		// In the description, we assume they can only be of type int, thus we just add all
+		String param = method.getBytecodeParms();
+		logger.debug("Added method parameters are " + param);
+		this.ints.add(param);
 
 		Chain<Local> locals = method.getActiveBody().getLocals(); 
 		Iterator localItr = locals.iterator(); 

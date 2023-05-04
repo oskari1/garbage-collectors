@@ -20,6 +20,7 @@ import apron.Texpr1BinNode;
 import apron.Texpr1CstNode;
 import apron.Texpr1Intern;
 import apron.Texpr1Node;
+import apron.Texpr1UnNode;
 import apron.Texpr1VarNode;
 import ch.ethz.rse.VerificationProperty;
 import ch.ethz.rse.pointer.StoreInitializer;
@@ -325,41 +326,32 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 				// TODO: FILL THIS OUT
 				Value cond = ((JIfStmt) s).getCondition();
-				// according to the project description, we assume cond is a boolean expr
-				// consisting only of J | {Eq, Ge, Gt, Le, Lt, Ne} | Expr that only relate
-				// integer constants or local variables
-				// therefore, we can simply construct a Texpr1Node from this and add it
-				// to the branchOutWrapper (cond is true) as well as the negation of the 
-				// conditional to the fallOutWrapper (cond is false) 
-				Abstract1 eb = branchOutWrapper.get();
-				Abstract1 ef = fallOutWrapper.get();
+				Abstract1 e_branch = branchOutWrapper.get();
+				Abstract1 e_fall = fallOutWrapper.get();
 
-				// need to check if cond contains a local variable or ParametricRef
-				// if not, the if-statement has no effect on the abstract state
-		
-				List<Value> values = ((JIfStmt) s).getUseBoxes().stream().map(b -> b.getValue()).collect(Collectors.toList());
-				// only keep the values that correspond to local variables/parameter references
-				values.removeIf(val -> !(val instanceof JimpleLocal || val instanceof ParameterRef));
-				for(Value var : values) {
-					logger.debug("entered for-loop of JIfStmt with var = " + var.toString());
-					assert(var instanceof JimpleLocal || var instanceof ParameterRef);
-					// Value op1 = ((JLeExpr) cond).getOp1();
-					Value op2 = ((AbstractBinopExpr) cond).getOp1();
-					// String cond_var_name = ((JimpleLocal) op2).getName();
-					String cond_var_name = "i0";
-					logger.debug("variable in conditional is " + cond_var_name);
-					// Texpr1Node expr = new Texpr1VarNode(var.toString());
-					// Texpr1Node expr = new Texpr1VarNode(((JimpleLocal) op2).getName());
-					Texpr1Node expr = new Texpr1VarNode(cond_var_name);
-					Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, expr); 
-					logger.debug("expected: " + var.toString() + " >= 0 but got " + constraint.toString());
-					logger.debug("old constraint: " + constraint);
-					Abstract1 new_const =eb.meetCopy(man, constraint);
-					Abstract1 new_const_f =ef.meetCopy(man, constraint);
-					logger.debug("new constraint: " + new_const.toString(man));
-					branchOutWrapper.set(new_const);
-					fallOutWrapper.set(new_const_f);
+				int bool_op_true;
+				int bool_op_false;
+				if (cond instanceof JEqExpr) {
+					bool_op_true = Tcons1.DISEQ;
+					bool_op_false = Tcons1.EQ;
+				} else if(cond instanceof JGeExpr || cond instanceof JLeExpr) {
+					bool_op_true = Tcons1.SUP;
+					bool_op_false = Tcons1.SUPEQ;
+				} else if (cond instanceof JGtExpr || cond instanceof JLtExpr) {
+					bool_op_true = Tcons1.SUPEQ;
+					bool_op_false = Tcons1.SUP;
+				} else {
+					bool_op_true = Tcons1.EQ;
+					bool_op_false = Tcons1.DISEQ;
 				}
+				Texpr1Node expr = normalFormExpr(cond); 
+				Tcons1 cond_true = new Tcons1(env, bool_op_true, expr);;
+				Tcons1 cond_false = new Tcons1(env, bool_op_false, new Texpr1UnNode(Texpr1UnNode.OP_NEG, expr)); 
+
+				Abstract1 fallOutConstr =e_fall.meetCopy(man, cond_true);
+				Abstract1 branchOutConstr =e_branch.meetCopy(man, cond_false);
+				branchOutWrapper.set(branchOutConstr);
+				fallOutWrapper.set(fallOutConstr);
 				
 			} else if (s instanceof JInvokeStmt) {
 				// handle invocations
@@ -409,13 +401,10 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	// returns state of in after assignment
 	private void handleDef(NumericalStateWrapper outWrapper, Value left, Value right) throws ApronException {
 		// TODO: FILL THIS OUT
-		logger.debug("Handling: " + left.toString() + " = " + right.toString());
 		Abstract1 e = outWrapper.get();
 
 		Texpr1Node right_expr = exprOfValue(right);
-		logger.debug("about to update outWrapper in handleDef");
 		outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
-		logger.debug("updated outWrapper in handleDef");
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
@@ -434,17 +423,30 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				op = Texpr1BinNode.OP_ADD; 
 			} else if (val instanceof JSubExpr) {
 				op = Texpr1BinNode.OP_SUB; 
-			} else if (val instanceof JMulExpr){
-				op = Texpr1BinNode.OP_MUL; 
 			} else {
-				throw new IllegalStateException("None of the handled expressions matched - got something else (dik how to print the type, it gives me errors)");
+				op = Texpr1BinNode.OP_MUL; 
 			}
 			return new Texpr1BinNode(op, op1_exp, op2_exp);
 		} else {
-			logger.debug("val instanceof ParameterRef true");
 			String arg_name = this.method.getBytecodeParms();
-			logger.debug("this.method.getBytecodeParms() = " + arg_name);
 			return new Texpr1VarNode(arg_name);
 		}
 	}
+
+	private Texpr1Node normalFormExpr(Value val) {
+		assert(val instanceof AbstractBinopExpr);
+		Value op1 = ((AbstractBinopExpr) val).getOp1();
+		Value op2 = ((AbstractBinopExpr) val).getOp2();
+		if (val instanceof JGeExpr || val instanceof JGtExpr) {
+			Value tmp = op1;
+			op1 = op2;
+			op2 = tmp;
+		}	
+		return new Texpr1BinNode(Texpr1BinNode.OP_SUB,
+								 Texpr1BinNode.RTYPE_INT, 
+								 Texpr1BinNode.RDIR_ZERO,
+								 exprOfValue(op1),
+								 exprOfValue(op2));
+	}
+
 }
