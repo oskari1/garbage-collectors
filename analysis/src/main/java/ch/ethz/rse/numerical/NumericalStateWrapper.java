@@ -112,7 +112,7 @@ public class NumericalStateWrapper {
 			throw new ApronException("Join failed", man, 0); 
 		}
 			 
-		Abstract1 merged = copy1.meetCopy(man, copy2); 
+		Abstract1 merged = copy1.joinCopy(man, copy2); 
 		return new NumericalStateWrapper(man, merged); 	
 
 	}

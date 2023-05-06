@@ -205,7 +205,11 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		// loopHeads only gets initialized for loops - if we are not in a loop it will not be initialized and thus null. In this case, merge normally 
 		if (loop_count == null){
 			try {
+				logger.debug("Case loop_count == null");
+				logger.debug("w1 = " + w1.toString());
+				logger.debug("w2 = " + w2.toString());
 				w3 = w1.join(w2);
+				logger.debug("w3 = " + w3.toString());
 			} catch (ApronException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -325,6 +329,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				// handle if
 
 				// TODO: FILL THIS OUT
+				logger.debug("Entered case s instanceof JIfStmt");
 				Value cond = ((JIfStmt) s).getCondition();
 				Abstract1 e_branch = branchOutWrapper.get();
 				Abstract1 e_fall = fallOutWrapper.get();
@@ -401,10 +406,18 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	// returns state of in after assignment
 	private void handleDef(NumericalStateWrapper outWrapper, Value left, Value right) throws ApronException {
 		// TODO: FILL THIS OUT
+		logger.debug("entered handleDef");
+		logger.debug("outWrapper = " + outWrapper.toString());
 		Abstract1 e = outWrapper.get();
+		logger.debug("e = " + e.toString());
 
 		Texpr1Node right_expr = exprOfValue(right);
-		outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
+		// Abstract1 e_out = e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e);
+		Abstract1 e_out = e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), null);
+		logger.debug("e_out = " + e_out.toString());
+		// outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
+		outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), null));
+		logger.debug("outWrapper after handleDef: " + outWrapper.toString());
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
