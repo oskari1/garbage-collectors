@@ -68,6 +68,7 @@ import soot.jimple.internal.JimpleLocal;
 import soot.jimple.toolkits.annotation.logic.Loop;
 import soot.toolkits.graph.LoopNestTree;
 import soot.toolkits.graph.UnitGraph;
+import soot.toolkits.scalar.FlowSet;
 import soot.toolkits.scalar.ForwardBranchedFlowAnalysis;
 
 // added imports
@@ -199,7 +200,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		logger.debug("in merge: " + succNode);
 
 		logger.info("We are using merge"); 
-
+		
 		IntegerWrapper loop_count = loopHeads.get(succNode); 
 		
 		// loopHeads only gets initialized for loops - if we are not in a loop it will not be initialized and thus null. In this case, merge normally 
@@ -210,6 +211,8 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
+			logger.debug("Not in loop: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
+
 
 		} else if (loop_count.value<WIDENING_THRESHOLD){
 			// WIDENING_THRESHOLD not reached - merge, increase counter and save new state
@@ -222,6 +225,8 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			} 
 			loopHeadState.put(succNode, w3); 
 			// Not sure if the line above works. if not, use new IntegerWrapper(loop_count.value+1)
+			logger.debug("In loop, not widended: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
+
 			
 		} else {
 			// Widening threshold was reached - widen
@@ -246,6 +251,9 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				e.printStackTrace();
 			} 
 			w3 = new NumericalStateWrapper(man, w3_abstr); 
+			
+			logger.debug("In widended: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
+
 
 			// Don't know if this is actually necessary
 			loopHeadState.put(succNode, w3); 
