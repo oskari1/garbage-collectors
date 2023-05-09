@@ -418,7 +418,12 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		Abstract1 e = outWrapper.get();
 
 		Texpr1Node right_expr = exprOfValue(right);
-		outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
+		// Abstract1 e_out = e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e);
+		Abstract1 e_out = e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), null);
+		logger.debug("e_out = " + e_out.toString());
+		// outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
+		outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), null));
+
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
