@@ -196,17 +196,22 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 	@Override
 	protected void merge(Unit succNode, NumericalStateWrapper w1, NumericalStateWrapper w2, NumericalStateWrapper w3){
-		// merge the two states from w1 and w2 and store the result into w3
+		// merge the two states from w1 and w2 and store the result into w3, by using .copyInto(w3) 
 		logger.debug("in merge: " + succNode);
-
-		logger.info("We are using merge"); 
-		
+	
 		IntegerWrapper loop_count = loopHeads.get(succNode); 
-		
+		if (loop_count != null){
+			logger.info("We are using merge, with Loop_count " + loop_count.value);
+		} else {
+			logger.info("We are using merge, with None Loop_count");
+		}
+
+
 		// loopHeads only gets initialized for loops - if we are not in a loop it will not be initialized and thus null. In this case, merge normally 
 		if (loop_count == null){
 			try {
-				w3 = w1.join(w2);
+				NumericalStateWrapper w3_new = w1.join(w2);
+				w3_new.copyInto(w3);
 			} catch (ApronException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -218,7 +223,8 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			// WIDENING_THRESHOLD not reached - merge, increase counter and save new state
 			loop_count.value+=1; 
 			try {
-				w3 = w1.join(w2);
+				NumericalStateWrapper w3_new = w1.join(w2);
+				w3_new.copyInto(w3);
 			} catch (ApronException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -250,8 +256,8 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
-			w3 = new NumericalStateWrapper(man, w3_abstr); 
-			
+			NumericalStateWrapper w3_newest = new NumericalStateWrapper(man, w3_abstr); 
+			w3_newest.copyInto(w3);
 			logger.debug("In widended: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
 
 
