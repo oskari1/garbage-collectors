@@ -19,11 +19,15 @@ import soot.SootClass;
 import soot.SootMethod;
 import soot.Unit;
 import soot.Value;
+import soot.ValueBox;
 import soot.jimple.IntConstant;
 import soot.jimple.InvokeExpr;
 import soot.jimple.internal.JInvokeStmt;
 import soot.jimple.internal.JSpecialInvokeExpr;
 import soot.jimple.spark.pag.Node;
+
+import soot.Local;
+import soot.util.Chain;
 
 /**
  * Convenience class which helps determine the {@link StoreInitializer}s
@@ -62,12 +66,79 @@ public class PointsToInitializer {
 	}
 
 	private void analyzeAllInitializers() {
+
+		int uniqueNumber = 4201;
+
 		for (SootMethod method : this.c.getMethods()) {
 
 			if (method.getName().contains("<init>")) {
 				// skip constructor of the class
 				continue;
 			}
+
+
+			for(Unit u : method.getActiveBody().getUnits()) {
+				logger.debug("points: " + u);
+				
+				// //this does not seem to work
+				// if(u instanceof JSpecialInvokeExpr) {
+				// 	JSpecialInvokeExpr expr = (JSpecialInvokeExpr)u;
+				// 	if(isRelevantInit(expr)) {
+				// 		Value val1 = expr.getUseBoxes().get(0).getValue();
+				// 		Value val2 = expr.getUseBoxes().get(1).getValue();
+
+						
+
+				// 		logger.debug("points: --> " + val1 + " " + val2);
+
+				// 	}
+				// }
+
+				if(u instanceof JInvokeStmt) {
+					logger.debug("points: we have a statement");
+
+					JInvokeStmt stmt = (JInvokeStmt) u;
+					JSpecialInvokeExpr expr = (JSpecialInvokeExpr) stmt.getInvokeExpr();
+
+					String name = stmt.getInvokeExpr().getMethod().getName();
+
+					if(name.equals("get_delivery")) {
+						//get delivery is called (no idea if this is needed at one point)
+					}
+
+					if(isRelevantInit(expr)) {
+					//else if(name.equals("<init>")) { //this assumes that no other objects are deifined - maybe use the given function from below
+
+						//the variables
+						IntConstant val1 = (IntConstant) expr.getArg(0);
+						IntConstant val2 = (IntConstant) expr.getArg(1);
+
+						logger.debug("points:" + expr); 
+						logger.debug("points: #1: " + expr.getBase()); // this probably has to be converted to node
+
+						// IntConstant val1 = (IntConstant) stmt.getUseBoxes().get(0).getValue();
+						// IntConstant val2 = (IntConstant) stmt.getUseBoxes().get(1).getValue();
+
+
+
+
+						logger.debug("points " + stmt.getUseBoxes().get(2)); //where the reference is stored
+						//gives -> JimpleLocalBox($r0)
+
+						StoreInitializer storeInit = new StoreInitializer(stmt, uniqueNumber, val1.value, val2.value);
+						uniqueNumber += 1;
+
+
+						perMethod.put(method, storeInit); //not sure if this is the correct method
+
+
+						logger.debug("points: --> " + val1 + " " + val2);
+
+					}
+				}
+			}
+
+	
 
 			// populate data structures perMethod and initializers
 			// TODO: FILL THIS OUT
@@ -81,6 +152,7 @@ public class PointsToInitializer {
 	}
 
 	public List<StoreInitializer> pointsTo(Local base) {
+		logger.debug("points: pointsTo local base: " + base);
 		Collection<Node> nodes = this.pointsTo.getNodes(base);
 		List<StoreInitializer> initializers = new LinkedList<StoreInitializer>();
 		for (Node node : nodes) {
@@ -98,6 +170,7 @@ public class PointsToInitializer {
 	 * Note that more than one node can be returned.
 	 */
 	public Collection<Node> getAllocationNodes(JSpecialInvokeExpr invokeExpr){
+		logger.debug("points: getAllocatinoNodes " + invokeExpr);
 		if(!isRelevantInit(invokeExpr)){
 			throw new RuntimeException("Call to getAllocationNodes with " + invokeExpr.toString() + "which is not an init call for the Store class");
 		}
@@ -107,6 +180,7 @@ public class PointsToInitializer {
 	}
 
 	public boolean isRelevantInit(JSpecialInvokeExpr invokeExpr){
+		logger.debug("points: isRelevantInit " + invokeExpr);
 		Local base = (Local) invokeExpr.getBase();
 		boolean isRelevant = base.getType().toString().equals(Constants.StoreClassName);
 		boolean isInit = invokeExpr.getMethod().getName().equals("<init>");
