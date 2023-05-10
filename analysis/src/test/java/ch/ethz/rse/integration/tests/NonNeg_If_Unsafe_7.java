@@ -12,7 +12,7 @@ public class NonNeg_If_Unsafe_7 {
 	public void m2(int k) {
 		Store s = new Store(1, 2);
 		if(k != 0 && k < 1) { 
-			// here k <= -1, so unsafe
+			// here k <= -1, so unsafe BUT passing this to RSE server, it should be UNSAFE (master solution is not more precise)
 			s.get_delivery(k);
 		}
 	  }

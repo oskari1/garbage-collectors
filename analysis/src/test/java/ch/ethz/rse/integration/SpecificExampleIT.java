@@ -167,7 +167,16 @@ public class SpecificExampleIT {
 	void specificTest11() {
 	 	String packageName = "ch.ethz.rse.integration.tests.NonNeg_If_Safe_9";
 	 	VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
-	 	boolean expectedIsSafe = true;
+	 	boolean expectedIsSafe = false; // according to RSE server's master solution
+	 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void specificTest12() {
+	 	String packageName = "ch.ethz.rse.integration.tests.NonNeg_If_Safe_10";
+	 	VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+	 	boolean expectedIsSafe = true; 
 	 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
 		SpecificExampleIT.testOnExample(t);
 	}
