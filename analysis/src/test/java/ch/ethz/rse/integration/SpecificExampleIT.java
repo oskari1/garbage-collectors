@@ -127,6 +127,51 @@ public class SpecificExampleIT {
 		SpecificExampleIT.testOnExample(t);
 	}
 
+	@Test
+	void specificTest7() {
+	 	String packageName = "ch.ethz.rse.integration.tests.NonNeg_If_Safe_6";
+	 	VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+	 	boolean expectedIsSafe = true;
+	 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void specificTest8() {
+	 	String packageName = "ch.ethz.rse.integration.tests.NonNeg_If_Safe_7";
+	 	VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+	 	boolean expectedIsSafe = true;
+	 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void specificTest9() {
+	 	String packageName = "ch.ethz.rse.integration.tests.NonNeg_If_Safe_8";
+	 	VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+	 	boolean expectedIsSafe = true;
+	 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void specificTest10() {
+	 	String packageName = "ch.ethz.rse.integration.tests.NonNeg_If_Unsafe_7";
+	 	VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+	 	boolean expectedIsSafe = false;
+	 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void specificTest11() {
+	 	String packageName = "ch.ethz.rse.integration.tests.NonNeg_If_Safe_9";
+	 	VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+	 	boolean expectedIsSafe = true;
+	 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
 
 
 	private static final Logger logger = LoggerFactory.getLogger(SpecificExampleIT.class);
