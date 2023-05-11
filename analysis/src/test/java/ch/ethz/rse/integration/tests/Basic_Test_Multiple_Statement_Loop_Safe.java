@@ -14,9 +14,17 @@ public class Basic_Test_Multiple_Statement_Loop_Safe {
         int k = 12; 
         for(int i = 10; i>0; i--){
             s.get_delivery(1);
-            j++;
+            if (x>0){
+                j++;
+                if (x>1){
+                    k++;
+                }
+                
+            }
+             
         }
         s.get_delivery(j);
+        s.get_delivery(k);
         
     
     }

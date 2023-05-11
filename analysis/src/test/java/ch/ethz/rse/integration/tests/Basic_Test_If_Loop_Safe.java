@@ -2,8 +2,10 @@ package ch.ethz.rse.integration.tests;
 
 import ch.ethz.rse.Store;
 
+// THIS IS IMPRECISE  - SHOULD BE SAFE
+
 // expected results:
-// NON_NEGATIVE SAFE
+// NON_NEGATIVE UNSAFE
 // FITS_IN_TROLLEY UNSAFE
 // FITS_IN_RESERVE UNSAFE
 
