@@ -234,18 +234,18 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			logger.debug("In loop, not widended: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
 
 			
-		// } else {
-		// 	// Widening threshold was reached - widen
-		// 	// First, calculate another merge
-		// 	logger.debug("Case else");
-		// 	NumericalStateWrapper w3_new = null;
-		// 	try {
-		// 		w3_new = w1.join(w2);
-		// 	} catch (ApronException e) {
-		// 		// TODO Auto-generated catch block
-		// 		e.printStackTrace();
-		// 	} 
-		// 	NumericalStateWrapper w3_old = loopHeadState.get(succNode); 
+		} else {
+		// Widening threshold was reached - widen
+		// First, calculate another merge
+		logger.debug("Case else");
+		NumericalStateWrapper w3_new = null;
+		try {
+			w3_new = w1.join(w2);
+		} catch (ApronException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		NumericalStateWrapper w3_old = loopHeadState.get(succNode); 
 
 			// Then, compare the new and the old w3 and widen appropriately 
 			Abstract1 w3_old_abstr = w3_old.get(); 
@@ -262,12 +262,12 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			logger.debug("In widended: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
 
 
-		// 	// Don't know if this is actually necessary
-		// 	loopHeadState.put(succNode, w3); 
-		// 	loop_count.value+=1; 
+		// Don't know if this is actually necessary
+		loopHeadState.put(succNode, w3); 
+		loop_count.value+=1; 
 
 			
-		// }
+		}
 	}
 
 	@Override
