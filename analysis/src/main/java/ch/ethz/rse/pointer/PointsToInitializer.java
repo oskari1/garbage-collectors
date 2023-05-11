@@ -65,9 +65,10 @@ public class PointsToInitializer {
 		this.analyzeAllInitializers();
 	}
 
+	int uniqueNumber = 4201;
+
 	private void analyzeAllInitializers() {
 
-		int uniqueNumber = 4201;
 
 		for (SootMethod method : this.c.getMethods()) {
 
