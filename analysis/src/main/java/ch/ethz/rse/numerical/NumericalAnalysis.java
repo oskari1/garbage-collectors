@@ -197,62 +197,81 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	protected void merge(Unit succNode, NumericalStateWrapper w1, NumericalStateWrapper w2, NumericalStateWrapper w3){
 		// merge the two states from w1 and w2 and store the result into w3
 		logger.debug("in merge: " + succNode);
+		logger.debug("predecessor nodes are " + SootHelper.getUnitGraph(method).getPredsOf(succNode));
 
 		logger.info("We are using merge"); 
+		try {
+			logger.debug("w1 = " + w1.toString());
+			logger.debug("w2 = " + w2.toString());
+			NumericalStateWrapper w3_new = w1.join(w2);
+			w3_new.copyInto(w3);
+			logger.debug("w3 = " + w3.toString());
+		} catch (ApronException e) {
+			// TO1 DO Auto-generated catch block
+			e.printStackTrace();
+		} 
 
-		IntegerWrapper loop_count = loopHeads.get(succNode); 
+
+
+		// IntegerWrapper loop_count = loopHeads.get(succNode); 
 		
 		// loopHeads only gets initialized for loops - if we are not in a loop it will not be initialized and thus null. In this case, merge normally 
-		if (loop_count == null){
-			try {
-				w3 = w1.join(w2);
-			} catch (ApronException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
+		// if (loop_count == null){
+		// 	try {
+		// 		logger.debug("Case if");
+		// 		logger.debug("w1 = " + w1.toString());
+		// 		logger.debug("w2 = " + w2.toString());
+		// 		w3 = w1.join(w2);
+		// 		logger.debug("w3 = " + w3.toString());
+		// 	} catch (ApronException e) {
+		// 		// TODO Auto-generated catch block
+		// 		e.printStackTrace();
+		// 	} 
 
-		} else if (loop_count.value<WIDENING_THRESHOLD){
-			// WIDENING_THRESHOLD not reached - merge, increase counter and save new state
-			loop_count.value+=1; 
-			try {
-				w3 = w1.join(w2);
-			} catch (ApronException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-			loopHeadState.put(succNode, w3); 
-			// Not sure if the line above works. if not, use new IntegerWrapper(loop_count.value+1)
+		// } else if (loop_count.value<WIDENING_THRESHOLD){
+		// 	// WIDENING_THRESHOLD not reached - merge, increase counter and save new state
+		// 	logger.debug("Case else");
+		// 	loop_count.value+=1; 
+		// 	try {
+		// 		w3 = w1.join(w2);
+		// 	} catch (ApronException e) {
+		// 		// TODO Auto-generated catch block
+		// 		e.printStackTrace();
+		// 	} 
+		// 	loopHeadState.put(succNode, w3); 
+		// 	// Not sure if the line above works. if not, use new IntegerWrapper(loop_count.value+1)
 			
-		} else {
-			// Widening threshold was reached - widen
-			// First, calculate another merge
-			NumericalStateWrapper w3_new = null;
-			try {
-				w3_new = w1.join(w2);
-			} catch (ApronException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-			NumericalStateWrapper w3_old = loopHeadState.get(succNode); 
+		// } else {
+		// 	// Widening threshold was reached - widen
+		// 	// First, calculate another merge
+		// 	logger.debug("Case else");
+		// 	NumericalStateWrapper w3_new = null;
+		// 	try {
+		// 		w3_new = w1.join(w2);
+		// 	} catch (ApronException e) {
+		// 		// TODO Auto-generated catch block
+		// 		e.printStackTrace();
+		// 	} 
+		// 	NumericalStateWrapper w3_old = loopHeadState.get(succNode); 
 
-			// Then, compare the new and the old w3 and widen appropriately 
-			Abstract1 w3_old_abstr = w3_old.get(); 
-			Abstract1 w3_new_abstr = w3_new.get(); 
-			Abstract1 w3_abstr = null;
-			try {
-				w3_abstr = w3_old_abstr.widening(man, w3_new_abstr);
-			} catch (ApronException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-			w3 = new NumericalStateWrapper(man, w3_abstr); 
+		// 	// Then, compare the new and the old w3 and widen appropriately 
+		// 	Abstract1 w3_old_abstr = w3_old.get(); 
+		// 	Abstract1 w3_new_abstr = w3_new.get(); 
+		// 	Abstract1 w3_abstr = null;
+		// 	try {
+		// 		w3_abstr = w3_old_abstr.widening(man, w3_new_abstr);
+		// 	} catch (ApronException e) {
+		// 		// TODO Auto-generated catch block
+		// 		e.printStackTrace();
+		// 	} 
+		// 	w3 = new NumericalStateWrapper(man, w3_abstr); 
 
-			// Don't know if this is actually necessary
-			loopHeadState.put(succNode, w3); 
-			loop_count.value+=1; 
+		// 	// Don't know if this is actually necessary
+		// 	loopHeadState.put(succNode, w3); 
+		// 	loop_count.value+=1; 
 
 			
-		}
+		// }
 	}
 
 	@Override
@@ -288,6 +307,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		assert branchOutWrappers.size() <= 1;
 		NumericalStateWrapper branchOutWrapper = null;
 		if (branchOutWrappers.size() == 1) {
+			logger.debug("copied " + inWrapper + " into branchOutWrapper");
 			branchOutWrapper = branchOutWrappers.get(0);
 			inWrapper.copyInto(branchOutWrapper);
 		}
@@ -325,6 +345,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				// handle if
 
 				// TODO: FILL THIS OUT
+				logger.debug("Entered case s instanceof JIfStmt");
 				Value cond = ((JIfStmt) s).getCondition();
 				Abstract1 e_branch = branchOutWrapper.get();
 				Abstract1 e_fall = fallOutWrapper.get();
@@ -358,6 +379,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				JInvokeStmt jInvStmt = (JInvokeStmt) s;
 				InvokeExpr invokeExpr = jInvStmt.getInvokeExpr();
 				if (invokeExpr instanceof JVirtualInvokeExpr) {
+					logger.debug("entered instanceof JVirtualInvokeExpr");
 					handleInvoke(jInvStmt, fallOutWrapper);
 				} else if (invokeExpr instanceof JSpecialInvokeExpr) {
 					// initializer for object
@@ -366,6 +388,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 					unhandled("Unhandled invoke statement", invokeExpr, true);
 				}
 			} else if (s instanceof JGotoStmt) {
+				logger.debug("entered flowThrough with JGotoStmt");
 				// safe to ignore
 			} else if (s instanceof JReturnVoidStmt) {
 				// safe to ignore
@@ -401,10 +424,18 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	// returns state of in after assignment
 	private void handleDef(NumericalStateWrapper outWrapper, Value left, Value right) throws ApronException {
 		// TODO: FILL THIS OUT
+		logger.debug("entered handleDef");
+		logger.debug("outWrapper = " + outWrapper.toString());
 		Abstract1 e = outWrapper.get();
+		logger.debug("e = " + e.toString());
 
 		Texpr1Node right_expr = exprOfValue(right);
-		outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
+		// Abstract1 e_out = e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e);
+		Abstract1 e_out = e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), null);
+		logger.debug("e_out = " + e_out.toString());
+		// outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
+		outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), null));
+		logger.debug("outWrapper after handleDef: " + outWrapper.toString());
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods

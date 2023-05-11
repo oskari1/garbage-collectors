@@ -16,6 +16,7 @@ import soot.Local;
 import soot.PointsToAnalysis;
 import soot.SootMethod;
 import soot.Value;
+import soot.JastAddJ.Body;
 import soot.jimple.ParameterRef;
 import soot.jimple.internal.JimpleLocal;
 import soot.util.Chain;
@@ -67,6 +68,10 @@ public class EnvironmentGenerator {
 		for(Local local : locals) {
 			this.ints.add(local.getName());
 		}
+
+		// for debugging purposes, we try to print out the Jimple code:
+		soot.Body body = method.getActiveBody();
+		logger.debug(body.toString());
 
 		// This should add the method-parameters to the ints
 		// In the description, we assume they can only be of type int, thus we just add all

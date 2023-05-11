@@ -116,17 +116,22 @@ public class Verifier extends AVerifier {
 			Manager man = an.man;
 			Environment env = an.env;
 			UnitGraph g = SootHelper.getUnitGraph(m);
+			logger.debug("CFG: " + g.toString());
 			Iterator<Unit> i = g.iterator();
 			while(i.hasNext()) {
 
 				Unit u = (Unit) i.next();
+				logger.debug("entered while-loop with node " + u.toString());
 				if(is_call_to_get_delivery(u)) {
 
 					// get_delivery only has single argument
 					Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
+					// logger.debug("entered while-loop while is_call_to_get_delivery with arg = " + arg.toString());
 
 					if (arg instanceof IntConstant) {
-						return ((IntConstant) arg).value >= 0; 
+						if (!(((IntConstant) arg).value >= 0)) {
+							return false;
+						}
 					} else if (arg instanceof JimpleLocal) {
 						Abstract1 in = an.getFlowBefore(u).get();
 						String arg_name = ((JimpleLocal) arg).getName();
@@ -135,7 +140,9 @@ public class Verifier extends AVerifier {
 							Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, arg_var);
 							logger.debug("Bound: " + in.getBound(man, arg_name).toString());
 							logger.debug("Abstract state in: " + in.toString(man));
-							return in.satisfy(man, constraint);
+							if (!(in.satisfy(man, constraint))) {
+								return false;
+							}
 						} catch (ApronException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
