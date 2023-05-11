@@ -68,6 +68,7 @@ import soot.jimple.internal.JimpleLocal;
 import soot.jimple.toolkits.annotation.logic.Loop;
 import soot.toolkits.graph.LoopNestTree;
 import soot.toolkits.graph.UnitGraph;
+import soot.toolkits.scalar.FlowSet;
 import soot.toolkits.scalar.ForwardBranchedFlowAnalysis;
 
 // added imports
@@ -195,51 +196,43 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 	@Override
 	protected void merge(Unit succNode, NumericalStateWrapper w1, NumericalStateWrapper w2, NumericalStateWrapper w3){
-		// merge the two states from w1 and w2 and store the result into w3
+		// merge the two states from w1 and w2 and store the result into w3, by using .copyInto(w3) 
 		logger.debug("in merge: " + succNode);
-		logger.debug("predecessor nodes are " + SootHelper.getUnitGraph(method).getPredsOf(succNode));
-
-		logger.info("We are using merge"); 
-		try {
-			logger.debug("w1 = " + w1.toString());
-			logger.debug("w2 = " + w2.toString());
-			NumericalStateWrapper w3_new = w1.join(w2);
-			w3_new.copyInto(w3);
-			logger.debug("w3 = " + w3.toString());
-		} catch (ApronException e) {
-			// TO1 DO Auto-generated catch block
-			e.printStackTrace();
-		} 
+	
+		IntegerWrapper loop_count = loopHeads.get(succNode); 
+		if (loop_count != null){
+			logger.info("We are using merge, with Loop_count " + loop_count.value);
+		} else {
+			logger.info("We are using merge, with None Loop_count");
+		}
 
 
-
-		// IntegerWrapper loop_count = loopHeads.get(succNode); 
-		
 		// loopHeads only gets initialized for loops - if we are not in a loop it will not be initialized and thus null. In this case, merge normally 
-		// if (loop_count == null){
-		// 	try {
-		// 		logger.debug("Case if");
-		// 		logger.debug("w1 = " + w1.toString());
-		// 		logger.debug("w2 = " + w2.toString());
-		// 		w3 = w1.join(w2);
-		// 		logger.debug("w3 = " + w3.toString());
-		// 	} catch (ApronException e) {
-		// 		// TODO Auto-generated catch block
-		// 		e.printStackTrace();
-		// 	} 
+		if (loop_count == null){
+			try {
+				NumericalStateWrapper w3_new = w1.join(w2);
+				w3_new.copyInto(w3);
+			} catch (ApronException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			logger.debug("Not in loop: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
 
-		// } else if (loop_count.value<WIDENING_THRESHOLD){
-		// 	// WIDENING_THRESHOLD not reached - merge, increase counter and save new state
-		// 	logger.debug("Case else");
-		// 	loop_count.value+=1; 
-		// 	try {
-		// 		w3 = w1.join(w2);
-		// 	} catch (ApronException e) {
-		// 		// TODO Auto-generated catch block
-		// 		e.printStackTrace();
-		// 	} 
-		// 	loopHeadState.put(succNode, w3); 
-		// 	// Not sure if the line above works. if not, use new IntegerWrapper(loop_count.value+1)
+
+		} else if (loop_count.value<WIDENING_THRESHOLD){
+			// WIDENING_THRESHOLD not reached - merge, increase counter and save new state
+			loop_count.value+=1; 
+			try {
+				NumericalStateWrapper w3_new = w1.join(w2);
+				w3_new.copyInto(w3);
+			} catch (ApronException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			loopHeadState.put(succNode, w3); 
+			// Not sure if the line above works. if not, use new IntegerWrapper(loop_count.value+1)
+			logger.debug("In loop, not widended: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
+
 			
 		// } else {
 		// 	// Widening threshold was reached - widen
@@ -254,17 +247,20 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		// 	} 
 		// 	NumericalStateWrapper w3_old = loopHeadState.get(succNode); 
 
-		// 	// Then, compare the new and the old w3 and widen appropriately 
-		// 	Abstract1 w3_old_abstr = w3_old.get(); 
-		// 	Abstract1 w3_new_abstr = w3_new.get(); 
-		// 	Abstract1 w3_abstr = null;
-		// 	try {
-		// 		w3_abstr = w3_old_abstr.widening(man, w3_new_abstr);
-		// 	} catch (ApronException e) {
-		// 		// TODO Auto-generated catch block
-		// 		e.printStackTrace();
-		// 	} 
-		// 	w3 = new NumericalStateWrapper(man, w3_abstr); 
+			// Then, compare the new and the old w3 and widen appropriately 
+			Abstract1 w3_old_abstr = w3_old.get(); 
+			Abstract1 w3_new_abstr = w3_new.get(); 
+			Abstract1 w3_abstr = null;
+			try {
+				w3_abstr = w3_old_abstr.widening(man, w3_new_abstr);
+			} catch (ApronException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			NumericalStateWrapper w3_newest = new NumericalStateWrapper(man, w3_abstr); 
+			w3_newest.copyInto(w3);
+			logger.debug("In widended: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
+
 
 		// 	// Don't know if this is actually necessary
 		// 	loopHeadState.put(succNode, w3); 

@@ -102,17 +102,8 @@ public class NumericalStateWrapper {
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
 
 	public NumericalStateWrapper join(NumericalStateWrapper other) throws ApronException{
-		Abstract1 copy1 = null;
-		Abstract1 copy2 = null;
-		
-		copy1 = new Abstract1(man, this.elem);
-		copy2 = new Abstract1(man, other.elem);
-		
-		if (copy1 == null || copy2 == null){
-			throw new ApronException("Join failed", man, 0); 
-		}
-			 
-		Abstract1 merged = copy1.joinCopy(man, copy2); 
+
+		Abstract1 merged = this.get().joinCopy(man, other.get()); 
 		return new NumericalStateWrapper(man, merged); 	
 
 	}

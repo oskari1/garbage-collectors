@@ -107,6 +107,7 @@ public class Verifier extends AVerifier {
 	@Override
 	public boolean checksNonNegative() {
 		// TODO: FILL THIS OUT
+		boolean valid = true; 
 		for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
 			// goal: iterate through CFG of the analyzed method
 			// and in each node of the CFG, check if it's a
@@ -118,6 +119,7 @@ public class Verifier extends AVerifier {
 			UnitGraph g = SootHelper.getUnitGraph(m);
 			logger.debug("CFG: " + g.toString());
 			Iterator<Unit> i = g.iterator();
+			
 			while(i.hasNext()) {
 
 				Unit u = (Unit) i.next();
@@ -129,9 +131,9 @@ public class Verifier extends AVerifier {
 					// logger.debug("entered while-loop while is_call_to_get_delivery with arg = " + arg.toString());
 
 					if (arg instanceof IntConstant) {
-						if (!(((IntConstant) arg).value >= 0)) {
-							return false;
-						}
+						if (!(((IntConstant) arg).value >= 0)){
+							valid = false; 
+						} 
 					} else if (arg instanceof JimpleLocal) {
 						Abstract1 in = an.getFlowBefore(u).get();
 						String arg_name = ((JimpleLocal) arg).getName();
@@ -140,8 +142,8 @@ public class Verifier extends AVerifier {
 							Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, arg_var);
 							logger.debug("Bound: " + in.getBound(man, arg_name).toString());
 							logger.debug("Abstract state in: " + in.toString(man));
-							if (!(in.satisfy(man, constraint))) {
-								return false;
+							if (!in.satisfy(man, constraint)){
+								valid = false; 
 							}
 						} catch (ApronException e) {
 							// TODO Auto-generated catch block
@@ -155,7 +157,7 @@ public class Verifier extends AVerifier {
 
 			}
 		}
-		return true;
+		return valid;
 	}
 
 	@Override

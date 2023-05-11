@@ -1,3 +1,4 @@
+
 package ch.ethz.rse.integration.tests;
 
 import ch.ethz.rse.Store;
@@ -7,12 +8,13 @@ import ch.ethz.rse.Store;
 // FITS_IN_TROLLEY SAFE
 // FITS_IN_RESERVE SAFE
 
-public class Basic_Test_Constant_Addition_Unsafe{
+public class Basic_Test_Multiple_Statements_Unsafe4 {
     public static void m1() {
-        Store s = new Store(3, 5);
-        s.get_delivery(2-6);
-        s.get_delivery(1+0);
-    
+        Store s = new Store(20, 100);
+        int k = -2; 
+        s.get_delivery(3);
+        s.get_delivery(k); 
+        
+        
     }
 }
-
