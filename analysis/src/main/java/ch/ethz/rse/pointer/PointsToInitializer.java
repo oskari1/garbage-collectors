@@ -84,6 +84,9 @@ public class PointsToInitializer {
 				continue;
 			}
 
+			// populate data structures perMethod and initializers
+			// TODO: FILL THIS OUT
+
 			for(Unit u : method.getActiveBody().getUnits()) {
 				logger.debug("points - here: " + u);
 				logger.debug("Type: " + u.getClass());
@@ -117,87 +120,12 @@ public class PointsToInitializer {
 
 					}
 				}
-				// if(u instanceof JAssignStmt) {
-				// 	logger.debug("points: we have a new store");
-				// 	// continue; 
-				// 	// JSpecialInvokeExpr siExpr = (JSpecialInvokeExpr) u; 
 
-				// 	//TODO: USE getAllocationNodes() 
-
-				// 	// if(isRelevantInit(siExpr)) {
-				// 	// 	Value val1 = siExpr.getUseBoxes().get(0).getValue();
-				// 	// 	Value val2 = siExpr.getUseBoxes().get(1).getValue();
-				// 	// 	logger.debug("WE got some values - " + val1 + val2); 
-				// 	// }
-				// }
 			}
 		}
 	}
-				// //this does not seem to work
-				// if(u instanceof JSpecialInvokeExpr) {
-				// 	JSpecialInvokeExpr expr = (JSpecialInvokeExpr)u;
-				// 	if(isRelevantInit(expr)) {
-				// 		Value val1 = expr.getUseBoxes().get(0).getValue();
-				// 		Value val2 = expr.getUseBoxes().get(1).getValue();
 
-						
-
-				// 		logger.debug("points: --> " + val1 + " " + val2);
-
-				// 	}
-				// }
-
-				// if(u instanceof JInvokeStmt) {
-				// 	logger.debug("points: we have a statement");
-
-				// 	JInvokeStmt jInvStmt = (JInvokeStmt) u;
-				// 	JSpecialInvokeExpr specialInvokeExpr = jInvStmt.getInvokeExpr(); // .getInvokeExpr() has to be called on a store object. 
-				// 	// JSpecialInvokeExpr specialInvokeWExpr = (JSpecialInvokeExpr) invokeExpr; 
-
-				// 	String name = jInvStmt.getInvokeExpr().getMethod().getName();
-
-				// 	if(name.equals("get_delivery")) {
-				// 		//get delivery is called (no idea if this is needed at one point)
-				// 	}
-
-				// 	if(isRelevantInit(specialInvokeExpr)) {
-				// 	//else if(name.equals("<init>")) { //this assumes that no other objects are deifined - maybe use the given function from below
-
-				// 		//the variables
-				// 		IntConstant val1 = (IntConstant) specialInvokeWExpr.getArg(0);
-				// 		IntConstant val2 = (IntConstant) specialInvokeWExpr.getArg(1);
-
-				// 		logger.debug("points:" + specialInvokeWExpr); 
-				// 		logger.debug("points: #1: " + specialInvokeWExpr.getBase()); // this probably has to be converted to node
-
-				// 		// IntConstant val1 = (IntConstant) stmt.getUseBoxes().get(0).getValue();
-				// 		// IntConstant val2 = (IntConstant) stmt.getUseBoxes().get(1).getValue();
-
-
-
-
-				// 		logger.debug("points " + jInvStmt.getUseBoxes().get(2)); //where the reference is stored
-				// 		//gives -> JimpleLocalBox($r0)
-
-				// 		StoreInitializer storeInit = new StoreInitializer(jInvStmt, uniqueNumber, val1.value, val2.value);
-				// 		uniqueNumber += 1;
-
-
-				// 		perMethod.put(method, storeInit); //not sure if this is the correct method
-
-
-				// 		logger.debug("points: --> " + val1 + " " + val2);
-
-				// 	}
-				// }
-			//}
-
-	
-
-			// populate data structures perMethod and initializers
-			// TODO: FILL THIS OUT
-		//}
-	//}
+			
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
 
