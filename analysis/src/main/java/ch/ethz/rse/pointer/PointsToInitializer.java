@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.sound.sampled.AudioFileFormat.Type;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,16 +16,21 @@ import com.google.common.collect.Multimap;
 
 import apron.Texpr1Node;
 import ch.ethz.rse.utils.Constants;
+import heros.utilities.JsonArray;
 import soot.Local;
 import soot.SootClass;
 import soot.SootMethod;
 import soot.Unit;
 import soot.Value;
 import soot.ValueBox;
+import soot.JastAddJ.Stmt;
+import soot.baf.SpecialInvokeInst;
 import soot.jimple.IntConstant;
 import soot.jimple.InvokeExpr;
+import soot.jimple.internal.JAssignStmt;
 import soot.jimple.internal.JInvokeStmt;
 import soot.jimple.internal.JSpecialInvokeExpr;
+import soot.jimple.internal.JVirtualInvokeExpr;
 import soot.jimple.spark.pag.Node;
 
 import soot.Local;
@@ -77,10 +84,55 @@ public class PointsToInitializer {
 				continue;
 			}
 
-
 			for(Unit u : method.getActiveBody().getUnits()) {
-				logger.debug("points: " + u);
+				logger.debug("points - here: " + u);
+				logger.debug("Type: " + u.getClass());
+				if (u instanceof JInvokeStmt){
+					JInvokeStmt invkStmt = (JInvokeStmt) u; 
+					if (((invkStmt.getInvokeExpr()).getMethod()).getName().contains("<init>")){
+						JSpecialInvokeExpr spInvkExpr = (JSpecialInvokeExpr) invkStmt.getInvokeExpr();
+						
+						if (isRelevantInit(spInvkExpr)){
+							logger.debug("Is relevant"); 
+							Value val1 = u.getUseBoxes().get(0).getValue();
+							Value val2 = u.getUseBoxes().get(1).getValue();
+							logger.debug("boxes : " + val1 + ", " + val2); 
+							// Hey, I found the ugly code that uses a string - and I will do it too
+							StoreInitializer storeInit = new StoreInitializer(invkStmt, uniqueNumber, Integer.parseInt(val1.toString()), Integer.parseInt(val2.toString()));
+							uniqueNumber++; 
+							perMethod.put(method, storeInit); 
+
+							Collection<Node> nodes = getAllocationNodes(spInvkExpr);
+							for(Node node : nodes) {
+								initializers.put(node, storeInit);
+							}
+
+
+						} else {
+							logger.debug("Is not relevant"); 
+						}
+
+						
+						
+
+					}
+				}
+				// if(u instanceof JAssignStmt) {
+				// 	logger.debug("points: we have a new store");
+				// 	// continue; 
+				// 	// JSpecialInvokeExpr siExpr = (JSpecialInvokeExpr) u; 
+
+				// 	//TODO: USE getAllocationNodes() 
+
+				// 	// if(isRelevantInit(siExpr)) {
+				// 	// 	Value val1 = siExpr.getUseBoxes().get(0).getValue();
+				// 	// 	Value val2 = siExpr.getUseBoxes().get(1).getValue();
+				// 	// 	logger.debug("WE got some values - " + val1 + val2); 
+				// 	// }
+				// }
 			}
+		}
+	}
 				// //this does not seem to work
 				// if(u instanceof JSpecialInvokeExpr) {
 				// 	JSpecialInvokeExpr expr = (JSpecialInvokeExpr)u;
@@ -95,56 +147,57 @@ public class PointsToInitializer {
 				// 	}
 				// }
 
-			// 	if(u instanceof JInvokeStmt) {
-			// 		logger.debug("points: we have a statement");
+				// if(u instanceof JInvokeStmt) {
+				// 	logger.debug("points: we have a statement");
 
-			// 		JInvokeStmt stmt = (JInvokeStmt) u;
-			// 		JSpecialInvokeExpr expr = (JSpecialInvokeExpr) stmt.getInvokeExpr();
+				// 	JInvokeStmt jInvStmt = (JInvokeStmt) u;
+				// 	JSpecialInvokeExpr specialInvokeExpr = jInvStmt.getInvokeExpr(); // .getInvokeExpr() has to be called on a store object. 
+				// 	// JSpecialInvokeExpr specialInvokeWExpr = (JSpecialInvokeExpr) invokeExpr; 
 
-			// 		String name = stmt.getInvokeExpr().getMethod().getName();
+				// 	String name = jInvStmt.getInvokeExpr().getMethod().getName();
 
-			// 		if(name.equals("get_delivery")) {
-			// 			//get delivery is called (no idea if this is needed at one point)
-			// 		}
+				// 	if(name.equals("get_delivery")) {
+				// 		//get delivery is called (no idea if this is needed at one point)
+				// 	}
 
-			// 		if(isRelevantInit(expr)) {
-			// 		//else if(name.equals("<init>")) { //this assumes that no other objects are deifined - maybe use the given function from below
+				// 	if(isRelevantInit(specialInvokeExpr)) {
+				// 	//else if(name.equals("<init>")) { //this assumes that no other objects are deifined - maybe use the given function from below
 
-			// 			//the variables
-			// 			IntConstant val1 = (IntConstant) expr.getArg(0);
-			// 			IntConstant val2 = (IntConstant) expr.getArg(1);
+				// 		//the variables
+				// 		IntConstant val1 = (IntConstant) specialInvokeWExpr.getArg(0);
+				// 		IntConstant val2 = (IntConstant) specialInvokeWExpr.getArg(1);
 
-			// 			logger.debug("points:" + expr); 
-			// 			logger.debug("points: #1: " + expr.getBase()); // this probably has to be converted to node
+				// 		logger.debug("points:" + specialInvokeWExpr); 
+				// 		logger.debug("points: #1: " + specialInvokeWExpr.getBase()); // this probably has to be converted to node
 
-			// 			// IntConstant val1 = (IntConstant) stmt.getUseBoxes().get(0).getValue();
-			// 			// IntConstant val2 = (IntConstant) stmt.getUseBoxes().get(1).getValue();
-
-
-
-
-			// 			logger.debug("points " + stmt.getUseBoxes().get(2)); //where the reference is stored
-			// 			//gives -> JimpleLocalBox($r0)
-
-			// 			StoreInitializer storeInit = new StoreInitializer(stmt, uniqueNumber, val1.value, val2.value);
-			// 			uniqueNumber += 1;
+				// 		// IntConstant val1 = (IntConstant) stmt.getUseBoxes().get(0).getValue();
+				// 		// IntConstant val2 = (IntConstant) stmt.getUseBoxes().get(1).getValue();
 
 
-			// 			perMethod.put(method, storeInit); //not sure if this is the correct method
 
 
-			// 			logger.debug("points: --> " + val1 + " " + val2);
+				// 		logger.debug("points " + jInvStmt.getUseBoxes().get(2)); //where the reference is stored
+				// 		//gives -> JimpleLocalBox($r0)
 
-			// 		}
-			// 	}
-			// }
+				// 		StoreInitializer storeInit = new StoreInitializer(jInvStmt, uniqueNumber, val1.value, val2.value);
+				// 		uniqueNumber += 1;
+
+
+				// 		perMethod.put(method, storeInit); //not sure if this is the correct method
+
+
+				// 		logger.debug("points: --> " + val1 + " " + val2);
+
+				// 	}
+				// }
+			//}
 
 	
 
 			// populate data structures perMethod and initializers
 			// TODO: FILL THIS OUT
-		}
-	}
+		//}
+	//}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
 
