@@ -197,7 +197,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	@Override
 	protected void merge(Unit succNode, NumericalStateWrapper w1, NumericalStateWrapper w2, NumericalStateWrapper w3){
 		// merge the two states from w1 and w2 and store the result into w3, by using .copyInto(w3) 
-		logger.debug("in merge: " + succNode);
+		// logger.debug("in merge: " + succNode);
 	
 		IntegerWrapper loop_count = loopHeads.get(succNode); 
 		if (loop_count != null){
@@ -216,11 +216,12 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
-			logger.debug("Not in loop: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
+			// logger.debug("Not in loop: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
 
 
 		} else if (loop_count.value<WIDENING_THRESHOLD){
 			// WIDENING_THRESHOLD not reached - merge, increase counter and save new state
+			logger.debug("WIDENING THRESHOLD NOT YET REACHED");
 			loop_count.value+=1; 
 			try {
 				NumericalStateWrapper w3_new = w1.join(w2);
@@ -231,13 +232,13 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			} 
 			loopHeadState.put(succNode, w3); 
 			// Not sure if the line above works. if not, use new IntegerWrapper(loop_count.value+1)
-			logger.debug("In loop, not widended: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
+			// logger.debug("In loop, not widended: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
 
 			
 		} else {
 		// Widening threshold was reached - widen
 		// First, calculate another merge
-		logger.debug("Case else");
+		logger.debug("WIDENING THRESHOLD REACHED");
 		NumericalStateWrapper w3_new = null;
 		try {
 			w3_new = w1.join(w2);
@@ -259,12 +260,12 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			} 
 			NumericalStateWrapper w3_newest = new NumericalStateWrapper(man, w3_abstr); 
 			w3_newest.copyInto(w3);
-			logger.debug("In widended: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
+			// logger.debug("In widended: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
 
 
 		// Don't know if this is actually necessary
-		loopHeadState.put(succNode, w3); 
-		loop_count.value+=1; 
+		// loopHeadState.put(succNode, w3); 
+		// loop_count.value+=1; 
 
 			
 		}
@@ -303,7 +304,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		assert branchOutWrappers.size() <= 1;
 		NumericalStateWrapper branchOutWrapper = null;
 		if (branchOutWrappers.size() == 1) {
-			logger.debug("copied " + inWrapper + " into branchOutWrapper");
+			// logger.debug("copied " + inWrapper + " into branchOutWrapper");
 			branchOutWrapper = branchOutWrappers.get(0);
 			inWrapper.copyInto(branchOutWrapper);
 		}
@@ -341,7 +342,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				// handle if
 
 				// TODO: FILL THIS OUT
-				logger.debug("Entered case s instanceof JIfStmt");
+				// logger.debug("Entered case s instanceof JIfStmt");
 				Value cond = ((JIfStmt) s).getCondition();
 				Abstract1 e_branch = branchOutWrapper.get();
 				Abstract1 e_fall = fallOutWrapper.get();
@@ -375,7 +376,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				JInvokeStmt jInvStmt = (JInvokeStmt) s;
 				InvokeExpr invokeExpr = jInvStmt.getInvokeExpr();
 				if (invokeExpr instanceof JVirtualInvokeExpr) {
-					logger.debug("entered instanceof JVirtualInvokeExpr");
+					// logger.debug("entered instanceof JVirtualInvokeExpr");
 					handleInvoke(jInvStmt, fallOutWrapper);
 				} else if (invokeExpr instanceof JSpecialInvokeExpr) {
 					// initializer for object
@@ -384,7 +385,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 					unhandled("Unhandled invoke statement", invokeExpr, true);
 				}
 			} else if (s instanceof JGotoStmt) {
-				logger.debug("entered flowThrough with JGotoStmt");
+				// logger.debug("entered flowThrough with JGotoStmt");
 				// safe to ignore
 			} else if (s instanceof JReturnVoidStmt) {
 				// safe to ignore
@@ -395,6 +396,9 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			// log outcome
 			if (fallOutWrapper != null) {
 				logger.debug(inWrapper.get() + " " + s + " =>[fallout] " + fallOutWrapper);
+				// if(s instanceof JIfStmt) {
+				// 	logger.debug("Bound for i1: " + inWrapper.get().getBound(man, "i1").toString());
+				// }
 			}
 			if (branchOutWrapper != null) {
 				logger.debug(inWrapper.get() + " " + s + " =>[branchout] " + branchOutWrapper);
@@ -420,18 +424,18 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	// returns state of in after assignment
 	private void handleDef(NumericalStateWrapper outWrapper, Value left, Value right) throws ApronException {
 		// TODO: FILL THIS OUT
-		logger.debug("entered handleDef");
-		logger.debug("outWrapper = " + outWrapper.toString());
+		// logger.debug("entered handleDef");
+		// logger.debug("outWrapper = " + outWrapper.toString());
 		Abstract1 e = outWrapper.get();
-		logger.debug("e = " + e.toString());
+		// logger.debug("e = " + e.toString());
 
 		Texpr1Node right_expr = exprOfValue(right);
 		// Abstract1 e_out = e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e);
 		Abstract1 e_out = e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), null);
-		logger.debug("e_out = " + e_out.toString());
+		// logger.debug("e_out = " + e_out.toString());
 		// outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
 		outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), null));
-		logger.debug("outWrapper after handleDef: " + outWrapper.toString());
+		// logger.debug("outWrapper after handleDef: " + outWrapper.toString());
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods

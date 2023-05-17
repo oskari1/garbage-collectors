@@ -181,6 +181,15 @@ public class SpecificExampleIT {
 		SpecificExampleIT.testOnExample(t);
 	}
 
+	@Test
+	void specificTest13() {
+	 	String packageName = "ch.ethz.rse.integration.tests.NonNeg_While_Safe_1";
+	 	VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+	 	boolean expectedIsSafe = true; 
+	 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
 
 
 	private static final Logger logger = LoggerFactory.getLogger(SpecificExampleIT.class);
