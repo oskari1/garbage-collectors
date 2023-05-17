@@ -65,7 +65,7 @@ public class PointsToInitializer {
 		this.analyzeAllInitializers();
 	}
 
-	int uniqueNumber = 4201;
+	static int uniqueNumber = 4201;
 
 	private void analyzeAllInitializers() {
 
@@ -79,61 +79,44 @@ public class PointsToInitializer {
 
 
 			for(Unit u : method.getActiveBody().getUnits()) {
-				logger.debug("points: " + u);
+				logger.debug("points unit: " + u);
 				
-				// //this does not seem to work
-				// if(u instanceof JSpecialInvokeExpr) {
-				// 	JSpecialInvokeExpr expr = (JSpecialInvokeExpr)u;
-				// 	if(isRelevantInit(expr)) {
-				// 		Value val1 = expr.getUseBoxes().get(0).getValue();
-				// 		Value val2 = expr.getUseBoxes().get(1).getValue();
-
-						
-
-				// 		logger.debug("points: --> " + val1 + " " + val2);
-
-				// 	}
-				// }
-
 				if(u instanceof JInvokeStmt) {
 					logger.debug("points: we have a statement");
 
 					JInvokeStmt stmt = (JInvokeStmt) u;
-					JSpecialInvokeExpr expr = (JSpecialInvokeExpr) stmt.getInvokeExpr();
 
-					String name = stmt.getInvokeExpr().getMethod().getName();
+					if(stmt.getInvokeExpr() instanceof JSpecialInvokeExpr) {
 
-					if(name.equals("get_delivery")) {
-						//get delivery is called (no idea if this is needed at one point)
-					}
+						JSpecialInvokeExpr expr = (JSpecialInvokeExpr) stmt.getInvokeExpr();
 
-					if(isRelevantInit(expr)) {
-					//else if(name.equals("<init>")) { //this assumes that no other objects are deifined - maybe use the given function from below
+						String name = stmt.getInvokeExpr().getMethod().getName();
 
-						//the variables
-						IntConstant val1 = (IntConstant) expr.getArg(0);
-						IntConstant val2 = (IntConstant) expr.getArg(1);
+						//only interesed if an expression that creates a new store
+						if(isRelevantInit(expr)) {
 
-						logger.debug("points:" + expr); 
-						logger.debug("points: #1: " + expr.getBase()); // this probably has to be converted to node
+							//the variables
+							IntConstant val1 = (IntConstant) expr.getArg(0);
+							IntConstant val2 = (IntConstant) expr.getArg(1);
 
-						// IntConstant val1 = (IntConstant) stmt.getUseBoxes().get(0).getValue();
-						// IntConstant val2 = (IntConstant) stmt.getUseBoxes().get(1).getValue();
+							logger.debug("points:" + expr); 
 
+							// logger.debug("points " + stmt.getUseBoxes().get(2)); //where the reference is stored
+							// //gives -> JimpleLocalBox($r0)
 
+							//creating a store initializer baseon the the arguments provided by the invoke expression
+							StoreInitializer storeInit = new StoreInitializer(stmt, uniqueNumber, val1.value, val2.value);
+							uniqueNumber += 1;
 
+							perMethod.put(method, storeInit); //not sure if this is the correct method
 
-						logger.debug("points " + stmt.getUseBoxes().get(2)); //where the reference is stored
-						//gives -> JimpleLocalBox($r0)
+							Collection<Node> nodes = getAllocationNodes(expr);
+							for(Node node : nodes) {
+								initializers.put(node, storeInit);
+							}
 
-						StoreInitializer storeInit = new StoreInitializer(stmt, uniqueNumber, val1.value, val2.value);
-						uniqueNumber += 1;
-
-
-						perMethod.put(method, storeInit); //not sure if this is the correct method
-
-
-						logger.debug("points: --> " + val1 + " " + val2);
+							// logger.debug("points: --> " + val1 + " " + val2);
+						}
 
 					}
 				}
@@ -142,7 +125,7 @@ public class PointsToInitializer {
 	
 
 			// populate data structures perMethod and initializers
-			// TODO: FILL THIS OUT
+			// done todo: FILL THIS OUT
 		}
 	}
 
