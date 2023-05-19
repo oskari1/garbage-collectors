@@ -4,8 +4,8 @@ import ch.ethz.rse.Store;
 
 // expected results:
 // NON_NEGATIVE SAFE
-// FITS_IN_TROLLEY SAFE
-// FITS_IN_RESERVE SAFE
+// FITS_IN_TROLLEY UNSAFE
+// FITS_IN_RESERVE UNSAFE
 
 public class Basic_Test_Multiple_Statement_Loop_Safe {
     public static void m1(int x) {

@@ -187,35 +187,52 @@ public class Verifier extends AVerifier {
 					logger.debug(" " + ((JVirtualInvokeExpr) u).getBase()); 
 				}
 				if(is_call_to_get_delivery(u)) {
-
+					int lowest_capacity = Integer.MAX_VALUE; 
 					// get_delivery only has single argument
 					if (u instanceof JVirtualInvokeExpr){
 						logger.debug("Got call to delivery: " + ((JVirtualInvokeExpr) u).getBase()); 
 					}
 					ValueBox store_reference = u.getUseBoxes().get(1); 
-					logger.debug("HERE123" + u.getUseBoxes().get(1).toString()); 
+					// logger.debug("HERE123" + u.getUseBoxes().get(1).toString()); 
 					for(StoreInitializer store : pointsTo.pointsTo((Local) store_reference.getValue())) {
 						logger.debug(String.valueOf(store.trolley_size));
+						if (store.trolley_size<lowest_capacity){
+							lowest_capacity = store.trolley_size; 
+						}
 					}
 					
+					logger.debug("Lowest capacity found: " + lowest_capacity); 
+
 					Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
 					// logger.debug("entered while-loop while is_call_to_get_delivery with arg = " + arg.toString());
 					
 					if (arg instanceof IntConstant) {
-						if (!(((IntConstant) arg).value >= 0)){
+						if (((IntConstant) arg).value > lowest_capacity){
 							valid = false; 
 						} 
+					
 					} else if (arg instanceof JimpleLocal) {
 						Abstract1 in = an.getFlowBefore(u).get();
 						String arg_name = ((JimpleLocal) arg).getName();
 						try {
-							Texpr1Node arg_var = new Texpr1VarNode(arg_name); 
-							Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, arg_var);
 							logger.debug("Bound: " + in.getBound(man, arg_name).toString());
 							logger.debug("Abstract state in: " + in.toString(man));
-							if (!in.satisfy(man, constraint)){
+							String upperboundstring = in.getBound(man, arg_name).sup.toString(); 
+							if (upperboundstring == "+oo"){
 								valid = false; 
+								logger.debug("Upper bound of argument is +oo"); 
+							} else if (upperboundstring == "-oo"){ 
+								logger.debug("Upper bound of argument is -oo"); 
+							} else {
+								int upperbound = Integer.valueOf(upperboundstring);
+								
+								logger.debug("Upper bound: " + upperbound); 
+								if (upperbound > lowest_capacity){
+									valid = false; 
+								}
 							}
+							
+
 						} catch (ApronException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
