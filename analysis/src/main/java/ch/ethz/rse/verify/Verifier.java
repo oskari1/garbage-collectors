@@ -36,13 +36,16 @@ import soot.SootHelper;
 import soot.SootMethod;
 import soot.Unit;
 import soot.Value;
+import soot.ValueBox;
 import soot.jimple.Constant;
 import soot.jimple.IntConstant;
 import soot.jimple.InvokeExpr;
+import soot.jimple.VirtualInvokeExpr;
 import soot.jimple.internal.JInvokeStmt;
 import soot.jimple.internal.JSpecialInvokeExpr;
 import soot.jimple.internal.JVirtualInvokeExpr;
 import soot.jimple.internal.JimpleLocal;
+import soot.jimple.internal.JimpleLocalBox;
 import soot.toolkits.graph.UnitGraph;
 import soot.util.Chain;
 import soot.util.Cons;
@@ -163,7 +166,69 @@ public class Verifier extends AVerifier {
 	@Override
 	public boolean checkFitsInTrolley() {
 		// TODO: FILL THIS OUT
-		return true;
+		boolean valid = true; 
+		for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
+			// goal: iterate through CFG of the analyzed method
+			// and in each node of the CFG, check if it's a
+			// call to get_delivery(v) and if so, check that v >= 0
+			SootMethod m = entry.getKey();
+			NumericalAnalysis an = entry.getValue();
+			Manager man = an.man;
+			Environment env = an.env;
+			UnitGraph g = SootHelper.getUnitGraph(m);
+			logger.debug("CFG: " + g.toString());
+			Iterator<Unit> i = g.iterator();
+			
+			while(i.hasNext()) {
+
+				Unit u = (Unit) i.next();
+				logger.debug("entered while-loop with node " + u.toString());
+				if (u instanceof JVirtualInvokeExpr){
+					logger.debug(" " + ((JVirtualInvokeExpr) u).getBase()); 
+				}
+				if(is_call_to_get_delivery(u)) {
+
+					// get_delivery only has single argument
+					if (u instanceof JVirtualInvokeExpr){
+						logger.debug("Got call to delivery: " + ((JVirtualInvokeExpr) u).getBase()); 
+					}
+					ValueBox store_reference = u.getUseBoxes().get(1); 
+					logger.debug("HERE123" + u.getUseBoxes().get(1).toString()); 
+					for(StoreInitializer store : pointsTo.pointsTo((Local) store_reference.getValue())) {
+						logger.debug(String.valueOf(store.trolley_size));
+					}
+					
+					Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
+					// logger.debug("entered while-loop while is_call_to_get_delivery with arg = " + arg.toString());
+					
+					if (arg instanceof IntConstant) {
+						if (!(((IntConstant) arg).value >= 0)){
+							valid = false; 
+						} 
+					} else if (arg instanceof JimpleLocal) {
+						Abstract1 in = an.getFlowBefore(u).get();
+						String arg_name = ((JimpleLocal) arg).getName();
+						try {
+							Texpr1Node arg_var = new Texpr1VarNode(arg_name); 
+							Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, arg_var);
+							logger.debug("Bound: " + in.getBound(man, arg_name).toString());
+							logger.debug("Abstract state in: " + in.toString(man));
+							if (!in.satisfy(man, constraint)){
+								valid = false; 
+							}
+						} catch (ApronException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+					} else {
+						throw new RuntimeException("Unhandled case for arg of get_delivery");
+					}
+
+				}
+
+			}
+		}
+		return valid;
 	}
 
 	@Override
