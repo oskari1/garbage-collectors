@@ -191,7 +191,6 @@ public class SpecificExampleIT {
 	}
 
 
-
 	private static final Logger logger = LoggerFactory.getLogger(SpecificExampleIT.class);
 
 	public static void testOnExample(VerificationTestCase example) {
