@@ -102,6 +102,7 @@ public class PointsToInitializer {
 							logger.debug("boxes : " + val1 + ", " + val2); 
 							// Hey, I found the ugly code that uses a string - and I will do it too
 							StoreInitializer storeInit = new StoreInitializer(invkStmt, uniqueNumber, Integer.parseInt(val1.toString()), Integer.parseInt(val2.toString()));
+							logger.debug("created StoreInitializer object with id " + uniqueNumber);
 							uniqueNumber++; 
 							perMethod.put(method, storeInit); 
 

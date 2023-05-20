@@ -194,9 +194,11 @@ public class Verifier extends AVerifier {
 						logger.debug("Got call to delivery: " + ((JVirtualInvokeExpr) u).getBase()); 
 					}
 					ValueBox store_reference = u.getUseBoxes().get(1); 
+					logger.debug("store_reference is " + store_reference.getValue().toString());
 					logger.debug("HERE123" + u.getUseBoxes().get(1).toString()); 
 					for(StoreInitializer store : pointsTo.pointsTo((Local) store_reference.getValue())) {
 						logger.debug(String.valueOf(store.trolley_size));
+						logger.debug("StoreInitializer store with id " + store.getUniqueLabel());
 
 						Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
 						// logger.debug("entered while-loop while is_call_to_get_delivery with arg = " + arg.toString());

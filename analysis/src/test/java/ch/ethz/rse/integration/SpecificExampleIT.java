@@ -235,6 +235,24 @@ public class SpecificExampleIT {
 		SpecificExampleIT.testOnExample(t);
 	}
 
+	@Test
+	void trolleyTest6() {
+		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Unsafe_2";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_TROLLEY;
+		boolean expectedIsSafe = false;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void trolleyTest7() {
+		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Safe_1";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_TROLLEY;
+		boolean expectedIsSafe = false; // same as master solution on server
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
 
 
 	private static final Logger logger = LoggerFactory.getLogger(SpecificExampleIT.class);
