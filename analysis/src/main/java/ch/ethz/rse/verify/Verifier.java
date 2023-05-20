@@ -188,10 +188,6 @@ public class Verifier extends AVerifier {
 				}
 				if(is_call_to_get_delivery(u)) {
 					int lowest_capacity = Integer.MAX_VALUE; 
-					// get_delivery only has single argument
-					if (u instanceof JVirtualInvokeExpr){
-						logger.debug("Got call to delivery: " + ((JVirtualInvokeExpr) u).getBase()); 
-					}
 					ValueBox store_reference = u.getUseBoxes().get(1); 
 					// logger.debug("HERE123" + u.getUseBoxes().get(1).toString()); 
 					for(StoreInitializer store : pointsTo.pointsTo((Local) store_reference.getValue())) {
@@ -250,8 +246,109 @@ public class Verifier extends AVerifier {
 
 	@Override
 	public boolean checkFitsInReserve() {
-		// TODO: FILL THIS OUT
-		return true;
+		boolean valid = true; 
+		Map<String, Integer> remaining_capacity = new HashMap<String,Integer>();
+		for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
+			// goal: iterate through CFG of the analyzed method
+			// and in each node of the CFG, check if it's a
+			// call to get_delivery(v) and if so, check that v >= 0
+			SootMethod m = entry.getKey();
+			NumericalAnalysis an = entry.getValue();
+			Manager man = an.man;
+			Environment env = an.env;
+			UnitGraph g = SootHelper.getUnitGraph(m);
+			logger.debug("CFG: " + g.toString());
+			Iterator<Unit> i = g.iterator();
+			
+			while(i.hasNext()) {
+
+				Unit u = (Unit) i.next();
+				logger.debug("entered while-loop with node " + u.toString());
+				if (u instanceof JVirtualInvokeExpr){
+					logger.debug(" " + ((JVirtualInvokeExpr) u).getBase()); 
+				}
+				if(is_call_to_get_delivery(u)) {
+					
+					Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
+					// logger.debug("entered while-loop while is_call_to_get_delivery with arg = " + arg.toString());
+					
+					int upperbound = Integer.MAX_VALUE; 
+					int lowerbound = Integer.MIN_VALUE; 
+
+					if (arg instanceof IntConstant) {
+						upperbound = ((IntConstant) arg).value; 
+						lowerbound = ((IntConstant) arg).value; 
+						
+					} else if (arg instanceof JimpleLocal) {
+						Abstract1 in = an.getFlowBefore(u).get();
+						String arg_name = ((JimpleLocal) arg).getName();
+						try {
+							logger.debug("Bound: " + in.getBound(man, arg_name).toString());
+							logger.debug("Abstract state in: " + in.toString(man));
+							String upperboundstring = in.getBound(man, arg_name).sup.toString(); 
+							String lowerboundstring = in.getBound(man, arg_name).inf.toString(); 
+							if (upperboundstring == "+oo"){
+								upperbound = Integer.MAX_VALUE;  
+							} else if (upperboundstring == "-oo"){ 
+								upperbound = Integer.MIN_VALUE; 
+							} else {
+								upperbound = Integer.valueOf(upperboundstring);
+							}
+
+							if (lowerboundstring == "+oo"){
+								lowerbound = Integer.MAX_VALUE;  
+							} else if (lowerboundstring == "-oo"){ 
+								lowerbound = Integer.MIN_VALUE; 
+							} else {
+								lowerbound = Integer.valueOf(lowerboundstring);
+							}
+
+						} catch (ApronException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+					} else {
+						throw new RuntimeException("Unhandled case for arg of get_delivery");
+					}
+
+					
+					if (upperbound == Integer.MAX_VALUE){
+						valid=false; 
+					} else if (lowerbound == Integer.MIN_VALUE){
+						continue; 
+					}
+
+					// Calculating how much capacity is needed, assuming all the values inside the bound are used once to call get_delivery. This is an unsound assumption, thus it is not used. 
+					int total = (int) (((1.0+((double)upperbound - (double)lowerbound))/2.0) * ((double)lowerbound + (double)upperbound)); 
+					logger.debug("Upper bound: " + upperbound + " lowerbound: " + lowerbound + " total: " + total);
+
+					ValueBox store_reference = u.getUseBoxes().get(1); 
+					for(StoreInitializer store : pointsTo.pointsTo((Local) store_reference.getValue())) {
+						logger.debug(String.valueOf(store.trolley_size));
+						String uniqueLabel = store.getUniqueLabel(); 
+						if (!remaining_capacity.containsKey(uniqueLabel)){
+							remaining_capacity.put(uniqueLabel, store.reserve_size); 
+						}
+						
+						// Needed if a store is initialized with negative capacity 
+						if (remaining_capacity.get(uniqueLabel)<0){
+							valid = false; 
+						} else {
+							remaining_capacity.put(uniqueLabel, (remaining_capacity.get(uniqueLabel)-upperbound)); 
+							if (remaining_capacity.get(uniqueLabel)<0){
+								valid = false;
+							}
+						}
+						logger.debug("Remaining capacity in store " + uniqueLabel + " is " + remaining_capacity.get(uniqueLabel)); 
+					}
+
+
+
+				}
+
+			}
+		}
+		return valid;
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
