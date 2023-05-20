@@ -18,6 +18,7 @@ import apron.Manager;
 import apron.MpqScalar;
 import apron.Polka;
 import apron.Tcons1;
+import apron.Texpr1BinNode;
 import apron.Texpr1CstNode;
 import apron.Texpr1Node;
 import apron.Texpr1VarNode;
@@ -196,36 +197,38 @@ public class Verifier extends AVerifier {
 					logger.debug("HERE123" + u.getUseBoxes().get(1).toString()); 
 					for(StoreInitializer store : pointsTo.pointsTo((Local) store_reference.getValue())) {
 						logger.debug(String.valueOf(store.trolley_size));
-					}
-					
-					Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
-					// logger.debug("entered while-loop while is_call_to_get_delivery with arg = " + arg.toString());
-					
-					if (arg instanceof IntConstant) {
-						if (!(((IntConstant) arg).value >= 0)){
-							valid = false; 
-						} 
-					} else if (arg instanceof JimpleLocal) {
-						Abstract1 in = an.getFlowBefore(u).get();
-						String arg_name = ((JimpleLocal) arg).getName();
-						try {
-							Texpr1Node arg_var = new Texpr1VarNode(arg_name); 
-							Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, arg_var);
-							logger.debug("Bound: " + in.getBound(man, arg_name).toString());
-							logger.debug("Abstract state in: " + in.toString(man));
-							if (!in.satisfy(man, constraint)){
+
+						Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
+						// logger.debug("entered while-loop while is_call_to_get_delivery with arg = " + arg.toString());
+						
+						if (arg instanceof IntConstant) {
+							if (((IntConstant) arg).value > store.trolley_size){
 								valid = false; 
-							}
-						} catch (ApronException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} 
-					} else {
-						throw new RuntimeException("Unhandled case for arg of get_delivery");
+							} 
+						} else if (arg instanceof JimpleLocal) {
+							Abstract1 in = an.getFlowBefore(u).get();
+							String arg_name = ((JimpleLocal) arg).getName();
+							try {
+								// idea: safe iff arg_var <= trolley_size iff trolley_size - arg_var >= 0
+								Texpr1Node arg_var = new Texpr1VarNode(arg_name); 
+								Texpr1CstNode trolley_const = new Texpr1CstNode(new MpqScalar(store.trolley_size));
+								Texpr1BinNode binop = new Texpr1BinNode(Texpr1BinNode.OP_SUB, trolley_const, arg_var);
+								Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, binop);
+								logger.debug("Constructed constraint: " + constraint.toString());
+								logger.debug("Bound: " + in.getBound(man, arg_name).toString());
+								logger.debug("Abstract state in: " + in.toString(man));
+								if (!in.satisfy(man, constraint)){
+									valid = false; 
+								}
+							} catch (ApronException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} 
+						} else {
+							throw new RuntimeException("Unhandled case for arg of get_delivery");
+						}
 					}
-
 				}
-
 			}
 		}
 		return valid;
