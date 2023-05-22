@@ -29,6 +29,8 @@ public class StoreInitializer {
 	 */
 	public final int reserve_size;
 
+	private int received_amt;
+
 
 	/**
 	 * 
@@ -41,6 +43,7 @@ public class StoreInitializer {
 		this.uniqueNumber = uniqueNumber;
 		this.trolley_size = trolley_size;
 		this.reserve_size = reserve_size;
+		this.received_amt = 0;
 	}
 
 	/**
@@ -69,6 +72,14 @@ public class StoreInitializer {
 
 	public String toString() {
 		return "AbstractObject" + this.getUniqueNumber();
+	}
+
+	public void receive(int amt) {
+		this.received_amt += amt;
+	}
+
+	public int get_received_amt() {
+		return this.received_amt;
 	}
 
 }

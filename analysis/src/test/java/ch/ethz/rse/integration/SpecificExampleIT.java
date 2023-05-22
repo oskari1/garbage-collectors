@@ -253,7 +253,50 @@ public class SpecificExampleIT {
 		SpecificExampleIT.testOnExample(t);
 	}
 
+	@Test
+	void trolleyTest8() {
+		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Safe_2";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_TROLLEY;
+		boolean expectedIsSafe = true; 
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
 
+	@Test
+	void reserveTest() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Constant_Unsafe_1";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		boolean expectedIsSafe = false; 
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void reserveTest1() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Variable_Safe_1";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		boolean expectedIsSafe = true; 
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void reserveTest2() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Variable_Unsafe_1";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		boolean expectedIsSafe = false; 
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void reserveTest3() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_If_Reserve_Safe";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		boolean expectedIsSafe = true; 
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
 
 	private static final Logger logger = LoggerFactory.getLogger(SpecificExampleIT.class);
 

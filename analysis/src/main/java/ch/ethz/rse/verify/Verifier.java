@@ -128,7 +128,7 @@ public class Verifier extends AVerifier {
 
 				Unit u = (Unit) i.next();
 				logger.debug("entered while-loop with node " + u.toString());
-				if(is_call_to_get_delivery(u)) {
+				if(is_reachable_call_to_get_delivery(u, an, man)) {
 
 					// get_delivery only has single argument
 					Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
@@ -187,7 +187,7 @@ public class Verifier extends AVerifier {
 				if (u instanceof JVirtualInvokeExpr){
 					logger.debug(" " + ((JVirtualInvokeExpr) u).getBase()); 
 				}
-				if(is_call_to_get_delivery(u)) {
+				if(is_reachable_call_to_get_delivery(u, an, man)) {
 
 					// get_delivery only has single argument
 					if (u instanceof JVirtualInvokeExpr){
@@ -239,13 +239,89 @@ public class Verifier extends AVerifier {
 	@Override
 	public boolean checkFitsInReserve() {
 		// TODO: FILL THIS OUT
-		return true;
+		boolean valid = true; 
+		for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
+			// goal: iterate through CFG of the analyzed method
+			// and in each node of the CFG, check if it's a
+			// call to get_delivery(v) and if so, check that v >= 0
+			SootMethod m = entry.getKey();
+			NumericalAnalysis an = entry.getValue();
+			Manager man = an.man;
+			Environment env = an.env;
+			UnitGraph g = SootHelper.getUnitGraph(m);
+			logger.debug("CFG: " + g.toString());
+			Iterator<Unit> i = g.iterator();
+			
+			while(i.hasNext()) {
+
+				Unit u = (Unit) i.next();
+				logger.debug("entered while-loop with node " + u.toString());
+				if (u instanceof JVirtualInvokeExpr){
+					logger.debug(" " + ((JVirtualInvokeExpr) u).getBase()); 
+				}
+				if(is_reachable_call_to_get_delivery(u, an, man)) {
+
+					// get_delivery only has single argument
+					if (u instanceof JVirtualInvokeExpr){
+						logger.debug("Got call to delivery: " + ((JVirtualInvokeExpr) u).getBase()); 
+					}
+					ValueBox store_reference = u.getUseBoxes().get(1); 
+					logger.debug("store_reference is " + store_reference.getValue().toString());
+					logger.debug("HERE123" + u.getUseBoxes().get(1).toString()); 
+					for(StoreInitializer store : pointsTo.pointsTo((Local) store_reference.getValue())) {
+						logger.debug(String.valueOf(store.trolley_size));
+						logger.debug("StoreInitializer store with id " + store.getUniqueLabel());
+
+						Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
+						// logger.debug("entered while-loop while is_call_to_get_delivery with arg = " + arg.toString());
+						
+						if (arg instanceof IntConstant) {
+							store.receive(((IntConstant) arg).value);
+							if (store.get_received_amt() > store.reserve_size){
+								valid = false; 
+							} 
+						} else if (arg instanceof JimpleLocal) {
+							Abstract1 in = an.getFlowBefore(u).get();
+							String arg_name = ((JimpleLocal) arg).getName();
+							try {
+								MpqScalar sup_received_amt = (MpqScalar) in.getBound(man, arg_name).sup();
+								if(sup_received_amt.isInfty() == 0) {
+									store.receive(Integer.valueOf(sup_received_amt.toString()));
+									if(store.get_received_amt() > store.reserve_size) {
+										valid = false;
+									}
+								} else {
+									valid = false;
+								}
+							} catch (ApronException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} 
+						} else {
+							throw new RuntimeException("Unhandled case for arg of get_delivery");
+						}
+					}
+				}
+			}
+		}
+		return valid;
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
-	private boolean is_call_to_get_delivery(Unit u) {
+	private boolean is_reachable_call_to_get_delivery(Unit u, NumericalAnalysis an, Manager man) {
 		if (u instanceof JInvokeStmt) {
-			return (((((JInvokeStmt) u).getInvokeExpr()).getMethod()).getName()).equals("get_delivery");
+			Abstract1 in = an.getFlowBefore(u).get();
+			try {
+				if(!in.isBottom(man)) {
+					return (((((JInvokeStmt) u).getInvokeExpr()).getMethod()).getName()).equals("get_delivery");
+				} else {
+					return false;
+				}
+			} catch (ApronException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
 		} else {
 			return false;
 		}
