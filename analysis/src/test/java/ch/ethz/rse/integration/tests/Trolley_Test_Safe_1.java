@@ -4,7 +4,7 @@ import ch.ethz.rse.Store;
 
 // expected results:
 // NON_NEGATIVE SAFE
-// FITS_IN_TROLLEY SAFE
+// FITS_IN_TROLLEY UNSAFE
 // FITS_IN_RESERVE SAFE
 
 public class Trolley_Test_Safe_1 {
@@ -20,6 +20,10 @@ public class Trolley_Test_Safe_1 {
     } else {
       z = q;
     }
-    z.get_delivery(3);
+    z.get_delivery(3); 
+    // this is UNSAFE since our analysis does not check the program
+    // semantics (i.e., not like in lecture with abstract interpretation)
+    // that's why z is believed to either alias p or q and in the latter
+    // case this would be UNSAFE
   }
 }
