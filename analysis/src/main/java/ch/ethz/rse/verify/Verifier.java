@@ -242,63 +242,85 @@ public class Verifier extends AVerifier {
 		boolean valid = true; 
 		for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
 			// goal: iterate through CFG of the analyzed method
-			// and in each node of the CFG, check if it's a
-			// call to get_delivery(v) and if so, check that v >= 0
+			// in a DFS-like manner and associate to each node of the CFG how much each Store-object 
+			// has received at most until that point
 			SootMethod m = entry.getKey();
 			NumericalAnalysis an = entry.getValue();
 			Manager man = an.man;
 			Environment env = an.env;
 			UnitGraph g = SootHelper.getUnitGraph(m);
-			logger.debug("CFG: " + g.toString());
+
+			// define visited and active map for BFS
+			HashMap<Unit,Boolean> visited = new HashMap<Unit,Boolean>(g.size()); 
+			HashMap<Unit,Boolean> active = new HashMap<Unit,Boolean>(g.size()); 
+			// define map that assigns to each unit, how much each Store-object has
+			// received up to that point
+
+			// in general need HashMap<Unit, HashMap<StoreInitializer, Integer>> since we need to store for each
+			// node, how much each object has received at most up to that point
+			HashMap<Unit,Integer> received_amt = new HashMap<Unit,Integer>(g.size());
+			// initialize maps
 			Iterator<Unit> i = g.iterator();
-			
 			while(i.hasNext()) {
+				Unit v = (Unit) i.next();
+				visited.put(v,new Boolean(false));
+				active.put(v,new Boolean(false));
+				received_amt.put(v,new Integer(0));
+			}
+			// logger.debug("CFG: " + g.toString());
 
-				Unit u = (Unit) i.next();
-				logger.debug("entered while-loop with node " + u.toString());
-				if (u instanceof JVirtualInvokeExpr){
-					logger.debug(" " + ((JVirtualInvokeExpr) u).getBase()); 
-				}
-				if(is_reachable_call_to_get_delivery(u, an, man)) {
 
-					// get_delivery only has single argument
-					if (u instanceof JVirtualInvokeExpr){
-						logger.debug("Got call to delivery: " + ((JVirtualInvokeExpr) u).getBase()); 
-					}
-					ValueBox store_reference = u.getUseBoxes().get(1); 
-					logger.debug("store_reference is " + store_reference.getValue().toString());
-					logger.debug("HERE123" + u.getUseBoxes().get(1).toString()); 
-					for(StoreInitializer store : pointsTo.pointsTo((Local) store_reference.getValue())) {
-						logger.debug(String.valueOf(store.trolley_size));
-						logger.debug("StoreInitializer store with id " + store.getUniqueLabel());
+			// traverse CFG in BFS-order
+			for(Unit u : g.getHeads()) {
+				if(!visited.get(u).booleanValue()) {
+					ArrayDeque<Unit> toVisit = new ArrayDeque<Unit>();
+					active.put(u,new Boolean(true));
+					toVisit.add(u);
+					while(!toVisit.isEmpty()) {
+						Unit w = toVisit.poll();
+						visited.put(w, new Boolean(true));
 
-						Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
-						// logger.debug("entered while-loop while is_call_to_get_delivery with arg = " + arg.toString());
-						
-						if (arg instanceof IntConstant) {
-							store.receive(((IntConstant) arg).value);
-							if (store.get_received_amt() > store.reserve_size){
-								valid = false; 
-							} 
-						} else if (arg instanceof JimpleLocal) {
-							Abstract1 in = an.getFlowBefore(u).get();
-							String arg_name = ((JimpleLocal) arg).getName();
-							try {
-								MpqScalar sup_received_amt = (MpqScalar) in.getBound(man, arg_name).sup();
-								if(sup_received_amt.isInfty() == 0) {
-									store.receive(Integer.valueOf(sup_received_amt.toString()));
-									if(store.get_received_amt() > store.reserve_size) {
-										valid = false;
-									}
-								} else {
-									valid = false;
+						// update the map received_amt 
+						// by taking the maximum amounts among the predecessor nodes
+						int max_amt_preds = 0;
+						for(Unit pred : g.getPredsOf(w)) {
+							max_amt_preds = Math.max(received_amt.get(pred).intValue(), max_amt_preds);
+						} 
+						received_amt.put(w, new Integer(max_amt_preds));
+
+						// if we have a call to get_delivery, add the received amount to the appropriate object 
+						// todo: handle case of get_delivery called within a loop
+						if(is_reachable_call_to_get_delivery(w, an, man)) {
+							Value arg = ((JInvokeStmt) w).getInvokeExpr().getArg(0);
+							MpqScalar delivered_amt = upper_bound_of(arg, an, w, man); 
+							if(delivered_amt.isInfty() != 0) {
+								// if received amount is unbounded, FITS_IN_RESERVE is certainly not SAFE 
+								return false;
+							} else {
+								// if received amount is finite, need to compare with reserve_size
+								int prev_amt = received_amt.get(w).intValue();
+								int new_amt = prev_amt + Integer.valueOf(delivered_amt.toString());
+								received_amt.put(w, new Integer(new_amt));
+							}
+
+							// check if any of the store objects has received more than its reserve_size 
+							ValueBox store_reference = w.getUseBoxes().get(1);
+							for(StoreInitializer store : pointsTo.pointsTo((Local) store_reference.getValue())) {
+								if(store.reserve_size < received_amt.get(w)) {
+									// received amount exceeds reserve_size, so FITS_IN_RESERVE is UNSAFE
+									return false;
 								}
-							} catch (ApronException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} 
-						} else {
-							throw new RuntimeException("Unhandled case for arg of get_delivery");
+							}
+						} 
+
+						
+
+						// continue with ordinary BFS
+						for(Unit x : g.getSuccsOf(w)) {
+							if(!visited.get(x).booleanValue() && !active.get(x).booleanValue()) {
+								active.put(x, new Boolean(true));
+								toVisit.add(x);
+							}
 						}
 					}
 				}
@@ -324,6 +346,23 @@ public class Verifier extends AVerifier {
 			}
 		} else {
 			return false;
+		}
+	}
+
+	private MpqScalar upper_bound_of (Value arg, NumericalAnalysis an, Unit u, Manager man) {
+		if (arg instanceof IntConstant) {
+			return new MpqScalar(((IntConstant) arg).value);
+		} else {
+			assert(arg instanceof JimpleLocal);
+			Abstract1 in = an.getFlowBefore(u).get();
+			String arg_name = ((JimpleLocal) arg).getName();
+			try {
+				return (MpqScalar) in.getBound(man, arg_name).sup();
+			} catch (ApronException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new MpqScalar();
+			} 
 		}
 	}
 
