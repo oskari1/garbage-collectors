@@ -88,8 +88,8 @@ public class PointsToInitializer {
 			// TODO: FILL THIS OUT
 
 			for(Unit u : method.getActiveBody().getUnits()) {
-				logger.debug("points - here: " + u);
-				logger.debug("Type: " + u.getClass());
+				// logger.debug("points - here: " + u);
+				// logger.debug("Type: " + u.getClass());
 				if (u instanceof JInvokeStmt){
 					JInvokeStmt invkStmt = (JInvokeStmt) u; 
 					if (((invkStmt.getInvokeExpr()).getMethod()).getName().contains("<init>")){

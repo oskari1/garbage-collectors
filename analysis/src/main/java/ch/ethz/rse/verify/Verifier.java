@@ -22,6 +22,7 @@ import apron.Texpr1CstNode;
 import apron.Texpr1Node;
 import apron.Texpr1VarNode;
 import ch.ethz.rse.VerificationProperty;
+import ch.ethz.rse.numerical.IntegerWrapper;
 import ch.ethz.rse.numerical.NumericalAnalysis;
 import ch.ethz.rse.numerical.NumericalStateWrapper;
 import ch.ethz.rse.pointer.StoreInitializer;
@@ -134,6 +135,7 @@ public class Verifier extends AVerifier {
 					// logger.debug("entered while-loop while is_call_to_get_delivery with arg = " + arg.toString());
 
 					if (arg instanceof IntConstant) {
+						// logger.debug("Issa int ayy " + ((IntConstant) arg).value); 
 						if (!(((IntConstant) arg).value >= 0)){
 							valid = false; 
 						} 
@@ -178,11 +180,14 @@ public class Verifier extends AVerifier {
 			UnitGraph g = SootHelper.getUnitGraph(m);
 			logger.debug("CFG: " + g.toString());
 			Iterator<Unit> i = g.iterator();
+   
+			// Also get loopHeadState, then use the bound calculated by loopHeads and the number of iterations by using loopheadState
 			
 			while(i.hasNext()) {
 
 				Unit u = (Unit) i.next();
 				logger.debug("entered while-loop with node " + u.toString());
+
 				if (u instanceof JVirtualInvokeExpr){
 					logger.debug(" " + ((JVirtualInvokeExpr) u).getBase()); 
 				}
@@ -259,11 +264,15 @@ public class Verifier extends AVerifier {
 			UnitGraph g = SootHelper.getUnitGraph(m);
 			logger.debug("CFG: " + g.toString());
 			Iterator<Unit> i = g.iterator();
+			// HashMap<Unit, IntegerWrapper> loopHeads = an.getLoopHeads();
+			// HashMap<Unit, NumericalStateWrapper> loopHeadState = an.getLoopHeadState();
 			
 			while(i.hasNext()) {
 
 				Unit u = (Unit) i.next();
 				logger.debug("entered while-loop with node " + u.toString());
+				// logger.debug("loopHead: " + loopHeads.get(u).toString()); 
+				// logger.debug("loopHeadState: " + loopHeadState.get(u).toString()); 
 				if (u instanceof JVirtualInvokeExpr){
 					logger.debug(" " + ((JVirtualInvokeExpr) u).getBase()); 
 				}
@@ -329,15 +338,10 @@ public class Verifier extends AVerifier {
 						if (!remaining_capacity.containsKey(uniqueLabel)){
 							remaining_capacity.put(uniqueLabel, store.reserve_size); 
 						}
-						
-						// Needed if a store is initialized with negative capacity 
+												
+						remaining_capacity.put(uniqueLabel, (remaining_capacity.get(uniqueLabel)-upperbound)); 
 						if (remaining_capacity.get(uniqueLabel)<0){
-							valid = false; 
-						} else {
-							remaining_capacity.put(uniqueLabel, (remaining_capacity.get(uniqueLabel)-upperbound)); 
-							if (remaining_capacity.get(uniqueLabel)<0){
-								valid = false;
-							}
+							valid = false;
 						}
 						logger.debug("Remaining capacity in store " + uniqueLabel + " is " + remaining_capacity.get(uniqueLabel)); 
 					}

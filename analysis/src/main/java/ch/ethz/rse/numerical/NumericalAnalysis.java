@@ -35,6 +35,7 @@ import soot.SootHelper;
 import soot.SootMethod;
 import soot.Unit;
 import soot.Value;
+import soot.ValueBox;
 import soot.jimple.AddExpr;
 import soot.jimple.BinopExpr;
 import soot.jimple.ConditionExpr;
@@ -409,12 +410,25 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		// TODO: MAYBE FILL THIS OUT
 		if (this.property == VerificationProperty.FITS_IN_RESERVE) {
 			// TODO: MAYBE FILL THIS OUT
-
+			// logger.debug("handleInvoke: "  + jInvStmt + " | " + fallOutWrapper); 
+			// List<ValueBox> boxlist = jInvStmt.getUseBoxes();
+			// for (ValueBox box : boxlist){
+			// 	logger.debug("handleInvoke - " + box.getValue());
+			// }
+			// Abstract1 in = fallOutWrapper.get();
+			// String arg_name = boxlist.get(0).getValue().toString();
+			// logger.debug("handleInvoke - Upper bound: " + in.getBound(man, arg_name).sup.toString());
+			// for(StoreInitializer store : pointsTo.pointsTo((Local) boxlist.get(1).getValue())) {
+			// 	logger.debug("handleInvoke - Store capacity: " + String.valueOf(store.reserve_size));
+				
+			// }
+			
 		}
 	}
 
 	public void handleInitialize(JInvokeStmt jInvStmt, NumericalStateWrapper fallOutWrapper) throws ApronException {
 		// TODO: MAYBE FILL THIS OUT
+		logger.debug("handleInitialize: "  + jInvStmt + " | " + fallOutWrapper);
 	}
 
 	// returns state of in after assignment
@@ -474,6 +488,14 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 								 Texpr1BinNode.RDIR_ZERO,
 								 exprOfValue(op1),
 								 exprOfValue(op2));
+	}
+
+	public HashMap<Unit, IntegerWrapper> getLoopHeads() {
+		return loopHeads; 
+	}
+
+	public HashMap<Unit,NumericalStateWrapper> getLoopHeadState() {
+		return loopHeadState; 
 	}
 
 }
