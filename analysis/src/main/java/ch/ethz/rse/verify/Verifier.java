@@ -258,14 +258,15 @@ public class Verifier extends AVerifier {
 
 			// in general need HashMap<Unit, HashMap<StoreInitializer, Integer>> since we need to store for each
 			// node, how much each object has received at most up to that point
-			HashMap<Unit,Integer> received_amt = new HashMap<Unit,Integer>(g.size());
+			// HashMap<Unit,Integer> received_amt = new HashMap<Unit,Integer>(g.size());
+			HashMap<Unit,ReceivedAmounts> received_amt = new HashMap<Unit, ReceivedAmounts>(g.size());
 			// initialize maps
 			Iterator<Unit> i = g.iterator();
 			while(i.hasNext()) {
 				Unit v = (Unit) i.next();
 				visited.put(v,new Boolean(false));
 				active.put(v,new Boolean(false));
-				received_amt.put(v,new Integer(0));
+				received_amt.put(v, new ReceivedAmounts(pointsTo, m));
 			}
 			// logger.debug("CFG: " + g.toString());
 
@@ -279,14 +280,16 @@ public class Verifier extends AVerifier {
 					while(!toVisit.isEmpty()) {
 						Unit w = toVisit.poll();
 						visited.put(w, new Boolean(true));
-
+						logger.debug("Visiting node " + w.toString());
 						// update the map received_amt 
 						// by taking the maximum amounts among the predecessor nodes
-						int max_amt_preds = 0;
+						ReceivedAmounts max_amt_preds_map = new ReceivedAmounts(pointsTo, m);
 						for(Unit pred : g.getPredsOf(w)) {
-							max_amt_preds = Math.max(received_amt.get(pred).intValue(), max_amt_preds);
+							logger.debug(g.getPredsOf(w).toString());
+							logger.debug("Processing node " + w.toString());
+							max_amt_preds_map.merge_amounts(received_amt.get(pred));
 						} 
-						received_amt.put(w, new Integer(max_amt_preds));
+						received_amt.put(w, max_amt_preds_map);
 
 						// if we have a call to get_delivery, add the received amount to the appropriate object 
 						// todo: handle case of get_delivery called within a loop
@@ -298,22 +301,15 @@ public class Verifier extends AVerifier {
 								return false;
 							} else {
 								// if received amount is finite, need to compare with reserve_size
-								int prev_amt = received_amt.get(w).intValue();
-								int new_amt = prev_amt + Integer.valueOf(delivered_amt.toString());
-								received_amt.put(w, new Integer(new_amt));
-							}
-
-							// check if any of the store objects has received more than its reserve_size 
-							ValueBox store_reference = w.getUseBoxes().get(1);
-							for(StoreInitializer store : pointsTo.pointsTo((Local) store_reference.getValue())) {
-								if(store.reserve_size < received_amt.get(w)) {
-									// received amount exceeds reserve_size, so FITS_IN_RESERVE is UNSAFE
+								ValueBox store_reference = w.getUseBoxes().get(1); 
+								ReceivedAmounts currAmounts = received_amt.get(w);
+								received_amt.put(w,currAmounts.receive_amount(delivered_amt, store_reference));
+								// check if received amounts exceed reserve_size at this node
+								if(!received_amt.get(w).fit_in_reserve(store_reference)) {
 									return false;
 								}
 							}
 						} 
-
-						
 
 						// continue with ordinary BFS
 						for(Unit x : g.getSuccsOf(w)) {
@@ -364,6 +360,16 @@ public class Verifier extends AVerifier {
 				return new MpqScalar();
 			} 
 		}
+	}
+
+	private  HashMap<StoreInitializer, Integer> get_zero_map(SootMethod m) {
+		Collection<StoreInitializer> allInits = pointsTo.getInitializers(m);
+		int total_nr_inits = allInits.size(); 
+		HashMap<StoreInitializer, Integer> zeroMap = new HashMap<StoreInitializer, Integer>(total_nr_inits);
+		for(StoreInitializer store : allInits) {
+			zeroMap.put(store, new Integer(0));
+		}
+		return zeroMap;
 	}
 
 }

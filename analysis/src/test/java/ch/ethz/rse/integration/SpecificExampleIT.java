@@ -334,6 +334,24 @@ public class SpecificExampleIT {
 		SpecificExampleIT.testOnExample(t);
 	}
 
+	@Test
+	void reserveTest8() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Reserve_Unsafe";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		boolean expectedIsSafe = false; 
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void reserveTest9() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_If_Reserve_Safe_3";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		boolean expectedIsSafe = true; 
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
 	private static final Logger logger = LoggerFactory.getLogger(SpecificExampleIT.class);
 
 	public static void testOnExample(VerificationTestCase example) {
