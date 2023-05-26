@@ -361,6 +361,15 @@ public class SpecificExampleIT {
 		SpecificExampleIT.testOnExample(t);
 	}
 
+	@Test
+	void reserveTest11() {
+		String packageName = "ch.ethz.rse.integration.tests.Wall_of_Fame_test";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		boolean expectedIsSafe = false; 
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
 	private static final Logger logger = LoggerFactory.getLogger(SpecificExampleIT.class);
 
 	public static void testOnExample(VerificationTestCase example) {

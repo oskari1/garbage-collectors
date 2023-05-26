@@ -51,6 +51,7 @@ import soot.toolkits.graph.UnitGraph;
 import soot.util.Chain;
 import soot.util.Cons;
 
+import java.rmi.NotBoundException;
 // Added imports
 import java.util.*;
 import soot.jimple.IntConstant;
@@ -250,83 +251,23 @@ public class Verifier extends AVerifier {
 			Environment env = an.env;
 			UnitGraph g = SootHelper.getUnitGraph(m);
 
-			// define visited and active map for BFS
-			HashMap<Unit,Boolean> visited = new HashMap<Unit,Boolean>(g.size()); 
-			HashMap<Unit,Boolean> active = new HashMap<Unit,Boolean>(g.size()); 
-			// define map that assigns to each unit, how much each Store-object has
-			// received up to that point
+			// this stores at each unit of the CFG, how much each Store object has
+			// received until that point
+			AmountsPerNode received_amt = new AmountsPerNode(g, pointsTo, m, an, man);
 
-			// in general need HashMap<Unit, HashMap<StoreInitializer, Integer>> since we need to store for each
-			// node, how much each object has received at most up to that point
-			// HashMap<Unit,Integer> received_amt = new HashMap<Unit,Integer>(g.size());
-			HashMap<Unit,ReceivedAmounts> received_amt = new HashMap<Unit, ReceivedAmounts>(g.size());
-			// initialize maps
-			Iterator<Unit> i = g.iterator();
-			while(i.hasNext()) {
-				Unit v = (Unit) i.next();
-				visited.put(v,new Boolean(false));
-				active.put(v,new Boolean(false));
-				received_amt.put(v, new ReceivedAmounts(pointsTo, m));
-			}
-			// logger.debug("CFG: " + g.toString());
-
-
-			// traverse CFG in BFS-order
-			for(Unit u : g.getHeads()) {
-				if(!visited.get(u).booleanValue()) {
-					ArrayDeque<Unit> toVisit = new ArrayDeque<Unit>();
-					active.put(u,new Boolean(true));
-					toVisit.add(u);
-					while(!toVisit.isEmpty()) {
-						Unit w = toVisit.poll();
-						visited.put(w, new Boolean(true));
-						logger.debug("Visiting node " + w.toString());
-						// update the map received_amt 
-						// by taking the maximum amounts among the predecessor nodes
-						ReceivedAmounts max_amt_preds_map = new ReceivedAmounts(pointsTo, m);
-						for(Unit pred : g.getPredsOf(w)) {
-							logger.debug(g.getPredsOf(w).toString());
-							logger.debug("Processing node " + w.toString());
-							max_amt_preds_map.merge_amounts(received_amt.get(pred));
-						} 
-						received_amt.put(w, max_amt_preds_map);
-
-						// if we have a call to get_delivery, add the received amount to the appropriate object 
-						// todo: handle case of get_delivery called within a loop
-						if(is_reachable_call_to_get_delivery(w, an, man)) {
-							Value arg = ((JInvokeStmt) w).getInvokeExpr().getArg(0);
-							MpqScalar delivered_amt = upper_bound_of(arg, an, w, man); 
-							if(delivered_amt.isInfty() != 0) {
-								// if received amount is unbounded, FITS_IN_RESERVE is certainly not SAFE 
-								return false;
-							} else {
-								// if received amount is finite, need to compare with reserve_size
-								ValueBox store_reference = w.getUseBoxes().get(1); 
-								ReceivedAmounts currAmounts = received_amt.get(w);
-								received_amt.put(w,currAmounts.receive_amount(delivered_amt, store_reference));
-								// check if received amounts exceed reserve_size at this node
-								if(!received_amt.get(w).fit_in_reserve(store_reference)) {
-									return false;
-								}
-							}
-						} 
-
-						// continue with ordinary BFS
-						for(Unit x : g.getSuccsOf(w)) {
-							if(!visited.get(x).booleanValue() && !active.get(x).booleanValue()) {
-								active.put(x, new Boolean(true));
-								toVisit.add(x);
-							}
-						}
-					}
-				}
+			try {
+				received_amt.compute_received_amounts();
+			} catch(NotBoundException e) {
+				// this is only thrown if some Store-object receives an infinite amount
+				// in which case FITS_IN_RESERVE is false
+				return false; 
 			}
 		}
 		return valid;
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
-	private boolean is_reachable_call_to_get_delivery(Unit u, NumericalAnalysis an, Manager man) {
+	public static boolean is_reachable_call_to_get_delivery(Unit u, NumericalAnalysis an, Manager man) {
 		if (u instanceof JInvokeStmt) {
 			Abstract1 in = an.getFlowBefore(u).get();
 			try {
@@ -345,7 +286,7 @@ public class Verifier extends AVerifier {
 		}
 	}
 
-	private MpqScalar upper_bound_of (Value arg, NumericalAnalysis an, Unit u, Manager man) {
+	public static MpqScalar upper_bound_of (Value arg, NumericalAnalysis an, Unit u, Manager man) {
 		if (arg instanceof IntConstant) {
 			return new MpqScalar(((IntConstant) arg).value);
 		} else {
@@ -362,14 +303,5 @@ public class Verifier extends AVerifier {
 		}
 	}
 
-	private  HashMap<StoreInitializer, Integer> get_zero_map(SootMethod m) {
-		Collection<StoreInitializer> allInits = pointsTo.getInitializers(m);
-		int total_nr_inits = allInits.size(); 
-		HashMap<StoreInitializer, Integer> zeroMap = new HashMap<StoreInitializer, Integer>(total_nr_inits);
-		for(StoreInitializer store : allInits) {
-			zeroMap.put(store, new Integer(0));
-		}
-		return zeroMap;
-	}
 
 }
