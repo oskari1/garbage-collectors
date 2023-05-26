@@ -379,6 +379,15 @@ public class SpecificExampleIT {
 		SpecificExampleIT.testOnExample(t);
 	}
 
+	@Test
+	void reserveTest13() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_If_Reserve_Unsafe_3";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		boolean expectedIsSafe = false; 
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
 	private static final Logger logger = LoggerFactory.getLogger(SpecificExampleIT.class);
 
 	public static void testOnExample(VerificationTestCase example) {
