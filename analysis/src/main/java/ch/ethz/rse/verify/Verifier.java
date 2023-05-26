@@ -242,9 +242,6 @@ public class Verifier extends AVerifier {
 		// TODO: FILL THIS OUT
 		boolean valid = true; 
 		for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
-			// goal: iterate through CFG of the analyzed method
-			// in a DFS-like manner and associate to each node of the CFG how much each Store-object 
-			// has received at most until that point
 			SootMethod m = entry.getKey();
 			NumericalAnalysis an = entry.getValue();
 			Manager man = an.man;
