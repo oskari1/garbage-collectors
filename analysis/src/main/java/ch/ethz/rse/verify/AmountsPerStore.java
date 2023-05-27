@@ -37,11 +37,19 @@ public class AmountsPerStore {
         }
     }
 
-    public AmountsPerStore receive_amount(MpqScalar delivered_amt, ValueBox store_reference) {
+    public AmountsPerStore receive_amount(MpqScalar delivered_amt, ValueBox store_reference, int iterations) {
         for(StoreInitializer store : pointsTo.pointsTo((Local) store_reference.getValue())) {
             int prev_amt = this.amts_map.get(store).intValue();
-            int new_amt = prev_amt + Integer.valueOf(delivered_amt.toString());
-            this.amts_map.put(store, new Integer(new_amt));
+            if(delivered_amt.isInfty() == -1) {
+                // if delivered amount is minus infty, we take the smallest int regardless 
+                // of the nr. of iterations
+                this.amts_map.put(store, Integer.MIN_VALUE);
+            } else {
+                // else, if the delivered amount is finite and >= 0, we 
+                // need to multiply and add to the previous amount
+                int new_amt = prev_amt + iterations * Integer.valueOf(delivered_amt.toString());
+                this.amts_map.put(store, new Integer(new_amt));
+            }
         }
         return this;
     }

@@ -20,6 +20,8 @@ import soot.Unit;
 import apron.MpqScalar;
 import apron.Manager;
 import soot.toolkits.graph.UnitGraph;
+import soot.toolkits.graph.LoopNestTree;
+import soot.jimple.toolkits.annotation.logic.Loop;
 
 public class AmountsPerNode {
     private HashMap<Unit,AmountsPerStore> amounts_per_node;
@@ -29,6 +31,7 @@ public class AmountsPerNode {
     private HashMap<Unit,Boolean> visited;
     private NumericalAnalysis an;
     private Manager man;
+    private LoopAnalysis loopAnalysis;
 
     public AmountsPerNode(UnitGraph g, PointsToInitializer pointsTo, SootMethod method, NumericalAnalysis an, Manager man) {
         this.amounts_per_node = new HashMap<Unit, AmountsPerStore>(g.size());
@@ -43,8 +46,7 @@ public class AmountsPerNode {
             Unit v = (Unit) i.next();
             amounts_per_node.put(v, new AmountsPerStore(pointsTo, method));
         }
-
-
+        this.loopAnalysis = new LoopAnalysis(g);
     }
 
     public void compute_received_amounts() throws FitsInReserveException {
@@ -94,7 +96,43 @@ public class AmountsPerNode {
                 // if received amount is finite, need to compare with reserve_size
                 ValueBox store_reference = u.getUseBoxes().get(1); 
                 AmountsPerStore currAmounts = amounts_per_node.get(u);
-                amounts_per_node.put(u,currAmounts.receive_amount(delivered_amt, store_reference));
+                Loop l = loopAnalysis.loop_of_unit(u);
+                if(l != null) {
+                    // l != null iff u is contained inside a loop 
+                    if(!loopAnalysis.terminates(l) && is_strictly_positive(delivered_amt)) {
+                        // if we have an infinite loop and the received amount is strictly positive
+                        // it's for sure UNSAFE 
+                        throw new FitsInReserveException("doesn't fit in reserve");
+                    } else if(!loopAnalysis.terminates(l) && !delivered_amt.isZero()) {
+                        // if we have an infinite loop and the received amount is
+                        // negative, the received amount is "minus infinity"
+                        MpqScalar minusInfty = new MpqScalar();
+                        minusInfty.setInfty(-1);
+                        delivered_amt = minusInfty;
+                        amounts_per_node.put(u,currAmounts.receive_amount(delivered_amt, store_reference, 0));
+                    } else if(!loopAnalysis.terminates(l) && delivered_amt.isZero()) {
+                        // if we have an infinite loop and the received amount is
+                        // zero, the received amount is "zero"
+                        MpqScalar zero = new MpqScalar(); // this is set to 0 by default
+                        delivered_amt = zero;
+                        amounts_per_node.put(u,currAmounts.receive_amount(delivered_amt, store_reference, 0));
+                    } else if(delivered_amt.sgn() == -1) {
+                        // if we have a finite loop and the received amount is negative
+                        // the maximum amount that can be received is 0 if the loop is never
+                        // executed 
+                        amounts_per_node.put(u,currAmounts.receive_amount(delivered_amt, store_reference, 0));
+                    } else {
+                        // if we have a finite loop and the received amount is >= 0 then
+                        // we need to multiply the maximum amount with the maximum number of
+                        // iterations
+                        int iterations = loopAnalysis.max_iterations_of(l);
+                        amounts_per_node.put(u,currAmounts.receive_amount(delivered_amt, store_reference, iterations));
+                    }
+                } else {
+                    // if get_delivery is not within a loop, it's called at most once
+                    int iterations = 1;
+                    amounts_per_node.put(u,currAmounts.receive_amount(delivered_amt, store_reference, iterations));
+                }
                 // check if received amounts exceed reserve_size at this node
                 if(!amounts_per_node.get(u).fit_in_reserve(store_reference)) {
                     throw new FitsInReserveException("doesn't fit in reserve");
@@ -103,6 +141,11 @@ public class AmountsPerNode {
         }
 
 
+    }
+
+    private boolean is_strictly_positive(MpqScalar amt) {
+        // amt > 0 iff sign(amt) = 1 
+        return amt.sgn() == 1;
     }
 
 }
