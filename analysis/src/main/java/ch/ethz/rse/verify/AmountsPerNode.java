@@ -47,7 +47,7 @@ public class AmountsPerNode {
 
     }
 
-    public void compute_received_amounts() throws NotBoundException {
+    public void compute_received_amounts() throws FitsInReserveException {
         // initialize visited-map
         visited = new HashMap<Unit,Boolean>(g.size());
         Iterator<Unit> i = g.iterator();
@@ -61,7 +61,7 @@ public class AmountsPerNode {
         }
     }
 
-    private void compute(Unit u) throws NotBoundException {
+    private void compute(Unit u) throws FitsInReserveException {
         if(g.getHeads().contains(u)) {
             // if u is a header, initialize all Stores to have received 0  
             amounts_per_node.put(u,new AmountsPerStore(pointsTo, method));
@@ -89,7 +89,7 @@ public class AmountsPerNode {
             MpqScalar delivered_amt = Verifier.upper_bound_of(arg, an, u, man); 
             if(delivered_amt.isInfty() != 0) {
                 // if received amount is unbounded, FITS_IN_RESERVE is certainly not SAFE 
-                throw new NotBoundException();
+                throw new FitsInReserveException("doesn't fit in reserve");
             } else {
                 // if received amount is finite, need to compare with reserve_size
                 ValueBox store_reference = u.getUseBoxes().get(1); 
@@ -97,7 +97,7 @@ public class AmountsPerNode {
                 amounts_per_node.put(u,currAmounts.receive_amount(delivered_amt, store_reference));
                 // check if received amounts exceed reserve_size at this node
                 if(!amounts_per_node.get(u).fit_in_reserve(store_reference)) {
-                    throw new NotBoundException();
+                    throw new FitsInReserveException("doesn't fit in reserve");
                 }
             }
         }

@@ -254,7 +254,7 @@ public class Verifier extends AVerifier {
 
 			try {
 				received_amt.compute_received_amounts();
-			} catch(NotBoundException e) {
+			} catch(FitsInReserveException e) {
 				// this is only thrown if some Store-object receives an infinite amount
 				// in which case FITS_IN_RESERVE is false
 				return false; 
