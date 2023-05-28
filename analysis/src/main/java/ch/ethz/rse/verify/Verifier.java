@@ -250,7 +250,7 @@ public class Verifier extends AVerifier {
 
 			// this stores at each unit of the CFG, how much each Store object has
 			// received until that point
-			AmountsPerNode received_amt = new AmountsPerNode(g, pointsTo, m, an, man);
+			AmountsPerNode received_amt = new AmountsPerNode(g, pointsTo, m, an, man, env);
 
 			try {
 				received_amt.compute_received_amounts();

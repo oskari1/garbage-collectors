@@ -363,7 +363,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 					bool_op_false = Tcons1.DISEQ;
 				}
 				Texpr1Node expr = normalFormExpr(cond); 
-				Tcons1 cond_true = new Tcons1(env, bool_op_true, expr);;
+				Tcons1 cond_true = new Tcons1(env, bool_op_true, expr);
 				Tcons1 cond_false = new Tcons1(env, bool_op_false, new Texpr1UnNode(Texpr1UnNode.OP_NEG, expr)); 
 
 				Abstract1 fallOutConstr =e_fall.meetCopy(man, cond_true);
@@ -464,7 +464,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		}
 	}
 
-	private Texpr1Node normalFormExpr(Value val) {
+	public Texpr1Node normalFormExpr(Value val) {
 		assert(val instanceof AbstractBinopExpr);
 		Value op1 = ((AbstractBinopExpr) val).getOp1();
 		Value op2 = ((AbstractBinopExpr) val).getOp2();

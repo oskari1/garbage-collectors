@@ -18,12 +18,14 @@ import soot.jimple.internal.JInvokeStmt;
 import soot.Local;
 import soot.Unit;
 import apron.MpqScalar;
+import apron.Environment;
 import apron.Manager;
 import soot.toolkits.graph.UnitGraph;
 import soot.toolkits.graph.LoopNestTree;
 import soot.jimple.toolkits.annotation.logic.Loop;
 
 public class AmountsPerNode {
+    private static final Logger logger = LoggerFactory.getLogger(Verifier.class);
     private HashMap<Unit,AmountsPerStore> amounts_per_node;
     private UnitGraph g;
     private SootMethod method;
@@ -33,7 +35,7 @@ public class AmountsPerNode {
     private Manager man;
     private LoopAnalysis loopAnalysis;
 
-    public AmountsPerNode(UnitGraph g, PointsToInitializer pointsTo, SootMethod method, NumericalAnalysis an, Manager man) {
+    public AmountsPerNode(UnitGraph g, PointsToInitializer pointsTo, SootMethod method, NumericalAnalysis an, Manager man, Environment env) {
         this.amounts_per_node = new HashMap<Unit, AmountsPerStore>(g.size());
         this.g = g;
         this.method = method;
@@ -46,7 +48,7 @@ public class AmountsPerNode {
             Unit v = (Unit) i.next();
             amounts_per_node.put(v, new AmountsPerStore(pointsTo, method));
         }
-        this.loopAnalysis = new LoopAnalysis(g);
+        this.loopAnalysis = new LoopAnalysis(g, method, env, man, an);
     }
 
     public void compute_received_amounts() throws FitsInReserveException {
@@ -64,13 +66,15 @@ public class AmountsPerNode {
     }
 
     private void compute(Unit u) throws FitsInReserveException {
+        logger.debug("entered compute-function with Unit " + u);
+        visited.put(u,new Boolean(true));
         if(g.getHeads().contains(u)) {
             // if u is a header, initialize all Stores to have received 0  
             amounts_per_node.put(u,new AmountsPerStore(pointsTo, method));
         } else {
             // else, first compute amounts for all predecessors
             for(Unit p : g.getPredsOf(u)) {
-                if(!visited.get(u).booleanValue()) {
+                if(!visited.get(p).booleanValue()) {
                     compute(p);
                 }
             }
