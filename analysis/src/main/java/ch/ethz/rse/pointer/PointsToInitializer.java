@@ -66,9 +66,9 @@ public class PointsToInitializer {
 
 	public PointsToInitializer(SootClass c) {
 		this.c = c;
-		logger.debug("Running points-to analysis on " + c.getName());
+		// logger.debug("Running points-to analysis on " + c.getName());
 		this.pointsTo = new PointsToAnalysisWrapper(c);
-		logger.debug("Analyzing initializers in " + c.getName());
+		// logger.debug("Analyzing initializers in " + c.getName());
 		this.analyzeAllInitializers();
 	}
 
@@ -88,21 +88,21 @@ public class PointsToInitializer {
 			// TODO: FILL THIS OUT
 
 			for(Unit u : method.getActiveBody().getUnits()) {
-				logger.debug("points - here: " + u);
-				logger.debug("Type: " + u.getClass());
+				// logger.debug("points - here: " + u);
+				// logger.debug("Type: " + u.getClass());
 				if (u instanceof JInvokeStmt){
 					JInvokeStmt invkStmt = (JInvokeStmt) u; 
 					if (((invkStmt.getInvokeExpr()).getMethod()).getName().contains("<init>")){
 						JSpecialInvokeExpr spInvkExpr = (JSpecialInvokeExpr) invkStmt.getInvokeExpr();
 						
 						if (isRelevantInit(spInvkExpr)){
-							logger.debug("Is relevant"); 
+							// logger.debug("Is relevant"); 
 							Value val1 = u.getUseBoxes().get(0).getValue();
 							Value val2 = u.getUseBoxes().get(1).getValue();
-							logger.debug("boxes : " + val1 + ", " + val2); 
+							// logger.debug("boxes : " + val1 + ", " + val2); 
 							// Hey, I found the ugly code that uses a string - and I will do it too
 							StoreInitializer storeInit = new StoreInitializer(invkStmt, uniqueNumber, Integer.parseInt(val1.toString()), Integer.parseInt(val2.toString()));
-							logger.debug("created StoreInitializer object with id " + uniqueNumber);
+							// logger.debug("created StoreInitializer object with id " + uniqueNumber);
 							uniqueNumber++; 
 							perMethod.put(method, storeInit); 
 
@@ -113,7 +113,7 @@ public class PointsToInitializer {
 
 
 						} else {
-							logger.debug("Is not relevant"); 
+							// logger.debug("Is not relevant"); 
 						}
 
 						
@@ -135,7 +135,7 @@ public class PointsToInitializer {
 	}
 
 	public List<StoreInitializer> pointsTo(Local base) {
-		logger.debug("points: pointsTo local base: " + base);
+		// logger.debug("points: pointsTo local base: " + base);
 		Collection<Node> nodes = this.pointsTo.getNodes(base);
 		List<StoreInitializer> initializers = new LinkedList<StoreInitializer>();
 		for (Node node : nodes) {
@@ -153,7 +153,7 @@ public class PointsToInitializer {
 	 * Note that more than one node can be returned.
 	 */
 	public Collection<Node> getAllocationNodes(JSpecialInvokeExpr invokeExpr){
-		logger.debug("points: getAllocatinoNodes " + invokeExpr);
+		// logger.debug("points: getAllocatinoNodes " + invokeExpr);
 		if(!isRelevantInit(invokeExpr)){
 			throw new RuntimeException("Call to getAllocationNodes with " + invokeExpr.toString() + "which is not an init call for the Store class");
 		}
@@ -163,7 +163,7 @@ public class PointsToInitializer {
 	}
 
 	public boolean isRelevantInit(JSpecialInvokeExpr invokeExpr){
-		logger.debug("points: isRelevantInit " + invokeExpr);
+		// logger.debug("points: isRelevantInit " + invokeExpr);
 		Local base = (Local) invokeExpr.getBase();
 		boolean isRelevant = base.getType().toString().equals(Constants.StoreClassName);
 		boolean isInit = invokeExpr.getMethod().getName().equals("<init>");

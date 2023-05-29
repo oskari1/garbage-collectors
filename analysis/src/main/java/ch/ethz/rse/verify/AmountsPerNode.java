@@ -66,7 +66,7 @@ public class AmountsPerNode {
     }
 
     private void compute(Unit u) throws FitsInReserveException {
-        logger.debug("entered compute-function with Unit " + u);
+        // logger.debug("entered compute-function with Unit " + u);
         visited.put(u,new Boolean(true));
         if(g.getHeads().contains(u)) {
             // if u is a header, initialize all Stores to have received 0  
@@ -91,10 +91,12 @@ public class AmountsPerNode {
         // if so, we need to update the received amounts for each Store object
         // that has received some amount by that call
         if(Verifier.is_reachable_call_to_get_delivery(u, an, man)) {
+            // logger.debug("we are in call " + u);
             Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
             MpqScalar delivered_amt = Verifier.upper_bound_of(arg, an, u, man); 
             if(delivered_amt.isInfty() != 0) {
                 // if received amount is unbounded, FITS_IN_RESERVE is certainly not SAFE 
+                // logger.debug("delivered amount is infinite");
                 throw new FitsInReserveException("doesn't fit in reserve");
             } else {
                 // if received amount is finite, need to compare with reserve_size
@@ -102,6 +104,7 @@ public class AmountsPerNode {
                 AmountsPerStore currAmounts = amounts_per_node.get(u);
                 Loop l = loopAnalysis.loop_of_unit(u);
                 if(l != null) {
+                    // logger.debug("call to get_delivery is contained in loop");
                     // l != null iff u is contained inside a loop 
                     if(!loopAnalysis.terminates(l) && is_strictly_positive(delivered_amt)) {
                         // if we have an infinite loop and the received amount is strictly positive
@@ -135,6 +138,7 @@ public class AmountsPerNode {
                 } else {
                     // if get_delivery is not within a loop, it's called at most once
                     int iterations = 1;
+                    // logger.debug("get_delivery only called once");
                     amounts_per_node.put(u,currAmounts.receive_amount(delivered_amt, store_reference, iterations));
                 }
                 // check if received amounts exceed reserve_size at this node

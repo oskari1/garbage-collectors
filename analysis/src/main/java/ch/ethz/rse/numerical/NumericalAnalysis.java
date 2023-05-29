@@ -201,9 +201,9 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	
 		IntegerWrapper loop_count = loopHeads.get(succNode); 
 		if (loop_count != null){
-			logger.info("We are using merge, with Loop_count " + loop_count.value);
+			// logger.info("We are using merge, with Loop_count " + loop_count.value);
 		} else {
-			logger.info("We are using merge, with None Loop_count");
+			// logger.info("We are using merge, with None Loop_count");
 		}
 
 
@@ -221,7 +221,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 		} else if (loop_count.value<WIDENING_THRESHOLD){
 			// WIDENING_THRESHOLD not reached - merge, increase counter and save new state
-			logger.debug("WIDENING THRESHOLD NOT YET REACHED");
+			// logger.debug("WIDENING THRESHOLD NOT YET REACHED");
 			loop_count.value+=1; 
 			try {
 				NumericalStateWrapper w3_new = w1.join(w2);
@@ -238,7 +238,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		} else {
 		// Widening threshold was reached - widen
 		// First, calculate another merge
-		logger.debug("WIDENING THRESHOLD REACHED");
+		// logger.debug("WIDENING THRESHOLD REACHED");
 		NumericalStateWrapper w3_new = null;
 		try {
 			w3_new = w1.join(w2);
@@ -280,7 +280,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	@Override
 	protected void flowThrough(NumericalStateWrapper inWrapper, Unit op, List<NumericalStateWrapper> fallOutWrappers,
 			List<NumericalStateWrapper> branchOutWrappers) {
-		logger.debug(inWrapper + " " + op + " => ?");
+		// logger.debug(inWrapper + " " + op + " => ?");
 
 		Stmt s = (Stmt) op;
 
@@ -395,13 +395,13 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 			// log outcome
 			if (fallOutWrapper != null) {
-				logger.debug(inWrapper.get() + " " + s + " =>[fallout] " + fallOutWrapper);
+				// logger.debug(inWrapper.get() + " " + s + " =>[fallout] " + fallOutWrapper);
 				// if(s instanceof JIfStmt) {
 				// 	logger.debug("Bound for i1: " + inWrapper.get().getBound(man, "i1").toString());
 				// }
 			}
 			if (branchOutWrapper != null) {
-				logger.debug(inWrapper.get() + " " + s + " =>[branchout] " + branchOutWrapper);
+				// logger.debug(inWrapper.get() + " " + s + " =>[branchout] " + branchOutWrapper);
 			}
 
 		} catch (ApronException e) {

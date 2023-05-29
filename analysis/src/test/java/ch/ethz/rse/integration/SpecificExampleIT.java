@@ -451,6 +451,42 @@ public class SpecificExampleIT {
 		SpecificExampleIT.testOnExample(t);
 	}
 
+@Test
+	void constantTestReserveUnsafe() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Constant_Unsafe";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		boolean expectedIsSafe = false;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+@Test
+	void constantTestReserveSafe_1() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Constant_Safe_1";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		boolean expectedIsSafe = true;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+@Test
+	void multipleStmtsReserveTest() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Multiple_Statement_Loop_Safe";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		boolean expectedIsSafe = false;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+@Test
+	void forLoopReserveTest() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Variable_Safe";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		boolean expectedIsSafe = true;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
 	private static final Logger logger = LoggerFactory.getLogger(SpecificExampleIT.class);
 
 	public static void testOnExample(VerificationTestCase example) {

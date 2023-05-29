@@ -144,10 +144,10 @@ public class LoopAnalysis {
 
                     Interval header_domain = header_state.getBound(man, expr_intern);
                     MpqScalar header_sup = (MpqScalar) header_domain.sup();
-                    logger.debug(header_domain.sup().toString());
+                    // logger.debug(header_domain.sup().toString());
                     Interval jmp_back_domain = jmp_back_state.getBound(man, expr_intern);
                     MpqScalar jmp_back_sup = (MpqScalar) jmp_back_domain.sup();
-                    logger.debug(jmp_back_domain.sup().toString());
+                    // logger.debug(jmp_back_domain.sup().toString());
                     if(header_sup.cmp(jmp_back_sup) == 1) {
                         // if we have a loop conditional of the form exp > 0 or exp >= 0 
                         // and we see that the upper bound of exp in the header
@@ -220,10 +220,10 @@ public class LoopAnalysis {
 			op1 = op2;
 			op2 = tmp;
 		}	
-        logger.debug("op1: " + op1);
-        logger.debug("op2: " + op2);
-        logger.debug("exprOfValue(op1): " + exprOfValue(op1));
-        logger.debug("exprOfValue(op2): " + exprOfValue(op2));
+        // logger.debug("op1: " + op1);
+        // logger.debug("op2: " + op2);
+        // logger.debug("exprOfValue(op1): " + exprOfValue(op1));
+        // logger.debug("exprOfValue(op2): " + exprOfValue(op2));
 		return new Texpr1BinNode(Texpr1BinNode.OP_SUB,
 								 Texpr1BinNode.RTYPE_INT, 
 								 Texpr1BinNode.RDIR_ZERO,

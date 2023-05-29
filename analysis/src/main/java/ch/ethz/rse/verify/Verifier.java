@@ -122,13 +122,13 @@ public class Verifier extends AVerifier {
 			Manager man = an.man;
 			Environment env = an.env;
 			UnitGraph g = SootHelper.getUnitGraph(m);
-			logger.debug("CFG: " + g.toString());
+			// logger.debug("CFG: " + g.toString());
 			Iterator<Unit> i = g.iterator();
 			
 			while(i.hasNext()) {
 
 				Unit u = (Unit) i.next();
-				logger.debug("entered while-loop with node " + u.toString());
+				// logger.debug("entered while-loop with node " + u.toString());
 				if(is_reachable_call_to_get_delivery(u, an, man)) {
 
 					// get_delivery only has single argument
@@ -145,8 +145,8 @@ public class Verifier extends AVerifier {
 						try {
 							Texpr1Node arg_var = new Texpr1VarNode(arg_name); 
 							Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, arg_var);
-							logger.debug("Bound: " + in.getBound(man, arg_name).toString());
-							logger.debug("Abstract state in: " + in.toString(man));
+							// logger.debug("Bound: " + in.getBound(man, arg_name).toString());
+							// logger.debug("Abstract state in: " + in.toString(man));
 							if (!in.satisfy(man, constraint)){
 								valid = false; 
 							}
@@ -178,28 +178,28 @@ public class Verifier extends AVerifier {
 			Manager man = an.man;
 			Environment env = an.env;
 			UnitGraph g = SootHelper.getUnitGraph(m);
-			logger.debug("CFG: " + g.toString());
+			// logger.debug("CFG: " + g.toString());
 			Iterator<Unit> i = g.iterator();
 			
 			while(i.hasNext()) {
 
 				Unit u = (Unit) i.next();
-				logger.debug("entered while-loop with node " + u.toString());
+				// logger.debug("entered while-loop with node " + u.toString());
 				if (u instanceof JVirtualInvokeExpr){
-					logger.debug(" " + ((JVirtualInvokeExpr) u).getBase()); 
+					// logger.debug(" " + ((JVirtualInvokeExpr) u).getBase()); 
 				}
 				if(is_reachable_call_to_get_delivery(u, an, man)) {
 
 					// get_delivery only has single argument
 					if (u instanceof JVirtualInvokeExpr){
-						logger.debug("Got call to delivery: " + ((JVirtualInvokeExpr) u).getBase()); 
+						// logger.debug("Got call to delivery: " + ((JVirtualInvokeExpr) u).getBase()); 
 					}
 					ValueBox store_reference = u.getUseBoxes().get(1); 
-					logger.debug("store_reference is " + store_reference.getValue().toString());
-					logger.debug("HERE123" + u.getUseBoxes().get(1).toString()); 
+					// logger.debug("store_reference is " + store_reference.getValue().toString());
+					// logger.debug("HERE123" + u.getUseBoxes().get(1).toString()); 
 					for(StoreInitializer store : pointsTo.pointsTo((Local) store_reference.getValue())) {
-						logger.debug(String.valueOf(store.trolley_size));
-						logger.debug("StoreInitializer store with id " + store.getUniqueLabel());
+						// logger.debug(String.valueOf(store.trolley_size));
+						// logger.debug("StoreInitializer store with id " + store.getUniqueLabel());
 
 						Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
 						// logger.debug("entered while-loop while is_call_to_get_delivery with arg = " + arg.toString());
@@ -217,9 +217,9 @@ public class Verifier extends AVerifier {
 								Texpr1CstNode trolley_const = new Texpr1CstNode(new MpqScalar(store.trolley_size));
 								Texpr1BinNode binop = new Texpr1BinNode(Texpr1BinNode.OP_SUB, trolley_const, arg_var);
 								Tcons1 constraint = new Tcons1(env, Tcons1.SUPEQ, binop);
-								logger.debug("Constructed constraint: " + constraint.toString());
-								logger.debug("Bound: " + in.getBound(man, arg_name).toString());
-								logger.debug("Abstract state in: " + in.toString(man));
+								// logger.debug("Constructed constraint: " + constraint.toString());
+								// logger.debug("Bound: " + in.getBound(man, arg_name).toString());
+								// logger.debug("Abstract state in: " + in.toString(man));
 								if (!in.satisfy(man, constraint)){
 									valid = false; 
 								}

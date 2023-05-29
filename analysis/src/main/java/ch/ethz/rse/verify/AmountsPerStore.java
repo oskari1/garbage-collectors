@@ -48,6 +48,7 @@ public class AmountsPerStore {
                 // else, if the delivered amount is finite and >= 0, we 
                 // need to multiply and add to the previous amount
                 int new_amt = prev_amt + iterations * Integer.valueOf(delivered_amt.toString());
+                // logger.debug("prev_amt, new_amt = " + prev_amt + ", " + new_amt);
                 this.amts_map.put(store, new Integer(new_amt));
             }
         }
@@ -56,7 +57,7 @@ public class AmountsPerStore {
 
     public boolean fit_in_reserve(ValueBox store_reference) {
         for(StoreInitializer store : pointsTo.pointsTo((Local) store_reference.getValue())) {
-            logger.debug("Checking fit_in_reserve for StoreInitializer " + store.getUniqueLabel() + " with reserve_size " + store.reserve_size);
+            // logger.debug("Checking fit_in_reserve for StoreInitializer " + store.getUniqueLabel() + " with reserve_size " + store.reserve_size);
             if(store.reserve_size < this.amts_map.get(store).intValue()) {
                 // received amount exceeds reserve_size, so FITS_IN_RESERVE is UNSAFE
                 return false;

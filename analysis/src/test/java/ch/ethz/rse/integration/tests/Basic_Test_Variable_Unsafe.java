@@ -5,7 +5,7 @@ import ch.ethz.rse.Store;
 // expected results:
 // NON_NEGATIVE UNSAFE
 // FITS_IN_TROLLEY UNSAFE
-// FITS_IN_RESERVE SAFE
+// FITS_IN_RESERVE UNSAFE
 
 public class Basic_Test_Variable_Unsafe {
     public static void m1() {

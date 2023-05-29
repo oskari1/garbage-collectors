@@ -71,12 +71,12 @@ public class EnvironmentGenerator {
 
 		// for debugging purposes, we try to print out the Jimple code:
 		soot.Body body = method.getActiveBody();
-		logger.debug(body.toString());
+		// logger.debug(body.toString());
 
 		// This should add the method-parameters to the ints
 		// In the description, we assume they can only be of type int, thus we just add all
 		String param = method.getBytecodeParms();
-		logger.debug("Added method parameters are " + param);
+		// logger.debug("Added method parameters are " + param);
 		this.ints.add(param);
 
 		// Chain<Local> locals = method.getActiveBody().getLocals(); -- merge confilc
