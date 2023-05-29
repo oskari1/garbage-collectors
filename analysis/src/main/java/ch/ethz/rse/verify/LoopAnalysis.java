@@ -75,6 +75,7 @@ public class LoopAnalysis {
     private SootMethod method;
     private Environment env;
     private Manager man;
+    private UnitGraph g;
     private NumericalAnalysis an;
     private static final Logger logger = LoggerFactory.getLogger(Verifier.class);
 
@@ -82,6 +83,7 @@ public class LoopAnalysis {
         this.method = m;
         this.env = env;
         this.man = man;
+        this.g = g;
         this.an = an;
         this.loops = new LoopNestTree(g.getBody());
         this.max_iterations_of_loop = new HashMap<Loop, Integer>(loops.size());
@@ -122,10 +124,10 @@ public class LoopAnalysis {
             if(l.getHead() instanceof JIfStmt) {
                 Stmt header_stmt = (Stmt) (l.getHead());
                 Stmt jmp_back_stmt = (Stmt) (l.getBackJumpStmt());
-                // logger.debug("header_stmt: " + header_stmt);
-                // logger.debug("jmp_back_stmt: " + jmp_back_stmt);
+                logger.debug("header_stmt: " + header_stmt);
+                logger.debug("jmp_back_stmt: " + jmp_back_stmt);
                 Value cond = ((JIfStmt) header_stmt).getCondition();
-                // logger.debug("cond: " + cond);
+                logger.debug("cond: " + cond);
 
 				if(cond instanceof JEqExpr || cond instanceof JNeExpr) {
                     // can't deal with loop where the conditional predicate 
@@ -136,41 +138,21 @@ public class LoopAnalysis {
 				Texpr1Node expr = normalFormExpr(cond); 
                 // logger.debug("normal form expression: " + expr.toString());
                 Texpr1Intern expr_intern = new Texpr1Intern(env, expr);
-                Abstract1 header_state = an.getBranchFlowAfter((Unit) header_stmt).get(0).get();
-                Abstract1 jmp_back_state = an.getFallFlowAfter((Unit) jmp_back_stmt).get();
-                // logger.debug("header_state: " + header_state);
+                // Abstract1 header_state = an.getFallFlowAfter((Unit) header_stmt).get();
+                Abstract1 header_state = get_header_state(l);
+                Abstract1 jmp_back_state = get_tail_state(l);
+                // Abstract1 jmp_back_state = an.getFlowBefore((Unit) jmp_back_stmt).get();
+                logger.debug("header_state: " + header_state);
                 // logger.debug("jmp_back_state: " + jmp_back_state);
-                try {
-
-                    Interval header_domain = header_state.getBound(man, expr_intern);
-                    MpqScalar header_sup = (MpqScalar) header_domain.sup();
-                    // logger.debug(header_domain.sup().toString());
-                    Interval jmp_back_domain = jmp_back_state.getBound(man, expr_intern);
-                    MpqScalar jmp_back_sup = (MpqScalar) jmp_back_domain.sup();
-                    // logger.debug(jmp_back_domain.sup().toString());
-                    if(header_sup.cmp(jmp_back_sup) == 1) {
-                        // if we have a loop conditional of the form exp > 0 or exp >= 0 
-                        // and we see that the upper bound of exp in the header
-                        // is strictly greater than its upper bound after executing 
-                        // the loop body, we know the loop must terminate
-                        int jmp_back_sup_int = Integer.valueOf(jmp_back_domain.sup().toString());
-                        // logger.debug("jmp_back_sup_int: " + Integer.toString(jmp_back_sup_int));
-                        int header_sup_int = Integer.valueOf(header_domain.sup().toString());
-                        // logger.debug("header_sup_int: " + Integer.toString(header_sup_int));
-                        int header_inf_int = Integer.valueOf(header_domain.inf().toString());
-                        // logger.debug("header_inf_int: " + Integer.toString(header_inf_int));
-                        int min_exp_dec = header_sup_int - jmp_back_sup_int; 
-                        // logger.debug("min_exp_dec: " + Integer.toString(min_exp_dec));
-                        int max_iterations = (header_sup_int - header_inf_int + 1)/min_exp_dec;
-                        // logger.debug("max_iterations: " + Integer.toString(max_iterations));
-                        max_iterations_of_loop.put(l,new Integer(max_iterations));
-                        return true;
-                    }
-                } catch (ApronException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                if(abs_expr_monotonically_decreasing(expr_intern, header_state, jmp_back_state, l)) {
+                    // if we have a loop conditional of the form exp > 0 or exp >= 0 
+                    // and we see that the upper bound of exp in the header
+                    // is strictly greater than its upper bound after executing 
+                    // the loop body, we know the loop must terminate
+                    return true;
+                } else {
+                    return false;
                 }
-                return false;
             } else {
                 return false;
             }
@@ -220,15 +202,84 @@ public class LoopAnalysis {
 			op1 = op2;
 			op2 = tmp;
 		}	
-        // logger.debug("op1: " + op1);
-        // logger.debug("op2: " + op2);
-        // logger.debug("exprOfValue(op1): " + exprOfValue(op1));
-        // logger.debug("exprOfValue(op2): " + exprOfValue(op2));
 		return new Texpr1BinNode(Texpr1BinNode.OP_SUB,
 								 Texpr1BinNode.RTYPE_INT, 
 								 Texpr1BinNode.RDIR_ZERO,
 								 exprOfValue(op1),
 								 exprOfValue(op2));
 	}
+
+    private boolean abs_expr_monotonically_decreasing(Texpr1Intern expr_intern, Abstract1 header_state, Abstract1 jmp_back_state, Loop l) {
+        try {
+            Interval header_domain = header_state.getBound(man, expr_intern);
+            Interval jmp_back_domain = jmp_back_state.getBound(man, expr_intern);
+            MpqScalar header_sup = (MpqScalar) header_domain.sup();
+            MpqScalar header_inf = (MpqScalar) header_domain.inf();
+            logger.debug("header domain: " + header_domain);
+
+            int abs_exp_sup_header; 
+            int abs_exp_inf_header;
+            int flipped_exp_sup_jmp_back;
+            if(header_sup.sgn() == -1) {
+                logger.debug("flipped sign");
+                header_inf.neg();
+                header_sup.neg();
+                abs_exp_sup_header = Integer.valueOf(header_inf.toString());
+                abs_exp_inf_header = Integer.valueOf(header_sup.toString());
+                logger.debug("jmp_back_domain before neg: " + jmp_back_domain);
+                jmp_back_domain.neg();
+                logger.debug("jmp_back_domain after neg: " + jmp_back_domain);
+            } else {
+                abs_exp_sup_header = Integer.valueOf(header_sup.toString());
+                abs_exp_inf_header = Integer.valueOf(header_inf.toString());
+            }
+
+            logger.debug("jmp_back_domain after neg: " + jmp_back_domain);
+            flipped_exp_sup_jmp_back = Integer.valueOf(jmp_back_domain.sup().toString());
+            int min_abs_exp_dec = abs_exp_sup_header - flipped_exp_sup_jmp_back;
+            logger.debug("abs_exp_sup_header = " + abs_exp_sup_header);
+            logger.debug("abs_exp_inf_header = " + abs_exp_inf_header);
+            logger.debug("min_abs_exp_dec = " + min_abs_exp_dec);
+            int max_loop_iterations = (abs_exp_sup_header - abs_exp_inf_header + 1)/min_abs_exp_dec;
+            max_iterations_of_loop.put(l,new Integer(max_loop_iterations));
+            return abs_exp_sup_header > flipped_exp_sup_jmp_back;
+
+        } catch (ApronException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return false;
+        
+    }
+
+    private Abstract1 get_header_state(Loop l) {
+        Stmt header_stmt = l.getHead();
+        List<Stmt> loop_stmts = l.getLoopStatements();
+        Unit header_node = (Unit) header_stmt;
+        List<Unit> header_succs = g.getSuccsOf(header_node); 
+        for(Unit succ : header_succs) {
+            if (loop_stmts.contains((Stmt) succ)) {
+                return an.getFlowBefore(succ).get(); 
+            }
+        }
+        return null;
+    }
+
+    private Abstract1 get_tail_state(Loop l) {
+        Stmt jmp_back_stmt = l.getBackJumpStmt();
+        if(jmp_back_stmt instanceof JGotoStmt) {
+            return an.getFlowBefore((Unit)jmp_back_stmt).get();
+        } else {
+            return an.getFallFlowAfter((Unit) jmp_back_stmt).get();
+        }
+        // List<Unit> tail_preds = g.getPredsOf((Unit) jmp_back_stmt);
+        // List<Stmt> loop_stmts = l.getLoopStatements();
+        // for(Unit pred : tail_preds) {
+        //     if(loop_stmts.contains((Stmt) pred)) {
+        //         return an.getFallFlowAfter(pred).get();
+        //     }
+        // }
+        // return null;
+    }
     
 }

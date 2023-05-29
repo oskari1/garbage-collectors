@@ -104,7 +104,7 @@ public class AmountsPerNode {
                 AmountsPerStore currAmounts = amounts_per_node.get(u);
                 Loop l = loopAnalysis.loop_of_unit(u);
                 if(l != null) {
-                    // logger.debug("call to get_delivery is contained in loop");
+                    logger.debug("call to get_delivery is contained in loop");
                     // l != null iff u is contained inside a loop 
                     if(!loopAnalysis.terminates(l) && is_strictly_positive(delivered_amt)) {
                         // if we have an infinite loop and the received amount is strictly positive
@@ -133,12 +133,13 @@ public class AmountsPerNode {
                         // we need to multiply the maximum amount with the maximum number of
                         // iterations
                         int iterations = loopAnalysis.max_iterations_of(l);
+                        logger.debug("the computed max iterations are " + iterations);
                         amounts_per_node.put(u,currAmounts.receive_amount(delivered_amt, store_reference, iterations));
                     }
                 } else {
                     // if get_delivery is not within a loop, it's called at most once
                     int iterations = 1;
-                    // logger.debug("get_delivery only called once");
+                    logger.debug("get_delivery only called once");
                     amounts_per_node.put(u,currAmounts.receive_amount(delivered_amt, store_reference, iterations));
                 }
                 // check if received amounts exceed reserve_size at this node
