@@ -124,10 +124,10 @@ public class LoopAnalysis {
             if(l.getHead() instanceof JIfStmt) {
                 Stmt header_stmt = (Stmt) (l.getHead());
                 Stmt jmp_back_stmt = (Stmt) (l.getBackJumpStmt());
-                logger.debug("header_stmt: " + header_stmt);
-                logger.debug("jmp_back_stmt: " + jmp_back_stmt);
+                // logger.debug("header_stmt: " + header_stmt);
+                // logger.debug("jmp_back_stmt: " + jmp_back_stmt);
                 Value cond = ((JIfStmt) header_stmt).getCondition();
-                logger.debug("cond: " + cond);
+                // logger.debug("cond: " + cond);
 
 				if(cond instanceof JEqExpr || cond instanceof JNeExpr) {
                     // can't deal with loop where the conditional predicate 
@@ -142,7 +142,7 @@ public class LoopAnalysis {
                 Abstract1 header_state = get_header_state(l);
                 Abstract1 jmp_back_state = get_tail_state(l);
                 // Abstract1 jmp_back_state = an.getFlowBefore((Unit) jmp_back_stmt).get();
-                logger.debug("header_state: " + header_state);
+                // logger.debug("header_state: " + header_state);
                 // logger.debug("jmp_back_state: " + jmp_back_state);
                 if(abs_expr_monotonically_decreasing(expr_intern, header_state, jmp_back_state, l)) {
                     // if we have a loop conditional of the form exp > 0 or exp >= 0 
@@ -215,31 +215,31 @@ public class LoopAnalysis {
             Interval jmp_back_domain = jmp_back_state.getBound(man, expr_intern);
             MpqScalar header_sup = (MpqScalar) header_domain.sup();
             MpqScalar header_inf = (MpqScalar) header_domain.inf();
-            logger.debug("header domain: " + header_domain);
+            // logger.debug("header domain: " + header_domain);
 
             int abs_exp_sup_header; 
             int abs_exp_inf_header;
             int flipped_exp_sup_jmp_back;
             if(header_sup.sgn() == -1) {
-                logger.debug("flipped sign");
+                // logger.debug("flipped sign");
                 header_inf.neg();
                 header_sup.neg();
                 abs_exp_sup_header = Integer.valueOf(header_inf.toString());
                 abs_exp_inf_header = Integer.valueOf(header_sup.toString());
-                logger.debug("jmp_back_domain before neg: " + jmp_back_domain);
+                // logger.debug("jmp_back_domain before neg: " + jmp_back_domain);
                 jmp_back_domain.neg();
-                logger.debug("jmp_back_domain after neg: " + jmp_back_domain);
+                // logger.debug("jmp_back_domain after neg: " + jmp_back_domain);
             } else {
                 abs_exp_sup_header = Integer.valueOf(header_sup.toString());
                 abs_exp_inf_header = Integer.valueOf(header_inf.toString());
             }
 
-            logger.debug("jmp_back_domain after neg: " + jmp_back_domain);
+            // logger.debug("jmp_back_domain after neg: " + jmp_back_domain);
             flipped_exp_sup_jmp_back = Integer.valueOf(jmp_back_domain.sup().toString());
             int min_abs_exp_dec = abs_exp_sup_header - flipped_exp_sup_jmp_back;
-            logger.debug("abs_exp_sup_header = " + abs_exp_sup_header);
-            logger.debug("abs_exp_inf_header = " + abs_exp_inf_header);
-            logger.debug("min_abs_exp_dec = " + min_abs_exp_dec);
+            // logger.debug("abs_exp_sup_header = " + abs_exp_sup_header);
+            // logger.debug("abs_exp_inf_header = " + abs_exp_inf_header);
+            // logger.debug("min_abs_exp_dec = " + min_abs_exp_dec);
             int max_loop_iterations = (abs_exp_sup_header - abs_exp_inf_header + 1)/min_abs_exp_dec;
             max_iterations_of_loop.put(l,new Integer(max_loop_iterations));
             return abs_exp_sup_header > flipped_exp_sup_jmp_back;
