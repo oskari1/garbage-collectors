@@ -133,7 +133,7 @@ public class AmountsPerNode {
                         // we need to multiply the maximum amount with the maximum number of
                         // iterations
                         int iterations = loopAnalysis.max_iterations_of(l);
-                        // logger.debug("the computed max iterations are " + iterations);
+                        logger.debug("the computed max iterations are " + iterations);
                         amounts_per_node.put(u,currAmounts.receive_amount(delivered_amt, store_reference, iterations));
                     }
                 } else {

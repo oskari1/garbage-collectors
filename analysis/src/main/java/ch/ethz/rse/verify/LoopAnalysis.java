@@ -217,33 +217,36 @@ public class LoopAnalysis {
             MpqScalar header_inf = (MpqScalar) header_domain.inf();
             // logger.debug("header domain: " + header_domain);
 
-            int abs_exp_sup_header; 
-            int abs_exp_inf_header;
-            int flipped_exp_sup_jmp_back;
-            if(header_sup.sgn() == -1) {
-                // logger.debug("flipped sign");
-                header_inf.neg();
-                header_sup.neg();
-                abs_exp_sup_header = Integer.valueOf(header_inf.toString());
-                abs_exp_inf_header = Integer.valueOf(header_sup.toString());
-                // logger.debug("jmp_back_domain before neg: " + jmp_back_domain);
-                jmp_back_domain.neg();
+            if(header_inf.isInfty() == 0 && header_sup.isInfty() == 0 && jmp_back_domain.sup().isInfty() == 0) {
+                int abs_exp_sup_header; 
+                int abs_exp_inf_header;
+                int flipped_exp_sup_jmp_back;
+                if(header_sup.sgn() == -1) {
+                   // logger.debug("flipped sign");
+                    header_inf.neg();
+                    header_sup.neg();
+                    abs_exp_sup_header = Integer.valueOf(header_inf.toString());
+                    abs_exp_inf_header = Integer.valueOf(header_sup.toString());
+                    // logger.debug("jmp_back_domain before neg: " + jmp_back_domain);
+                    jmp_back_domain.neg();
+                    // logger.debug("jmp_back_domain after neg: " + jmp_back_domain);
+                } else {
+                    abs_exp_sup_header = Integer.valueOf(header_sup.toString());
+                    abs_exp_inf_header = Integer.valueOf(header_inf.toString());
+                }
+
                 // logger.debug("jmp_back_domain after neg: " + jmp_back_domain);
+                flipped_exp_sup_jmp_back = Integer.valueOf(jmp_back_domain.sup().toString());
+                int min_abs_exp_dec = abs_exp_sup_header - flipped_exp_sup_jmp_back;
+                // logger.debug("abs_exp_sup_header = " + abs_exp_sup_header);
+                // logger.debug("abs_exp_inf_header = " + abs_exp_inf_header);
+                // logger.debug("min_abs_exp_dec = " + min_abs_exp_dec);
+                int max_loop_iterations = (abs_exp_sup_header - abs_exp_inf_header + 1)/min_abs_exp_dec;
+                max_iterations_of_loop.put(l,new Integer(max_loop_iterations));
+                return abs_exp_sup_header > flipped_exp_sup_jmp_back;
             } else {
-                abs_exp_sup_header = Integer.valueOf(header_sup.toString());
-                abs_exp_inf_header = Integer.valueOf(header_inf.toString());
+                return false;
             }
-
-            // logger.debug("jmp_back_domain after neg: " + jmp_back_domain);
-            flipped_exp_sup_jmp_back = Integer.valueOf(jmp_back_domain.sup().toString());
-            int min_abs_exp_dec = abs_exp_sup_header - flipped_exp_sup_jmp_back;
-            // logger.debug("abs_exp_sup_header = " + abs_exp_sup_header);
-            // logger.debug("abs_exp_inf_header = " + abs_exp_inf_header);
-            // logger.debug("min_abs_exp_dec = " + min_abs_exp_dec);
-            int max_loop_iterations = (abs_exp_sup_header - abs_exp_inf_header + 1)/min_abs_exp_dec;
-            max_iterations_of_loop.put(l,new Integer(max_loop_iterations));
-            return abs_exp_sup_header > flipped_exp_sup_jmp_back;
-
         } catch (ApronException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
