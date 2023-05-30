@@ -216,6 +216,7 @@ public class LoopAnalysis {
             MpqScalar header_sup = (MpqScalar) header_domain.sup();
             MpqScalar header_inf = (MpqScalar) header_domain.inf();
             logger.debug("header domain: " + header_domain);
+            logger.debug("jmp_back_domain: " + jmp_back_domain);
 
             if(header_inf.isInfty() == 0 && header_sup.isInfty() == 0 && jmp_back_domain.sup().isInfty() == 0) {
                 int abs_exp_sup_header; 
@@ -269,12 +270,41 @@ public class LoopAnalysis {
     }
 
     private Abstract1 get_tail_state(Loop l) {
-        Stmt jmp_back_stmt = l.getBackJumpStmt();
-        if(jmp_back_stmt instanceof JGotoStmt) {
-            return an.getFlowBefore((Unit)jmp_back_stmt).get();
-        } else {
-            return an.getFallFlowAfter((Unit) jmp_back_stmt).get();
+        try {
+            // initialize the tail_state
+            Abstract1 tail_state;
+            Stmt jmp_back_stmt = l.getBackJumpStmt();
+            if(jmp_back_stmt instanceof JGotoStmt) {
+                tail_state = an.getFlowBefore((Unit)jmp_back_stmt).get();
+            } else {
+                tail_state = an.getFallFlowAfter((Unit) jmp_back_stmt).get();
+            }
+            // join with all other predecessors of the loop's header
+            List<Stmt> loop_stmts = l.getLoopStatements();
+            Unit header = (Unit) l.getHead();
+            for(Unit pred : g.getPredsOf(header)) {
+                if(loop_stmts.contains((Stmt) pred)) {
+                    Abstract1 pred_state;
+                    if((Stmt) pred instanceof JGotoStmt) {
+                        pred_state = an.getFlowBefore(pred).get();
+                    } else {
+                        pred_state = an.getFallFlowAfter(pred).get();
+                    } 
+                    tail_state.join(man, pred_state);
+                }
+            }
+            return tail_state;
+        } catch (ApronException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
+        return null;
+        // Stmt jmp_back_stmt = l.getBackJumpStmt();
+        // if(jmp_back_stmt instanceof JGotoStmt) {
+        //     return an.getFlowBefore((Unit)jmp_back_stmt).get();
+        // } else {
+        //     return an.getFallFlowAfter((Unit) jmp_back_stmt).get();
+        // }
         // List<Unit> tail_preds = g.getPredsOf((Unit) jmp_back_stmt);
         // List<Stmt> loop_stmts = l.getLoopStatements();
         // for(Unit pred : tail_preds) {
