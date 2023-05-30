@@ -14,6 +14,7 @@ import ch.ethz.rse.pointer.PointsToInitializer;
 import soot.SootMethod;
 import soot.ValueBox;
 import soot.Value;
+import soot.jimple.Stmt;
 import soot.jimple.internal.JInvokeStmt;
 import soot.Local;
 import soot.Unit;
@@ -34,6 +35,7 @@ public class AmountsPerNode {
     private NumericalAnalysis an;
     private Manager man;
     private LoopAnalysis loopAnalysis;
+    private LoopNestTree loopNestTree;
 
     public AmountsPerNode(UnitGraph g, PointsToInitializer pointsTo, SootMethod method, NumericalAnalysis an, Manager man, Environment env) {
         this.amounts_per_node = new HashMap<Unit, AmountsPerStore>(g.size());
@@ -42,6 +44,7 @@ public class AmountsPerNode {
         this.pointsTo = pointsTo;
         this.an = an;
         this.man = man;
+        this.loopNestTree = new LoopNestTree(g.getBody());
         this.visited = new HashMap<Unit,Boolean>(g.size());
         Iterator<Unit> i = g.iterator();
         while(i.hasNext()) {
@@ -53,6 +56,7 @@ public class AmountsPerNode {
 
     public void compute_received_amounts() throws FitsInReserveException {
         // initialize visited-map
+        logger.debug("entered compute_received_amounts");
         visited = new HashMap<Unit,Boolean>(g.size());
         Iterator<Unit> i = g.iterator();
         while(i.hasNext()) {
@@ -60,13 +64,18 @@ public class AmountsPerNode {
             visited.put(v, new Boolean(false));
         }
         // start computation
-        for(Unit t : g.getTails()) {
+        logger.debug("Body of CFG");
+        logger.debug(g.getBody().toString());
+        logger.debug("before for-loop");
+        List<Unit> tails = get_tails(); 
+        for(Unit t : tails) {
             compute(t);
         }
+        logger.debug("after for-loop");
     }
 
     private void compute(Unit u) throws FitsInReserveException {
-        // logger.debug("entered compute-function with Unit " + u);
+        logger.debug("entered compute-function with Unit " + u);
         visited.put(u,new Boolean(true));
         if(g.getHeads().contains(u)) {
             // if u is a header, initialize all Stores to have received 0  
@@ -91,7 +100,7 @@ public class AmountsPerNode {
         // if so, we need to update the received amounts for each Store object
         // that has received some amount by that call
         if(Verifier.is_reachable_call_to_get_delivery(u, an, man)) {
-            // logger.debug("we are in call " + u);
+            logger.debug("we are in call " + u);
             Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
             MpqScalar delivered_amt = Verifier.upper_bound_of(arg, an, u, man); 
             if(delivered_amt.isInfty() != 0) {
@@ -155,6 +164,17 @@ public class AmountsPerNode {
     private boolean is_strictly_positive(MpqScalar amt) {
         // amt > 0 iff sign(amt) = 1 
         return amt.sgn() == 1;
+    }
+
+    private List<Unit> get_tails() {
+        List<Unit> exit_nodes = g.getTails();
+        List<Unit> jmp_back_nodes = new ArrayList<Unit>(); 
+        for(Loop l : loopNestTree) {
+            Stmt jmp_back_stmt = l.getBackJumpStmt();
+            jmp_back_nodes.add((Unit) jmp_back_stmt);
+        }
+        jmp_back_nodes.addAll(exit_nodes);
+        return jmp_back_nodes;
     }
 
 }
