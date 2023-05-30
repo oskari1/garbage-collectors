@@ -241,7 +241,7 @@ public class Verifier extends AVerifier {
 	public boolean checkFitsInReserve() {
 		// TODO: FILL THIS OUT
 		boolean valid = true; 
-		logger.debug("entered checkFitsInReserve");
+		// logger.debug("entered checkFitsInReserve");
 		for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
 			SootMethod m = entry.getKey();
 			NumericalAnalysis an = entry.getValue();

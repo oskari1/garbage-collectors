@@ -56,7 +56,7 @@ public class AmountsPerNode {
 
     public void compute_received_amounts() throws FitsInReserveException {
         // initialize visited-map
-        logger.debug("entered compute_received_amounts");
+        // logger.debug("entered compute_received_amounts");
         visited = new HashMap<Unit,Boolean>(g.size());
         Iterator<Unit> i = g.iterator();
         while(i.hasNext()) {
@@ -64,18 +64,18 @@ public class AmountsPerNode {
             visited.put(v, new Boolean(false));
         }
         // start computation
-        logger.debug("Body of CFG");
-        logger.debug(g.getBody().toString());
-        logger.debug("before for-loop");
+        // logger.debug("Body of CFG");
+        // logger.debug(g.getBody().toString());
+        // logger.debug("before for-loop");
         List<Unit> tails = get_tails(); 
         for(Unit t : tails) {
             compute(t);
         }
-        logger.debug("after for-loop");
+        // logger.debug("after for-loop");
     }
 
     private void compute(Unit u) throws FitsInReserveException {
-        logger.debug("entered compute-function with Unit " + u);
+        // logger.debug("entered compute-function with Unit " + u);
         visited.put(u,new Boolean(true));
         if(g.getHeads().contains(u)) {
             // if u is a header, initialize all Stores to have received 0  
@@ -100,7 +100,7 @@ public class AmountsPerNode {
         // if so, we need to update the received amounts for each Store object
         // that has received some amount by that call
         if(Verifier.is_reachable_call_to_get_delivery(u, an, man)) {
-            logger.debug("we are in call " + u);
+            // logger.debug("we are in call " + u);
             Value arg = ((JInvokeStmt) u).getInvokeExpr().getArg(0);
             MpqScalar delivered_amt = Verifier.upper_bound_of(arg, an, u, man); 
             if(delivered_amt.isInfty() != 0) {
@@ -142,7 +142,7 @@ public class AmountsPerNode {
                         // we need to multiply the maximum amount with the maximum number of
                         // iterations
                         int iterations = loopAnalysis.max_iterations_of(l);
-                        logger.debug("the computed max iterations are " + iterations);
+                        // logger.debug("the computed max iterations are " + iterations);
                         amounts_per_node.put(u,currAmounts.receive_amount(delivered_amt, store_reference, iterations));
                     }
                 } else {
