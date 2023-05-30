@@ -64,8 +64,8 @@ public class AmountsPerNode {
             visited.put(v, new Boolean(false));
         }
         // start computation
-        // logger.debug("Body of CFG");
-        // logger.debug(g.getBody().toString());
+        logger.debug("Body of CFG");
+        logger.debug(g.getBody().toString());
         // logger.debug("before for-loop");
         List<Unit> tails = get_tails(); 
         for(Unit t : tails) {
