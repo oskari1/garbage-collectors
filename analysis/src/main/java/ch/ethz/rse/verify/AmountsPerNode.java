@@ -64,8 +64,8 @@ public class AmountsPerNode {
             visited.put(v, new Boolean(false));
         }
         // start computation
-        logger.debug("Body of CFG");
-        logger.debug(g.getBody().toString());
+        // logger.debug("Body of CFG");
+        // logger.debug(g.getBody().toString());
         // logger.debug("before for-loop");
         List<Unit> tails = get_tails(); 
         for(Unit t : tails) {
@@ -116,6 +116,7 @@ public class AmountsPerNode {
                     // logger.debug("call to get_delivery is contained in loop");
                     // l != null iff u is contained inside a loop 
                     if(!loopAnalysis.terminates(l) && is_strictly_positive(delivered_amt)) {
+                        // logger.debug("loop doesn't terminate and delivered_amt > 0");
                         // if we have an infinite loop and the received amount is strictly positive
                         // it's for sure UNSAFE 
                         throw new FitsInReserveException("doesn't fit in reserve");

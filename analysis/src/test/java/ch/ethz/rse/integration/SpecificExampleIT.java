@@ -19,14 +19,14 @@ public class SpecificExampleIT {
 	/**
 	 * Modify the configuration below to run a single example
 	 */
-	@Test
-	void specificTest() {
-		String packageName = "ch.ethz.rse.integration.tests.Reserve_Test_For_Loop_Safe_13";
-		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
-		boolean expectedIsSafe = true;
-		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
-		SpecificExampleIT.testOnExample(t);
-	}
+	// @Test
+	// void specificTest() {
+	// 	String packageName = "ch.ethz.rse.integration.tests.Reserve_Test_For_Loop_Safe_23";
+	// 	VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+	// 	boolean expectedIsSafe = true;
+	// 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+	// 	SpecificExampleIT.testOnExample(t);
+	// }
 
 // 	@Test
 // 	void constantTestTrue() {

@@ -396,9 +396,10 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			// log outcome
 			if (fallOutWrapper != null) {
 				// logger.debug(inWrapper.get() + " " + s + " =>[fallout] " + fallOutWrapper);
-				// if(s instanceof JIfStmt) {
-				// 	logger.debug("Bound for i1: " + inWrapper.get().getBound(man, "i1").toString());
-				// }
+				// if(s instanceof DefinitionStmt) {
+				// 	String var = ((DefinitionStmt) s).getLeftOp().toString();
+				// 	logger.debug("Bound for " + var + ": " + fallOutWrapper.get().getBound(man, var).toString());
+				//
 			}
 			if (branchOutWrapper != null) {
 				// logger.debug(inWrapper.get() + " " + s + " =>[branchout] " + branchOutWrapper);
