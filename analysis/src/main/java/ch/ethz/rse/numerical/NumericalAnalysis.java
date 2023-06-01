@@ -376,7 +376,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				JInvokeStmt jInvStmt = (JInvokeStmt) s;
 				InvokeExpr invokeExpr = jInvStmt.getInvokeExpr();
 				if (invokeExpr instanceof JVirtualInvokeExpr) {
-					logger.debug("entered instanceof JVirtualInvokeExpr");
+					// logger.debug("entered instanceof JVirtualInvokeExpr");
 					handleInvoke(jInvStmt, fallOutWrapper);
 				} else if (invokeExpr instanceof JSpecialInvokeExpr) {
 					// initializer for object
@@ -395,8 +395,8 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 			// log outcome
 			if (fallOutWrapper != null) {
-				logger.debug(inWrapper.get() + " " + s + " =>[fallout] " + fallOutWrapper);
-				logger.debug("type of s is " + s.getClass().getName());
+				// logger.debug(inWrapper.get() + " " + s + " =>[fallout] " + fallOutWrapper);
+				// logger.debug("type of s is " + s.getClass().getName());
 				if(s instanceof JInvokeStmt) {
 					JInvokeStmt jInvStmt = (JInvokeStmt) s;
 					InvokeExpr invokeExpr = jInvStmt.getInvokeExpr();
@@ -410,11 +410,11 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				//
 			}
 			if (branchOutWrapper != null) {
-				logger.debug(inWrapper.get() + " " + s + " =>[branchout] " + branchOutWrapper);
+				// logger.debug(inWrapper.get() + " " + s + " =>[branchout] " + branchOutWrapper);
 				if(s instanceof JVirtualInvokeExpr) {
 					// String var = ((DefinitionStmt) s).getLeftOp().toString();
 					String var = "i0";
-					logger.debug("Bound for " + var + ": " + fallOutWrapper.get().getBound(man, var).toString());
+					// logger.debug("Bound for " + var + ": " + fallOutWrapper.get().getBound(man, var).toString());
 				}
 			}
 
