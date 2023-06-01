@@ -153,7 +153,7 @@ public class LoopAnalysis {
                     return false;
 				}
 				Texpr1Node expr = normalFormExpr(cond); 
-                // logger.debug("normal form expression: " + expr.toString());
+                logger.debug("normal form expression: " + expr.toString());
                 Texpr1Intern expr_intern = new Texpr1Intern(env, expr);
                 // Abstract1 header_state = an.getFallFlowAfter((Unit) header_stmt).get();
                 Abstract1 header_state = get_header_state(l);
@@ -232,8 +232,8 @@ public class LoopAnalysis {
             Interval jmp_back_domain = jmp_back_state.getBound(man, expr_intern);
             MpqScalar header_sup = (MpqScalar) header_domain.sup();
             MpqScalar header_inf = (MpqScalar) header_domain.inf();
-            // logger.debug("header domain: " + header_domain);
-            // logger.debug("jmp_back_domain: " + jmp_back_domain);
+            logger.debug("header domain: " + header_domain);
+            logger.debug("jmp_back_domain: " + jmp_back_domain);
 
             if(header_inf.isInfty() == 0 && header_sup.isInfty() == 0) {
                 int abs_exp_sup_header; 
@@ -286,6 +286,11 @@ public class LoopAnalysis {
         for(Unit succ : header_succs) {
             if (loop_stmts.contains((Stmt) succ)) {
                 // logger.debug("succ(header) is " + succ);
+                // this is only true if the header has exactly one 
+                // successor that's contained in the loop, might not
+                // always be that case. In that case, we would have to
+                // join all the states of the successors that are contained
+                // inside the loop
                 return an.getFlowBefore(succ).get(); 
             }
         }
@@ -329,6 +334,8 @@ public class LoopAnalysis {
     }
 
     private Stmt get_loop_conditional(Loop l) {
+        // uncertain about what to do if we have more than one loop
+        // conditional expression
         Stmt header = l.getHead();
         if(header instanceof JIfStmt) {
             return header;

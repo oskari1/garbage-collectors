@@ -402,9 +402,9 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 					InvokeExpr invokeExpr = jInvStmt.getInvokeExpr();
 					if(invokeExpr instanceof JVirtualInvokeExpr) {
 						String var = "i0";
-						logger.debug("Bound for " + var + ": " + fallOutWrapper.get().getBound(man, var).toString());
+						// logger.debug("Bound for " + var + ": " + fallOutWrapper.get().getBound(man, var).toString());
 						var = "i1";
-						logger.debug("Bound for " + var + ": " + fallOutWrapper.get().getBound(man, var).toString());
+						// logger.debug("Bound for " + var + ": " + fallOutWrapper.get().getBound(man, var).toString());
 					}
 				}
 				//
