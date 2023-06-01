@@ -10,7 +10,7 @@ import ch.ethz.rse.Store;
 public class Reserve_Test_For_Loop_Unsafe_6 {
 
   public static void m1() {
-    Store s = new Store(2, 20);
+    Store s = new Store(2, 19);
     int i = 0;
     while(i < 4) {
         int j = 0;

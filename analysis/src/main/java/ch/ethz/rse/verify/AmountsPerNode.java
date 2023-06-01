@@ -55,23 +55,29 @@ public class AmountsPerNode {
     }
 
     public void compute_received_amounts() throws FitsInReserveException {
-        // initialize visited-map
-        // logger.debug("entered compute_received_amounts");
-        visited = new HashMap<Unit,Boolean>(g.size());
-        Iterator<Unit> i = g.iterator();
-        while(i.hasNext()) {
-            Unit v = (Unit) i.next();
-            visited.put(v, new Boolean(false));
+        // check that there are no calls to get_delivery contained in 
+        // nested loop
+        if(loopAnalysis.hasNestedCall()) {
+            throw new FitsInReserveException("can't handle this case");
+        } else {
+            // initialize visited-map
+            // logger.debug("entered compute_received_amounts");
+            visited = new HashMap<Unit,Boolean>(g.size());
+            Iterator<Unit> i = g.iterator();
+            while(i.hasNext()) {
+                Unit v = (Unit) i.next();
+                visited.put(v, new Boolean(false));
+            }
+            // start computation
+            // logger.debug("Body of CFG");
+            // logger.debug(g.getBody().toString());
+            // logger.debug("before for-loop");
+            List<Unit> tails = get_tails(); 
+            for(Unit t : tails) {
+                compute(t);
+            }
+            // logger.debug("after for-loop");
         }
-        // start computation
-        // logger.debug("Body of CFG");
-        // logger.debug(g.getBody().toString());
-        // logger.debug("before for-loop");
-        List<Unit> tails = get_tails(); 
-        for(Unit t : tails) {
-            compute(t);
-        }
-        // logger.debug("after for-loop");
     }
 
     private void compute(Unit u) throws FitsInReserveException {

@@ -77,6 +77,7 @@ public class LoopAnalysis {
     private Manager man;
     private UnitGraph g;
     private NumericalAnalysis an;
+    private boolean hasNestedCall;
     private static final Logger logger = LoggerFactory.getLogger(Verifier.class);
 
     public LoopAnalysis(UnitGraph g, SootMethod m, Environment env, Manager man, NumericalAnalysis an) {
@@ -91,9 +92,22 @@ public class LoopAnalysis {
         for(Loop l : loops) {
             List<Stmt> stmts = l.getLoopStatements();
             for(Stmt s : stmts) {
-                loop_of_unit.put((Unit) s, l);
+                // if(s instanceof JInvokeStmt) {
+                //     logger.debug("adding get_delivery to loop_of_unit map");
+                // }
+                // loop_of_unit.put((Unit) s, l);
+                if(loop_of_unit.putIfAbsent((Unit) s, l) != null) {
+                    // this is the case only if s has already been added
+                    // once into the map as a key for some other loop 
+                    // this indicates the existence of another loop 
+                    this.hasNestedCall = true;
+                }
             }
         }
+    }
+
+    public boolean hasNestedCall() {
+        return this.hasNestedCall;
     }
 
     public Loop loop_of_unit(Unit u) {
@@ -145,8 +159,8 @@ public class LoopAnalysis {
                 Abstract1 header_state = get_header_state(l);
                 Abstract1 jmp_back_state = get_tail_state(l);
                 // Abstract1 jmp_back_state = an.getFlowBefore((Unit) jmp_back_stmt).get();
-                // logger.debug("header_state: " + header_state);
-                // logger.debug("jmp_back_state: " + jmp_back_state);
+                logger.debug("header_state: " + header_state);
+                logger.debug("jmp_back_state: " + jmp_back_state);
                 if(abs_expr_monotonically_decreasing(expr_intern, header_state, jmp_back_state, l)) {
                     // if we have a loop conditional of the form exp > 0 or exp >= 0 
                     // and we see that the upper bound of exp in the header
@@ -244,9 +258,9 @@ public class LoopAnalysis {
                 if(jmp_back_domain.sup().isInfty() == 0) {
                     flipped_exp_sup_jmp_back = Integer.valueOf(jmp_back_domain.sup().toString());
                     int min_abs_exp_dec = abs_exp_sup_header - flipped_exp_sup_jmp_back;
-                    // logger.debug("abs_exp_sup_header = " + abs_exp_sup_header);
-                    // logger.debug("abs_exp_inf_header = " + abs_exp_inf_header);
-                    // logger.debug("min_abs_exp_dec = " + min_abs_exp_dec);
+                    logger.debug("abs_exp_sup_header = " + abs_exp_sup_header);
+                    logger.debug("abs_exp_inf_header = " + abs_exp_inf_header);
+                    logger.debug("min_abs_exp_dec = " + min_abs_exp_dec);
                     int max_loop_iterations = (abs_exp_sup_header - abs_exp_inf_header + 1)/min_abs_exp_dec;
                     max_iterations_of_loop.put(l,new Integer(max_loop_iterations));
                     return abs_exp_sup_header > flipped_exp_sup_jmp_back;
