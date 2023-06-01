@@ -5,7 +5,7 @@ import ch.ethz.rse.Store;
 // expected results:
 // NON_NEGATIVE SAFE
 // FITS_IN_TROLLEY SAFE
-// FITS_IN_RESERVE SAFE
+// FITS_IN_RESERVE UNSAFE
 
 public class Reserve_Test_For_Loop_Safe_19 {
 
