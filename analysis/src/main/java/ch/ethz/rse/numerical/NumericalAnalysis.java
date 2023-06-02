@@ -111,7 +111,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 	public final Environment env;
 
-	// private AlreadyInitMap alreadyInitMap;
+	private AmountsPerStmt amountsPerStmt;
 
 	/**
 	 * We apply widening after updating the state at a given merge point for the
@@ -138,6 +138,8 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		this.alreadyInit = new HashSet<StoreInitializer>();
 
 		this.env = new EnvironmentGenerator(method, pointsTo).getEnvironment();
+
+		this.amountsPerStmt = new AmountsPerStmt(g);
 
 		// initialize counts for loop heads
 		for (Loop l : new LoopNestTree(g.getBody())) {
@@ -429,15 +431,9 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			Value store_reference = (Value) jInvStmt.getUseBoxes().get(1).getValue();
 			Value arg = jInvStmt.getInvokeExpr().getArg(0);
 			for(StoreInitializer s : pointsTo.pointsTo((Local) store_reference)) {
-				if(alreadyInit.contains(s)) {
-				// if(alreadyInitMap.get_set_of(jInvStmt).contains(s)) {
-					MpqScalar delivered_amt = upper_bound_of(arg, fallOutWrapper); 
-					// alreadyInitMap.receiveat(jInvStmt, s, delivered_amt);
-					s.receive(delivered_amt);
-				}
+				MpqScalar delivered_amt = upper_bound_of(arg, fallOutWrapper); 
+				amountsPerStmt.receive(jInvStmt, s, delivered_amt);
 			}
-
-
 		}
 	}
 
@@ -455,7 +451,8 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		// logger.debug("useBoxes.get(0): " + jInvStmt.getUseBoxes().get(0));
 		// logger.debug("type of store_reference is " + store_reference.getClass().getName());
 		for(StoreInitializer s : pointsTo.pointsTo((Local) store_reference)) {
-			alreadyInit.add(s);
+			amountsPerStmt.add(s);
+			// alreadyInit.add(s);
 		}
 	}
 
@@ -478,13 +475,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
 	public boolean fitsInReserve() {
-		for(StoreInitializer s : alreadyInit) {
-			if (!s.satisfiesFitsInReserve()) {
-				return false;
-			} 
-		}
-		return true;
-		// return alreadyInitMap.fitsInReserve();
+		return amountsPerStmt.fitsInReserve();
 	}
 
 	private MpqScalar upper_bound_of(Value val, NumericalStateWrapper outWrapper) {

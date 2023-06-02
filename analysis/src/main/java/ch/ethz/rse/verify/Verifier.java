@@ -104,8 +104,11 @@ public class Verifier extends AVerifier {
 			// note that each class has two methods, the method we are analyzing and the constructor
 			// which according to description always has name <init>
 			// note that constructing the NumericalAnalysis object automatically start the analysis
-			NumericalAnalysis an = new NumericalAnalysis(method, property, this.pointsTo); 
-			numericalAnalysis.put(method, an);
+			logger.debug(method.getName());
+			if(!method.isConstructor()) {
+				NumericalAnalysis an = new NumericalAnalysis(method, property, this.pointsTo); 
+				numericalAnalysis.put(method, an);
+			}
 		}
 	}
 
