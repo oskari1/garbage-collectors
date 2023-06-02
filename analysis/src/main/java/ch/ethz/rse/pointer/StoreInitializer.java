@@ -119,27 +119,6 @@ public class StoreInitializer {
 		}
 	}
 
-	public boolean checkFitsInReserve(MpqScalar received_amount) {
-		if(received_amount.isInfty() == 1) {
-			// if received amount is +oo, it does not satisfy fitsInReserve 
-			logger.debug("case +oo");
-			return false;
-		} else if(received_amount.isInfty() == -1) {
-			// if the received amount is -oo, it satisfies fitsInReserve
-			logger.debug("case -oo");
-			return true;
-		} else {
-			// if the received amount if finite, need to compare with 
-			// the reserve_size
-			logger.debug("case finite");
-			int received_amt_int = int_of(this.received_amount);
-			logger.debug("received amount is " + received_amt_int);
-			logger.debug("reserve size is" + reserve_size);
-			return received_amt_int <= reserve_size; 
-		}
-
-	}
-
 	private int int_of(MpqScalar s) {
 		assert(s.isInfty() == 0);
 		return Integer.valueOf(s.toString());
