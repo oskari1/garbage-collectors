@@ -92,8 +92,8 @@ public class StoreInitializer {
 			// just add them up
 			int amount_int = int_of(amount);
 			int received_amount_int = int_of(received_amount);
-			logger.debug("Object " + uniqueNumber + " has already received " + received_amount_int); 
-			logger.debug("Object " + uniqueNumber + " is receiving " + amount_int); 
+			// logger.debug("Object " + uniqueNumber + " has already received " + received_amount_int); 
+			// logger.debug("Object " + uniqueNumber + " is receiving " + amount_int); 
 			this.received_amount = new MpqScalar(received_amount_int + amount_int);
 		}
 		// if the received amount is already +oo or -oo, just keep 
@@ -114,19 +114,19 @@ public class StoreInitializer {
 	public boolean satisfiesFitsInReserve() {
 		if(received_amount.isInfty() == 1) {
 			// if received amount is +oo, it does not satisfy fitsInReserve 
-			logger.debug("case +oo");
+			// logger.debug("case +oo");
 			return false;
 		} else if(received_amount.isInfty() == -1) {
 			// if the received amount is -oo, it satisfies fitsInReserve
-			logger.debug("case -oo");
+			// logger.debug("case -oo");
 			return true;
 		} else {
 			// if the received amount if finite, need to compare with 
 			// the reserve_size
-			logger.debug("case finite");
+			// logger.debug("case finite");
 			int received_amt_int = int_of(this.received_amount);
-			logger.debug("received amount is " + received_amt_int);
-			logger.debug("reserve size is" + reserve_size);
+			// logger.debug("received amount is " + received_amt_int);
+			// logger.debug("reserve size is" + reserve_size);
 			return received_amt_int <= reserve_size; 
 		}
 	}
