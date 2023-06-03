@@ -33,8 +33,9 @@ public class StoreInitializer {
 	 */
 	public final int reserve_size;
 
-	// added field
+	// added fields
 	private MpqScalar received_amount;
+	public boolean fits_in_trolley = true;
 
 
 
@@ -97,6 +98,17 @@ public class StoreInitializer {
 		}
 		// if the received amount is already +oo or -oo, just keep 
 		// that value, i.e., do nothing
+	}
+
+	public void checkFitsInTrolley(MpqScalar amount) {
+		if(amount.isInfty() != 0) {
+			fits_in_trolley = false;
+		} else {
+			int amount_int = int_of(amount);
+			if(amount_int > trolley_size) {
+				fits_in_trolley = false;
+			}
+		}
 	}
 
 	public boolean satisfiesFitsInReserve() {

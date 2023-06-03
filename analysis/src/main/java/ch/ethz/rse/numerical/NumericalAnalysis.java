@@ -111,6 +111,8 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 	public final Environment env;
 
+	public boolean non_negative_satisfied = true;
+
 	// private AlreadyInitMap alreadyInitMap;
 
 	/**
@@ -424,7 +426,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 	public void handleInvoke(JInvokeStmt jInvStmt, NumericalStateWrapper fallOutWrapper) throws ApronException {
 		// TODO: MAYBE FILL THIS OUT
-		if (this.property == VerificationProperty.FITS_IN_RESERVE) {
+		if (this.property == VerificationProperty.FITS_IN_RESERVE || this.property == VerificationProperty.FITS_IN_TROLLEY) {
 			// TODO: MAYBE FILL THIS OUT
 			Value store_reference = (Value) jInvStmt.getUseBoxes().get(1).getValue();
 			Value arg = jInvStmt.getInvokeExpr().getArg(0);
@@ -433,11 +435,19 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 				// if(alreadyInitMap.get_set_of(jInvStmt).contains(s)) {
 					MpqScalar delivered_amt = upper_bound_of(arg, fallOutWrapper); 
 					// alreadyInitMap.receiveat(jInvStmt, s, delivered_amt);
-					s.receive(delivered_amt);
+					if(this.property == VerificationProperty.FITS_IN_RESERVE) {
+						s.receive(delivered_amt);
+					} else {
+						s.checkFitsInTrolley(delivered_amt);
+					}
 				}
 			}
-
-
+		} else {
+			Value arg = jInvStmt.getInvokeExpr().getArg(0);
+			MpqScalar delivered_amt = lower_bound_of(arg, fallOutWrapper);
+			if(delivered_amt.sgn() == -1) {
+				non_negative_satisfied = false;
+			}
 		}
 	}
 
@@ -496,6 +506,23 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			String var_name = ((JimpleLocal) val).getName();
 			try {
 				return (MpqScalar) out.getBound(man, var_name).sup();
+			} catch (ApronException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return new MpqScalar();
+			}
+		}
+	}
+
+	private MpqScalar lower_bound_of(Value val, NumericalStateWrapper outWrapper) {
+		if(val instanceof IntConstant) {
+			return new MpqScalar(((IntConstant) val).value);
+		} else {
+			assert(val instanceof JimpleLocal);
+			Abstract1 out = outWrapper.get();
+			String var_name = ((JimpleLocal) val).getName();
+			try {
+				return (MpqScalar) out.getBound(man, var_name).inf();
 			} catch (ApronException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
