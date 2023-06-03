@@ -439,7 +439,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 						if(this.property == VerificationProperty.FITS_IN_RESERVE) {
 							s.receive(delivered_amt);
 						} else {
-							logger.debug("delivered amount is " + delivered_amt.toString());
+							// logger.debug("delivered amount is " + delivered_amt.toString());
 							s.checkFitsInTrolley(delivered_amt);
 						}
 					}
