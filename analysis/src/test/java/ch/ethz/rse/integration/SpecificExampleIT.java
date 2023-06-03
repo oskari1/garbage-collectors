@@ -21,16 +21,16 @@ public class SpecificExampleIT {
 	 */
 	@Test
 	void specificTest() {
-		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Unsafe_9";
+		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Unsafe_8";
 		VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
-		boolean expectedIsSafe = true;
+		boolean expectedIsSafe = false;
 		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
 		SpecificExampleIT.testOnExample(t);
 	}
 
 	@Test
 	void specificTest1() {
-		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Unsafe_9";
+		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Unsafe_8";
 		VerificationProperty verificationTask = VerificationProperty.FITS_IN_TROLLEY;
 		boolean expectedIsSafe = false;
 		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
@@ -39,7 +39,7 @@ public class SpecificExampleIT {
 
 	@Test
 	void specificTest2() {
-		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Unsafe_9";
+		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Unsafe_8";
 		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
 		boolean expectedIsSafe = false;
 		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
