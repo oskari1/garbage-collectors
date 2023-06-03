@@ -47,7 +47,7 @@ public class VerificationTestCaseCollector {
 	/**
 	 * Search for tests in this package
 	 */
-	private static final String testPackage = "ch.ethz.rse.integration.a_tests";
+	private static final String testPackage = "ch.ethz.rse.integration.tests";
 
 	/**
 	 * 

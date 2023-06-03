@@ -21,9 +21,9 @@ public class SpecificExampleIT {
 	 */
 	// @Test
 	// void specificTest() {
-	// 	String packageName = "ch.ethz.rse.integration.tests.Wall_of_Fame_test";
+	// 	String packageName = "ch.ethz.rse.integration.tests.a_Trolley_Test_Unsafe_8";
 	// 	VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
-	// 	boolean expectedIsSafe = false;
+	// 	boolean expectedIsSafe = true;
 	// 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
 	// 	SpecificExampleIT.testOnExample(t);
 	// }
