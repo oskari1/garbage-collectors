@@ -100,7 +100,7 @@ public class StoreInitializer {
 	}
 
 	public boolean checkFitsInTrolley(MpqScalar amount) {
-		if(amount.isInfty() != 1) {
+		if(amount.isInfty() == 1) {
 			return false;
 		} else if(amount.isInfty() == -1) {
 			return true;
