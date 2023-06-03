@@ -7,7 +7,7 @@ import ch.ethz.rse.Store;
 // FITS_IN_TROLLEY UNSAFE
 // FITS_IN_RESERVE UNSAFE
 
-public class Trolley_Test_Unsafe {
+public class a_Trolley_Test_Unsafe {
 
   public static void m1() {
     Store s = new Store(2, 4);

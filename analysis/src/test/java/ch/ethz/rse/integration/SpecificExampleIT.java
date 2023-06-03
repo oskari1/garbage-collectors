@@ -19,14 +19,14 @@ public class SpecificExampleIT {
 	/**
 	 * Modify the configuration below to run a single example
 	 */
-	@Test
-	void specificTest() {
-		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Safe_7";
-		VerificationProperty verificationTask = VerificationProperty.FITS_IN_TROLLEY;
-		boolean expectedIsSafe = true;
-		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
-		SpecificExampleIT.testOnExample(t);
-	}
+	// @Test
+	// void specificTest() {
+	// 	String packageName = "ch.ethz.rse.integration.tests.Wall_of_Fame_test";
+	// 	VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+	// 	boolean expectedIsSafe = false;
+	// 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+	// 	SpecificExampleIT.testOnExample(t);
+	// }
 
 // 	@Test
 // 	void constantTestTrue() {
