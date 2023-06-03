@@ -35,7 +35,6 @@ public class StoreInitializer {
 
 	// added fields
 	private MpqScalar received_amount;
-	public boolean fits_in_trolley = true;
 
 
 
@@ -100,14 +99,18 @@ public class StoreInitializer {
 		// that value, i.e., do nothing
 	}
 
-	public void checkFitsInTrolley(MpqScalar amount) {
-		if(amount.isInfty() != 0) {
-			fits_in_trolley = false;
+	public boolean checkFitsInTrolley(MpqScalar amount) {
+		if(amount.isInfty() != 1) {
+			return false;
+		} else if(amount.isInfty() == -1) {
+			return true;
 		} else {
 			int amount_int = int_of(amount);
 			if(amount_int > trolley_size) {
 				// logger.debug("trolley size is " + trolley_size);
-				fits_in_trolley = false;
+				return false;
+			} else {
+				return true;
 			}
 		}
 	}

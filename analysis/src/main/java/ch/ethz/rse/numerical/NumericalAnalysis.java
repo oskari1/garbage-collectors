@@ -112,6 +112,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	public final Environment env;
 
 	public boolean non_negative_satisfied = true;
+	public boolean fits_in_trolley_satisfied = true;
 
 	// private AlreadyInitMap alreadyInitMap;
 
@@ -440,7 +441,9 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 							s.receive(delivered_amt);
 						} else {
 							// logger.debug("delivered amount is " + delivered_amt.toString());
-							s.checkFitsInTrolley(delivered_amt);
+							if(!s.checkFitsInTrolley(delivered_amt)) {
+								fits_in_trolley_satisfied = false;
+							}
 						}
 					}
 				}
