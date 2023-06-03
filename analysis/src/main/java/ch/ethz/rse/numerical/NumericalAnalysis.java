@@ -264,11 +264,8 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			w3_newest.copyInto(w3);
 			// logger.debug("In widended: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
 
-
-		// Don't know if this is actually necessary
-		// loopHeadState.put(succNode, w3); 
-		// loop_count.value+=1; 
-
+			loopHeadState.put(succNode, w3); 
+			loop_count.value+=1; 
 			
 		}
 	}
