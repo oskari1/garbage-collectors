@@ -106,6 +106,7 @@ public class StoreInitializer {
 		} else {
 			int amount_int = int_of(amount);
 			if(amount_int > trolley_size) {
+				logger.debug("trolley size is " + trolley_size);
 				fits_in_trolley = false;
 			}
 		}

@@ -426,27 +426,30 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 	public void handleInvoke(JInvokeStmt jInvStmt, NumericalStateWrapper fallOutWrapper) throws ApronException {
 		// TODO: MAYBE FILL THIS OUT
-		if (this.property == VerificationProperty.FITS_IN_RESERVE || this.property == VerificationProperty.FITS_IN_TROLLEY) {
-			// TODO: MAYBE FILL THIS OUT
-			Value store_reference = (Value) jInvStmt.getUseBoxes().get(1).getValue();
-			Value arg = jInvStmt.getInvokeExpr().getArg(0);
-			for(StoreInitializer s : pointsTo.pointsTo((Local) store_reference)) {
-				if(alreadyInit.contains(s)) {
-				// if(alreadyInitMap.get_set_of(jInvStmt).contains(s)) {
-					MpqScalar delivered_amt = upper_bound_of(arg, fallOutWrapper); 
-					// alreadyInitMap.receiveat(jInvStmt, s, delivered_amt);
-					if(this.property == VerificationProperty.FITS_IN_RESERVE) {
-						s.receive(delivered_amt);
-					} else {
-						s.checkFitsInTrolley(delivered_amt);
+		if(!fallOutWrapper.get().isBottom(man)) {
+			if (this.property == VerificationProperty.FITS_IN_RESERVE || this.property == VerificationProperty.FITS_IN_TROLLEY) {
+				// TODO: MAYBE FILL THIS OUT
+				Value store_reference = (Value) jInvStmt.getUseBoxes().get(1).getValue();
+				Value arg = jInvStmt.getInvokeExpr().getArg(0);
+				for(StoreInitializer s : pointsTo.pointsTo((Local) store_reference)) {
+					if(alreadyInit.contains(s)) {
+					// if(alreadyInitMap.get_set_of(jInvStmt).contains(s)) {
+						MpqScalar delivered_amt = upper_bound_of(arg, fallOutWrapper); 
+						// alreadyInitMap.receiveat(jInvStmt, s, delivered_amt);
+						if(this.property == VerificationProperty.FITS_IN_RESERVE) {
+							s.receive(delivered_amt);
+						} else {
+							logger.debug("delivered amount is " + delivered_amt.toString());
+							s.checkFitsInTrolley(delivered_amt);
+						}
 					}
 				}
-			}
-		} else {
-			Value arg = jInvStmt.getInvokeExpr().getArg(0);
-			MpqScalar delivered_amt = lower_bound_of(arg, fallOutWrapper);
-			if(delivered_amt.sgn() == -1) {
-				non_negative_satisfied = false;
+			} else {
+				Value arg = jInvStmt.getInvokeExpr().getArg(0);
+				MpqScalar delivered_amt = lower_bound_of(arg, fallOutWrapper);
+				if(delivered_amt.sgn() == -1) {
+					non_negative_satisfied = false;
+				}
 			}
 		}
 	}
@@ -465,7 +468,9 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		// logger.debug("useBoxes.get(0): " + jInvStmt.getUseBoxes().get(0));
 		// logger.debug("type of store_reference is " + store_reference.getClass().getName());
 		for(StoreInitializer s : pointsTo.pointsTo((Local) store_reference)) {
-			alreadyInit.add(s);
+			if(!fallOutWrapper.get().isBottom(man)) {
+				alreadyInit.add(s);
+			}
 		}
 	}
 

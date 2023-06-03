@@ -249,35 +249,38 @@ public class Verifier extends AVerifier {
 	@Override
 	public boolean checkFitsInReserve() {
 		// TODO: FILL THIS OUT
-		// for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
-		// 	NumericalAnalysis an = entry.getValue();
-		// 	if(!an.fitsInReserve()) {
-		// 		return false;
-		// 	}
-		// }
-		// return true;
 		boolean valid = true; 
-		// logger.debug("entered checkFitsInReserve");
 		for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
-			SootMethod m = entry.getKey();
 			NumericalAnalysis an = entry.getValue();
-			Manager man = an.man;
-			Environment env = an.env;
-			UnitGraph g = SootHelper.getUnitGraph(m);
-
-			// this stores at each unit of the CFG, how much each Store object has
-			// received until that point
-			AmountsPerNode received_amt = new AmountsPerNode(g, pointsTo, m, an, man, env);
-
-			try {
-				received_amt.compute_received_amounts();
-			} catch(FitsInReserveException e) {
-				// this is only thrown if some Store-object receives an infinite amount
-				// in which case FITS_IN_RESERVE is false
-				return false; 
+			if(!an.fitsInReserve()) {
+				valid = false;
 			}
 		}
-		return valid;
+		if(!valid) {
+			// logger.debug("entered checkFitsInReserve");
+			for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
+				SootMethod m = entry.getKey();
+				NumericalAnalysis an = entry.getValue();
+				Manager man = an.man;
+				Environment env = an.env;
+				UnitGraph g = SootHelper.getUnitGraph(m);
+
+				// this stores at each unit of the CFG, how much each Store object has
+				// received until that point
+				AmountsPerNode received_amt = new AmountsPerNode(g, pointsTo, m, an, man, env);
+
+				try {
+					received_amt.compute_received_amounts();
+				} catch(FitsInReserveException e) {
+					// this is only thrown if some Store-object receives an infinite amount
+					// in which case FITS_IN_RESERVE is false
+					return false; 
+				}
+			}
+			return true;
+		} else {
+			return valid;
+		}
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods

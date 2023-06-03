@@ -21,7 +21,7 @@ public class SpecificExampleIT {
 	 */
 	@Test
 	void specificTest() {
-		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Safe_4";
+		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Safe_7";
 		VerificationProperty verificationTask = VerificationProperty.FITS_IN_TROLLEY;
 		boolean expectedIsSafe = true;
 		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
