@@ -19,14 +19,34 @@ public class SpecificExampleIT {
 	/**
 	 * Modify the configuration below to run a single example
 	 */
-	// @Test
-	// void specificTest() {
-	// 	String packageName = "ch.ethz.rse.integration.tests.a_Trolley_Test_Unsafe_8";
-	// 	VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
-	// 	boolean expectedIsSafe = true;
-	// 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
-	// 	SpecificExampleIT.testOnExample(t);
-	// }
+	@Test
+	void specificTest() {
+		String packageName = "ch.ethz.rse.integration.tests.a_Wall_of_Fame_test";
+		VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
+		boolean expectedIsSafe = true;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void specificTest1() {
+		String packageName = "ch.ethz.rse.integration.tests.a_Wall_of_Fame_test";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_TROLLEY;
+		boolean expectedIsSafe = true;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void specificTest2() {
+		String packageName = "ch.ethz.rse.integration.tests.a_Wall_of_Fame_test";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		boolean expectedIsSafe = false;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+
 
 // 	@Test
 // 	void constantTestTrue() {
