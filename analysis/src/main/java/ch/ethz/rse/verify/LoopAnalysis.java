@@ -89,6 +89,8 @@ public class LoopAnalysis {
         this.loops = new LoopNestTree(g.getBody());
         this.max_iterations_of_loop = new HashMap<Loop, Integer>(loops.size());
         this.loop_of_unit = new HashMap<Unit, Loop>(g.size());
+        // logger.debug("Body of CFG: ");
+        // logger.debug(g.getBody().toString());
         for(Loop l : loops) {
             List<Stmt> stmts = l.getLoopStatements();
             for(Stmt s : stmts) {
@@ -96,11 +98,20 @@ public class LoopAnalysis {
                 //     logger.debug("adding get_delivery to loop_of_unit map");
                 // }
                 // loop_of_unit.put((Unit) s, l);
+                // logger.debug("visited loop: ");
+                // logger.debug(stmts.toString());
+                // logger.debug("visiting statement: " + s);
                 if(loop_of_unit.putIfAbsent((Unit) s, l) != null) {
                     // this is the case only if s has already been added
                     // once into the map as a key for some other loop 
                     // this indicates the existence of another loop 
-                    this.hasNestedCall = true;
+                    if(s instanceof JInvokeStmt) {
+                        JInvokeStmt jInvStmt = (JInvokeStmt) s;
+                        InvokeExpr invokeExpr = jInvStmt.getInvokeExpr();
+                        if (invokeExpr instanceof JVirtualInvokeExpr) {
+                            this.hasNestedCall = true;
+                        }
+                    }
                 }
             }
         }

@@ -62,7 +62,7 @@ public class AmountsPerNode {
         } else {
             // initialize visited-map
             // logger.debug("entered compute_received_amounts");
-            visited = new HashMap<Unit,Boolean>(g.size());
+            // visited = new HashMap<Unit,Boolean>(g.size());
             Iterator<Unit> i = g.iterator();
             while(i.hasNext()) {
                 Unit v = (Unit) i.next();

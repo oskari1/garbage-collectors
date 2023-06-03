@@ -21,7 +21,7 @@ public class SpecificExampleIT {
 	 */
 	@Test
 	void specificTest() {
-		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_If_Reserve_Safe";
+		String packageName = "ch.ethz.rse.integration.tests.Reserve_Test_For_Loop_Safe_19";
 		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
 		boolean expectedIsSafe = true;
 		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
