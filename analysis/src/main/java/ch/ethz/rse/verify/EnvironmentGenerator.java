@@ -69,12 +69,6 @@ public class EnvironmentGenerator {
 			this.ints.add(local.getName());
 		}
 
-		// we also construct new variables for FITS_IN_RESERVE to keep track of 
-		// how much each StoreInitializer has received
-		for(StoreInitializer s : pointsTo.getInitializers(method)) {
-			this.ints.add(s.getUniqueLabel());
-		}
-
 		// for debugging purposes, we try to print out the Jimple code:
 		soot.Body body = method.getActiveBody();
 		// logger.debug(body.toString());

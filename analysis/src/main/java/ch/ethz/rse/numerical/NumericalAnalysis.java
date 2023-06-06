@@ -2,7 +2,6 @@ package ch.ethz.rse.numerical;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -114,9 +113,6 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 	public boolean non_negative_satisfied = true;
 	public boolean fits_in_trolley_satisfied = true;
-	public boolean fits_in_reserve_satisfied = true;
-	private HashMap<Loop, List<Stmt>> stmts_per_loop;
-	private HashMap<JInvokeStmt, LoopAnalysis> loop_analysis_of_invoke;
 
 	// private AlreadyInitMap alreadyInitMap;
 
@@ -146,41 +142,9 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 		this.env = new EnvironmentGenerator(method, pointsTo).getEnvironment();
 
-		//initialize stmts_per_loop with sufficient capacity
-		LoopNestTree loops = new LoopNestTree(g.getBody());
-		this.stmts_per_loop = new HashMap<Loop, List<Stmt>>(loops.size()); 
-		int total_nr_stmts = method.getActiveBody().getUnits().size();
-		this.loop_analysis_of_invoke = new HashMap<JInvokeStmt, LoopAnalysis>(total_nr_stmts); 
 		// initialize counts for loop heads
 		for (Loop l : new LoopNestTree(g.getBody())) {
 			loopHeads.put(l.getHead(), new IntegerWrapper(0));
-			// initialize stmts_per_loop
-			stmts_per_loop.put(l, l.getLoopStatements());
-		}
-		Iterator<Unit> i = g.iterator();
-		while(i.hasNext()) {
-			Stmt s = (Stmt) i.next();
-			if(s instanceof JInvokeStmt) {
-				JInvokeStmt jInvStmt = (JInvokeStmt) s;
-				InvokeExpr invokeExpr = jInvStmt.getInvokeExpr();
-				if (invokeExpr instanceof JVirtualInvokeExpr) {
-					boolean contained_in_loop = false;
-					for(Loop l : stmts_per_loop.keySet()) {
-						if(l.getLoopStatements().contains(s)) {
-							loop_analysis_of_invoke.put(jInvStmt, new LoopAnalysis(l, jInvStmt, stmts_per_loop));
-							contained_in_loop = true;
-						} 
-					}
-					if(!contained_in_loop) {
-						loop_analysis_of_invoke.put(jInvStmt, new LoopAnalysis(jInvStmt));
-					}
-				}
-			}
-		}
-		for (Loop l : new LoopNestTree(g.getBody())) {
-			for(Stmt s : l.getLoopStatements()) {
-				
-			}
 		}
 
 		// perform analysis by calling into super-class
@@ -228,17 +192,6 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		NumericalStateWrapper ret = NumericalStateWrapper.top(man, env);
 
 		// TODO: MAYBE FILL THIS OUT
-		for(StoreInitializer s : pointsTo.getInitializers(this.method)) {
-			logger.debug("Adding the following store-init to the env ");
-			logger.debug(s.getUniqueLabel());
-			try {
-				Abstract1 state = ret.get();
-				ret.set(state.assignCopy(man, s.getUniqueLabel(), new Texpr1Intern(env, new Texpr1CstNode(new MpqScalar(0))), null));
-			} catch (ApronException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 
 		return ret;
 	}
@@ -482,140 +435,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 						MpqScalar delivered_amt = upper_bound_of(arg, fallOutWrapper); 
 						// alreadyInitMap.receiveat(jInvStmt, s, delivered_amt);
 						if(this.property == VerificationProperty.FITS_IN_RESERVE) {
-							// s.receive(delivered_amt);
-							if(arg instanceof IntConstant) {
-								if(delivered_amt.isInfty() == 1) {
-									fits_in_reserve_satisfied = false;
-								} else if(delivered_amt.isInfty() == 0 && fits_in_reserve_satisfied) {
-									// this variable stores, in how many loops jInvStmt is contained in,
-									// if it isn't in a loop, loop_depth is 0
-									// if it's in a nested for-loop it's 2, etc.
-									LoopAnalysis loop_analysis = loop_analysis_of_invoke.get(jInvStmt); 
-									int loop_depth = loop_analysis.get_loop_depth();
-									// logger.debug("Computing loop depth of statement: " + jInvStmt);
-									// logger.debug("computed loop depth: " + loop_depth);
-									if(loop_depth == 0) {
-										// construct the constraint rcvd_amt = rcvd_amt + delivered_amt and add it to the environment
-										Texpr1Node op1_exp = new Texpr1VarNode(s.getUniqueLabel());
-										Texpr1Node op2_exp = new Texpr1CstNode(delivered_amt);
-										int op = Texpr1BinNode.OP_ADD;
-										Texpr1Node updated_expr = new Texpr1BinNode(op, op1_exp, op2_exp);
-										Abstract1 e = fallOutWrapper.get();
-										fallOutWrapper.set(e.assignCopy(man, s.getUniqueLabel(), new Texpr1Intern(env, updated_expr), null));
-										// check if received amount is still ok
-										MpqScalar received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, s.getUniqueLabel()).sup();
-										if(received_amt.isInfty() != 0 || !s.checkFitsInReserve(received_amt)) {
-											fits_in_reserve_satisfied = false;
-										}
-									} else if(loop_depth == 1) {
-										// if get_delivery is contained in exactly one loop (not in nested loop)
-										// then we can find the loop conditional and construct the equation for 
-										// relating the loop variable with the received amount
-										// for this we need to visit this node at least twice to have all 
-										// information necessary for computing the constraint
-										// make use of Apron's forgetCopy to replace the old constraint on the 
-										// received amount
-										if(loopHeads.get(loop_analysis.loop_head).value == 1) {
-											// the first time we visit this call to get_delivery
-											MpqScalar received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, s.getUniqueLabel()).sup();
-											if(received_amt.isInfty() == 0) {
-												logger.debug("initially received amount is (iteration 1): " + received_amt);
-												loop_analysis.set_init_rcvd_amt_map(alreadyInit.size());
-												loop_analysis.set_rhs_expr_of_map(alreadyInit.size());
-												loop_analysis.set_init_rcvd_amt(received_amt, s.getUniqueLabel());
-												loop_analysis.set_rcvd_amt_var(s.getUniqueLabel());
-												loop_analysis.set_arg(delivered_amt);
-												String loop_var_name = loop_analysis.get_loop_var_name();
-												logger.debug("loop variable is " + loop_var_name);
-												if(loop_var_name != null) {
-													MpqScalar init_loop_var;
-													if(loop_analysis.is_growing_loop_variable()) {
-														init_loop_var = (MpqScalar) fallOutWrapper.get().getBound(man, loop_var_name).sup();
-													} else {
-														init_loop_var = (MpqScalar) fallOutWrapper.get().getBound(man, loop_var_name).inf();
-													}
-													if(init_loop_var.isInfty() == 0) {
-														logger.debug("the initial upper bound is " + init_loop_var);
-														loop_analysis.set_init_val_loop_var(int_of(init_loop_var));
-														loop_analysis.set_loop_var_name(loop_var_name);
-													} else {
-														fits_in_reserve_satisfied = false;
-													}
-												} else {
-													fits_in_reserve_satisfied = false;
-												}
-											} else {
-												fits_in_reserve_satisfied = false;
-											}
-										} else if(loopHeads.get(loop_analysis.loop_head).value == 2 && fits_in_reserve_satisfied) {
-											String loop_var_name = loop_analysis.get_loop_var_name();
-											logger.debug("loop variable is " + loop_var_name);
-											MpqScalar second_loop_var;
-											if(loop_analysis.is_growing_loop_variable()) {
-												second_loop_var = (MpqScalar) fallOutWrapper.get().getBound(man, loop_var_name).sup();
-											} else {
-												second_loop_var = (MpqScalar) fallOutWrapper.get().getBound(man, loop_var_name).inf();
-											}
-											if(second_loop_var.isInfty() == 0) {
-												loop_analysis.set_second_val_loop_var(int_of(second_loop_var));
-												Abstract1 e = fallOutWrapper.get();
-												logger.debug("fallOutWrapper is initially " + fallOutWrapper);
-												// e.forget(man, s.getUniqueLabel(), false);
-												logger.debug("fallOutWrapper is after forgetting " + e);
-												loop_analysis.set_rhs_expr(s.getUniqueLabel());
-												// evaluate the received amount so far based on the loop variable and the constructed equation 
-												Texpr1Node rhs_expr = loop_analysis.get_rhs_expr(s.getUniqueLabel());
-												MpqScalar received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, new Texpr1Intern(env, rhs_expr)).sup();
-												// logger.debug("rhs_expr is " + rhs_expr);
-												// fallOutWrapper.set(e.assignCopy(man, s.getUniqueLabel(), new Texpr1Intern(env, rhs_expr), null));
-												Texpr1Node store_var = new Texpr1VarNode(s.getUniqueLabel());
-												Texpr1Node received_amt_expr = new Texpr1CstNode(received_amt);
-												Tcons1 cons = new Tcons1(env, Tcons1.SUPEQ, new Texpr1BinNode(Texpr1BinNode.OP_SUB, received_amt_expr, store_var)); 
-												Tcons1 cons1 = new Tcons1(env, Tcons1.SUPEQ, new Texpr1BinNode(Texpr1BinNode.OP_SUB, store_var, rhs_expr)); 
-												Abstract1 constraint = new Abstract1(man, new Tcons1[] {cons});
-												// e.meet(man, constraint);
-												logger.debug("fallOutWrapper after meeting: " + e);
-												// fallOutWrapper.set(e.joinCopy(man, constraint));
-												fallOutWrapper.set(e.assignCopy(man, s.getUniqueLabel(), new Texpr1Intern(env, received_amt_expr), null));
-												logger.debug("fallOutWrapper is after creating new equation " + fallOutWrapper);
-												// check if received amount is still ok
-
-												received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, s.getUniqueLabel()).sup();
-												logger.debug("upper bound for received amount is " + received_amt);
-												if(received_amt.isInfty() != 0 || !s.checkFitsInReserve(received_amt)) {
-													fits_in_reserve_satisfied = false;
-												}
-											} else {
-												fits_in_reserve_satisfied = false;
-											}
-										} else if (fits_in_reserve_satisfied){
-											// check if received amount is still ok
-											Texpr1Node rhs_expr = loop_analysis.get_rhs_expr(s.getUniqueLabel());
-											MpqScalar received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, new Texpr1Intern(env, rhs_expr)).sup();
-											Texpr1Node store_var = new Texpr1VarNode(s.getUniqueLabel());
-											Texpr1Node received_amt_expr = new Texpr1CstNode(received_amt);
-											Tcons1 cons = new Tcons1(env, Tcons1.SUPEQ, new Texpr1BinNode(Texpr1BinNode.OP_SUB, received_amt_expr, store_var)); 
-											Abstract1 constraint = new Abstract1(man, new Tcons1[] {cons});
-											Abstract1 e = fallOutWrapper.get();
-											// fallOutWrapper.set(e.joinCopy(man, constraint));
-											fallOutWrapper.set(e.assignCopy(man, s.getUniqueLabel(), new Texpr1Intern(env, received_amt_expr), null));
-											logger.debug("rhs_expr is " + rhs_expr);
-											// MpqScalar received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, rhs_expr).sup();
-											received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, s.getUniqueLabel()).sup();
-											logger.debug("upper bound for received amount is " + received_amt);
-											received_amt = new MpqScalar((int) Math.floor(received_amt.get().doubleValue()));
-											if(received_amt.isInfty() != 0 || !s.checkFitsInReserve(received_amt)) {
-												fits_in_reserve_satisfied = false;
-											}
-										}
-									} else {
-										// here we fail directly, no attempt to make it precise
-										fits_in_reserve_satisfied = false;
-									}
-								}
-							} else {
-								fits_in_reserve_satisfied = false;
-							}
+							s.receive(delivered_amt);
 						} else {
 							// logger.debug("delivered amount is " + delivered_amt.toString());
 							if(!s.checkFitsInTrolley(delivered_amt)) {
@@ -672,8 +492,6 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
-
-
 	public boolean fitsInReserve() {
 		for(StoreInitializer s : alreadyInit) {
 			if (!s.satisfiesFitsInReserve()) {
@@ -757,11 +575,6 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 								 Texpr1BinNode.RDIR_ZERO,
 								 exprOfValue(op1),
 								 exprOfValue(op2));
-	}
-
-	private int int_of(MpqScalar s) {
-		assert(s.isInfty() == 0);
-		return Integer.valueOf(s.toString());
 	}
 
 }

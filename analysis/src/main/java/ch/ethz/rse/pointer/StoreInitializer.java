@@ -99,23 +99,6 @@ public class StoreInitializer {
 		// that value, i.e., do nothing
 	}
 
-	public boolean checkFitsInReserve(MpqScalar amount) {
-		logger.debug("received amount is " + amount);
-		if(amount.isInfty() == 1) {
-			return false;
-		} else if(amount.isInfty() == -1) {
-			return true;
-		} else {
-			int amount_int = int_of(amount);
-			if(amount_int > reserve_size) {
-				// logger.debug("trolley size is " + trolley_size);
-				return false;
-			} else {
-				return true;
-			}
-		}
-	}
-
 	public boolean checkFitsInTrolley(MpqScalar amount) {
 		if(amount.isInfty() == 1) {
 			return false;

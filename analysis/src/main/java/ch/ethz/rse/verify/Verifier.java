@@ -138,13 +138,6 @@ public class Verifier extends AVerifier {
 	@Override
 	public boolean checkFitsInReserve() {
 		// TODO: FILL THIS OUT
-		for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
-			NumericalAnalysis an = entry.getValue();
-			if(!an.fits_in_reserve_satisfied) {
-				return false;
-			}
-		}
-		return true;
 		// boolean valid = true; 
 		// for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
 		// 	NumericalAnalysis an = entry.getValue();
@@ -154,27 +147,26 @@ public class Verifier extends AVerifier {
 		// }
 		// if(!valid) {
 			// logger.debug("entered checkFitsInReserve");
-		// for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
-		// 	SootMethod m = entry.getKey();
-		// 	NumericalAnalysis an = entry.getValue();
-		// 	Manager man = an.man;
-		// 	Environment env = an.env;
-		// 	UnitGraph g = SootHelper.getUnitGraph(m);
+		for(Map.Entry<SootMethod, NumericalAnalysis> entry : numericalAnalysis.entrySet()) {
+			SootMethod m = entry.getKey();
+			NumericalAnalysis an = entry.getValue();
+			Manager man = an.man;
+			Environment env = an.env;
+			UnitGraph g = SootHelper.getUnitGraph(m);
 
+			// this stores at each unit of the CFG, how much each Store object has
+			// received until that point
+			AmountsPerNode received_amt = new AmountsPerNode(g, pointsTo, m, an, man, env);
 
-		// 	// this stores at each unit of the CFG, how much each Store object has
-		// 	// received until that point
-		// 	AmountsPerNode received_amt = new AmountsPerNode(g, pointsTo, m, an, man, env);
-
-		// 	try {
-		// 		received_amt.compute_received_amounts();
-		// 	} catch(FitsInReserveException e) {
-		// 		// this is only thrown if some Store-object receives an infinite amount
-		// 		// in which case FITS_IN_RESERVE is false
-		// 		return false; 
-		// 	}
-		// }
-		// return true;
+			try {
+				received_amt.compute_received_amounts();
+			} catch(FitsInReserveException e) {
+				// this is only thrown if some Store-object receives an infinite amount
+				// in which case FITS_IN_RESERVE is false
+				return false; 
+			}
+		}
+		return true;
 		// } else {
 		// 	return valid;
 		// }
