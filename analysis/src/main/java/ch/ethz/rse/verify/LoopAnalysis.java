@@ -66,6 +66,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
+import java.util.stream.Collectors;
 import java.util.*;
 
 public class LoopAnalysis {
@@ -147,14 +148,14 @@ public class LoopAnalysis {
             // I assume (don't know if this is always true) that if 
             // the loop-header is a JIfStmt then we know that it's
             // the conditional jump 
-            Stmt loop_conditional_stmt = get_loop_conditional(l);
-            if(loop_conditional_stmt != null) {
+            List<ConditionExpr> loop_conditionals = get_loop_conditionals(l);
+            if(loop_conditionals.size() != 1) {
                 Stmt header_stmt = (Stmt) (l.getHead());
                 Stmt jmp_back_stmt = (Stmt) (l.getBackJumpStmt());
                 // logger.debug("header_stmt: " + header_stmt);
                 // logger.debug("jmp_back_stmt: " + jmp_back_stmt);
                 // Value cond = ((JIfStmt) header_stmt).getCondition();
-                Value cond = ((JIfStmt) loop_conditional_stmt).getCondition();
+                Value cond = loop_conditionals.get(0);
                 // logger.debug("cond: " + cond);
 
 				if(cond instanceof JEqExpr || cond instanceof JNeExpr) {
@@ -344,20 +345,52 @@ public class LoopAnalysis {
         return null;
     }
 
-    private Stmt get_loop_conditional(Loop l) {
-        // uncertain about what to do if we have more than one loop
-        // conditional expression
-        Stmt header = l.getHead();
-        if(header instanceof JIfStmt) {
-            return header;
+    private List<ConditionExpr> get_loop_conditionals(Loop loop) {
+        List<Stmt> loop_stmts = loop.getLoopStatements();
+		Collection<Stmt> loop_exits = loop.getLoopExits(); 
+		loop_exits.add(loop.getHead());
+		List<Stmt> cond_stmts = loop_exits.stream()
+		.filter(s -> s instanceof JIfStmt).collect(Collectors.toList());
+        // need to extract the correct conditionals, i.e., make sure
+        // that if the condition is satisfied, we make another iteration
+        // to do this, need to check whether the branchOutStmt is
+        // outside of the loop or not and if so, negate the condition
+
+        // for each statement, check if the target-stmt is part of the 
+        // same loop, if so, just take getCondition of that JIfStmt
+        // else, construct the negated condition
+        List<Stmt> ready_cond_stmts = cond_stmts.stream()
+        .filter(s -> loop_stmts.contains(((JIfStmt) s).getTarget())).collect(Collectors.toList());
+        cond_stmts.removeAll(ready_cond_stmts);
+        List<ConditionExpr> conds = cond_stmts.stream()
+        .map(c -> (ConditionExpr) ((JIfStmt) c).getCondition()).collect(Collectors.toList());
+        List<ConditionExpr> ready_conds = ready_cond_stmts.stream()
+        .map(c -> (ConditionExpr) ((JIfStmt) c).getCondition()).collect(Collectors.toList());
+        List<ConditionExpr> flipped_conds = conds.stream()
+        .map(c -> flip(c)).collect(Collectors.toList());
+        ready_conds.addAll(flipped_conds);
+        logger.debug("the conditionals are: " + ready_conds.toString());
+        return ready_conds; 
+	}
+
+    private ConditionExpr flip(ConditionExpr c) {
+        Value op1 = c.getOp1();
+        Value op2 = c.getOp2();
+        if(c instanceof JLeExpr) {
+            return new JGtExpr(op1, op2);
+        } else if(c instanceof JLtExpr) {
+            return new JGeExpr(op1, op2);
+        } else if(c instanceof JGeExpr) {
+            return new JLtExpr(op1, op2);
+        } else if(c instanceof JGtExpr) {
+            return new JLeExpr(op1, op2);
+        } else if(c instanceof JEqExpr) {
+            return new JNeExpr(op1, op2);
         } else {
-            for(Stmt exit : l.getLoopExits()) {
-                if(exit instanceof JIfStmt) {
-                    return exit;
-                }
-            }
-            return null;
+            return new JEqExpr(op1, op2);
         }
     }
+
+
     
 }
