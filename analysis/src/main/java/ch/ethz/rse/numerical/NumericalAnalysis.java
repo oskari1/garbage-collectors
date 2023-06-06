@@ -9,6 +9,8 @@ import org.apache.commons.lang3.ObjectUtils.Null;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.reflect.Parameter;
+
 import apron.Abstract1;
 import apron.ApronException;
 import apron.Environment;
@@ -502,38 +504,43 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		// return alreadyInitMap.fitsInReserve();
 	}
 
+	// private MpqScalar upper_bound_of(Value val, NumericalStateWrapper outWrapper) {
+	// 	if(val instanceof IntConstant) {
+	// 		return new MpqScalar(((IntConstant) val).value);
+	// 	} else {
+	// 		assert(val instanceof JimpleLocal);
+	// 		Abstract1 out = outWrapper.get();
+	// 		String var_name = ((JimpleLocal) val).getName();
+	// 		try {
+	// 			return (MpqScalar) out.getBound(man, var_name).sup();
+	// 		} catch (ApronException e) {
+	// 			// TODO Auto-generated catch block
+	// 			e.printStackTrace();
+	// 			return new MpqScalar();
+	// 		}
+	// 	}
+	// }
+
 	private MpqScalar upper_bound_of(Value val, NumericalStateWrapper outWrapper) {
-		if(val instanceof IntConstant) {
-			return new MpqScalar(((IntConstant) val).value);
-		} else {
-			assert(val instanceof JimpleLocal);
-			Abstract1 out = outWrapper.get();
-			String var_name = ((JimpleLocal) val).getName();
-			try {
-				return (MpqScalar) out.getBound(man, var_name).sup();
-			} catch (ApronException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return new MpqScalar();
-			}
+		Texpr1Node val_expr = exprOfValue(val);
+		try {
+			return (MpqScalar) outWrapper.get().getBound(man, new Texpr1Intern(env, val_expr)).sup();
+		} catch (ApronException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return null;
 	}
 
 	private MpqScalar lower_bound_of(Value val, NumericalStateWrapper outWrapper) {
-		if(val instanceof IntConstant) {
-			return new MpqScalar(((IntConstant) val).value);
-		} else {
-			assert(val instanceof JimpleLocal);
-			Abstract1 out = outWrapper.get();
-			String var_name = ((JimpleLocal) val).getName();
-			try {
-				return (MpqScalar) out.getBound(man, var_name).inf();
-			} catch (ApronException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return new MpqScalar();
-			}
+		Texpr1Node val_expr = exprOfValue(val);
+		try {
+			return (MpqScalar) outWrapper.get().getBound(man, new Texpr1Intern(env, val_expr)).inf();
+		} catch (ApronException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return null;
 	}
 
 	private Texpr1Node exprOfValue(Value val) {
@@ -556,7 +563,13 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			}
 			return new Texpr1BinNode(op, op1_exp, op2_exp);
 		} else {
+			// logger.debug("CFG body: ");
+			// logger.debug(method.getActiveBody().toString());
+			int index =((ParameterRef) val).getIndex(); 
+			// logger.debug(method.getBytecodeSignature());
+			// logger.debug("index is " + index);
 			String arg_name = this.method.getBytecodeParms();
+			// logger.debug(arg_name);
 			return new Texpr1VarNode(arg_name);
 		}
 	}
