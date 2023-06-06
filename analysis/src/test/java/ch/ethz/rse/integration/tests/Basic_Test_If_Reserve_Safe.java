@@ -9,12 +9,18 @@ import ch.ethz.rse.Store;
 
 public class Basic_Test_If_Reserve_Safe {
     public static void m1(int i) {
-        Store s = new Store(3, 3);
+        Store s = new Store(3, 4);
         if(i > 5) {
-            s.get_delivery(2);
+            if(i > 10) {
+                s.get_delivery(2);
+            } else {
+                s.get_delivery(2);
+            }
+            s.get_delivery(1);
         } else {
             s.get_delivery(3);
         }
+        s.get_delivery(1);
     }
 }
 

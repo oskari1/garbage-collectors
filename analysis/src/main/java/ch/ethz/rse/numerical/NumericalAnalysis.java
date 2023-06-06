@@ -9,6 +9,8 @@ import org.apache.commons.lang3.ObjectUtils.Null;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.reflect.Parameter;
+
 import apron.Abstract1;
 import apron.ApronException;
 import apron.Environment;
@@ -71,9 +73,6 @@ import soot.toolkits.graph.UnitGraph;
 import soot.toolkits.scalar.FlowSet;
 import soot.toolkits.scalar.ForwardBranchedFlowAnalysis;
 
-// added imports
-import java.util.stream.Collectors;
-
 /**
  * Convenience class running a numerical analysis on a given {@link SootMethod}
  */
@@ -113,6 +112,11 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	public final Manager man = new Polka(true);
 
 	public final Environment env;
+
+	public boolean non_negative_satisfied = true;
+	public boolean fits_in_trolley_satisfied = true;
+
+	// private AlreadyInitMap alreadyInitMap;
 
 	/**
 	 * We apply widening after updating the state at a given merge point for the
@@ -262,11 +266,8 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			w3_newest.copyInto(w3);
 			// logger.debug("In widended: Merged " + w1.get() + " and " + w2.get() + " into " + w3.get());
 
-
-		// Don't know if this is actually necessary
-		// loopHeadState.put(succNode, w3); 
-		// loop_count.value+=1; 
-
+			loopHeadState.put(succNode, w3); 
+			loop_count.value+=1; 
 			
 		}
 	}
@@ -425,14 +426,54 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 	public void handleInvoke(JInvokeStmt jInvStmt, NumericalStateWrapper fallOutWrapper) throws ApronException {
 		// TODO: MAYBE FILL THIS OUT
-		if (this.property == VerificationProperty.FITS_IN_RESERVE) {
-			// TODO: MAYBE FILL THIS OUT
-
+		if(!fallOutWrapper.get().isBottom(man)) {
+			if (this.property == VerificationProperty.FITS_IN_RESERVE || this.property == VerificationProperty.FITS_IN_TROLLEY) {
+				// TODO: MAYBE FILL THIS OUT
+				Value store_reference = (Value) jInvStmt.getUseBoxes().get(1).getValue();
+				Value arg = jInvStmt.getInvokeExpr().getArg(0);
+				for(StoreInitializer s : pointsTo.pointsTo((Local) store_reference)) {
+					if(alreadyInit.contains(s)) {
+					// if(alreadyInitMap.get_set_of(jInvStmt).contains(s)) {
+						MpqScalar delivered_amt = upper_bound_of(arg, fallOutWrapper); 
+						// alreadyInitMap.receiveat(jInvStmt, s, delivered_amt);
+						if(this.property == VerificationProperty.FITS_IN_RESERVE) {
+							s.receive(delivered_amt);
+						} else {
+							// logger.debug("delivered amount is " + delivered_amt.toString());
+							if(!s.checkFitsInTrolley(delivered_amt)) {
+								fits_in_trolley_satisfied = false;
+							}
+						}
+					}
+				}
+			} else {
+				Value arg = jInvStmt.getInvokeExpr().getArg(0);
+				MpqScalar delivered_amt = lower_bound_of(arg, fallOutWrapper);
+				if(delivered_amt.sgn() == -1) {
+					non_negative_satisfied = false;
+				}
+			}
 		}
 	}
 
 	public void handleInitialize(JInvokeStmt jInvStmt, NumericalStateWrapper fallOutWrapper) throws ApronException {
 		// TODO: MAYBE FILL THIS OUT
+		// there are two kinds of initializers: empty initializer, then we need
+		// to use get(0) and initializers that are not empty, then we need get(2)
+		Value store_reference = (Value) jInvStmt.getUseBoxes().get(0).getValue();
+		if(!(store_reference instanceof JimpleLocal)) {
+			store_reference = (Value) jInvStmt.getUseBoxes().get(2).getValue();
+		}
+		// logger.debug("type of jInvStmt is" + jInvStmt.getClass().getName());
+		// logger.debug("jInvStmt: " + jInvStmt);
+		// logger.debug("useBoxes: " + jInvStmt.getUseBoxes());
+		// logger.debug("useBoxes.get(0): " + jInvStmt.getUseBoxes().get(0));
+		// logger.debug("type of store_reference is " + store_reference.getClass().getName());
+		for(StoreInitializer s : pointsTo.pointsTo((Local) store_reference)) {
+			if(!fallOutWrapper.get().isBottom(man)) {
+				alreadyInit.add(s);
+			}
+		}
 	}
 
 	// returns state of in after assignment
@@ -453,6 +494,55 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
+	public boolean fitsInReserve() {
+		for(StoreInitializer s : alreadyInit) {
+			if (!s.satisfiesFitsInReserve()) {
+				return false;
+			} 
+		}
+		return true;
+		// return alreadyInitMap.fitsInReserve();
+	}
+
+	// private MpqScalar upper_bound_of(Value val, NumericalStateWrapper outWrapper) {
+	// 	if(val instanceof IntConstant) {
+	// 		return new MpqScalar(((IntConstant) val).value);
+	// 	} else {
+	// 		assert(val instanceof JimpleLocal);
+	// 		Abstract1 out = outWrapper.get();
+	// 		String var_name = ((JimpleLocal) val).getName();
+	// 		try {
+	// 			return (MpqScalar) out.getBound(man, var_name).sup();
+	// 		} catch (ApronException e) {
+	// 			// TODO Auto-generated catch block
+	// 			e.printStackTrace();
+	// 			return new MpqScalar();
+	// 		}
+	// 	}
+	// }
+
+	private MpqScalar upper_bound_of(Value val, NumericalStateWrapper outWrapper) {
+		Texpr1Node val_expr = exprOfValue(val);
+		try {
+			return (MpqScalar) outWrapper.get().getBound(man, new Texpr1Intern(env, val_expr)).sup();
+		} catch (ApronException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private MpqScalar lower_bound_of(Value val, NumericalStateWrapper outWrapper) {
+		Texpr1Node val_expr = exprOfValue(val);
+		try {
+			return (MpqScalar) outWrapper.get().getBound(man, new Texpr1Intern(env, val_expr)).inf();
+		} catch (ApronException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	private Texpr1Node exprOfValue(Value val) {
 		if(val instanceof IntConstant) {
 			return new Texpr1CstNode(new MpqScalar(((IntConstant) val).value));
@@ -473,7 +563,13 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			}
 			return new Texpr1BinNode(op, op1_exp, op2_exp);
 		} else {
+			// logger.debug("CFG body: ");
+			// logger.debug(method.getActiveBody().toString());
+			int index =((ParameterRef) val).getIndex(); 
+			// logger.debug(method.getBytecodeSignature());
+			// logger.debug("index is " + index);
 			String arg_name = this.method.getBytecodeParms();
+			// logger.debug(arg_name);
 			return new Texpr1VarNode(arg_name);
 		}
 	}

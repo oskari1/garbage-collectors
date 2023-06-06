@@ -7,7 +7,7 @@ import ch.ethz.rse.Store;
 // FITS_IN_TROLLEY SAFE
 // FITS_IN_RESERVE UNSAFE
 
-public class Wall_of_Fame_test {
+public class a_Wall_of_Fame_test {
 
 	public void m2(int j) {
 		Store s = new Store(1, 2);

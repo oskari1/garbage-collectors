@@ -19,14 +19,42 @@ public class SpecificExampleIT {
 	/**
 	 * Modify the configuration below to run a single example
 	 */
+
 	@Test
 	void specificTest() {
-		String packageName = "ch.ethz.rse.integration.tests.Reserve_Test_For_Loop_Unsafe_12";
-		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Unsafe_7";
+		VerificationProperty verificationTask = VerificationProperty.NON_NEGATIVE;
 		boolean expectedIsSafe = false;
 		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
 		SpecificExampleIT.testOnExample(t);
 	}
+
+	@Test
+	void specificTest1() {
+		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Unsafe_7";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_TROLLEY;
+		boolean expectedIsSafe = false;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	@Test
+	void specificTest2() {
+		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Unsafe_7";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		boolean expectedIsSafe = true;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
+
+	// @Test
+	// void specificTest3() {
+	// 	String packageName = "ch.ethz.rse.integration.tests.Basic_Test_Reserve_Unsafe_1";
+	// 	VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+	// 	boolean expectedIsSafe = false;
+	// 	VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+	// 	SpecificExampleIT.testOnExample(t);
+	// }
 
 // 	@Test
 // 	void constantTestTrue() {

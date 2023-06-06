@@ -3,18 +3,18 @@ package ch.ethz.rse.integration.tests;
 import ch.ethz.rse.Store;
 
 // expected results:
-// NON_NEGATIVE SAFE
+// NON_NEGATIVE UNSAFE
 // FITS_IN_TROLLEY UNSAFE
 // FITS_IN_RESERVE UNSAFE
 
-public class Trolley_Test_Unsafe {
+public class Reserve_Test_Basic_Safe_2 {
 
   public static void m1() {
     Store s = new Store(2, 4);
-    s.get_delivery(2);
-    s.get_delivery(1);
-
-    Store s2 = new Store(4, 4);
-    s2.get_delivery(5);
+    Store s1 = s;
+    s.get_delivery(-1);
+    s1.get_delivery(5);
   }
 }
+
+
