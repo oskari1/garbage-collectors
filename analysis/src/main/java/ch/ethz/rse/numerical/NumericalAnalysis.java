@@ -483,14 +483,17 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		// logger.debug("outWrapper = " + outWrapper.toString());
 		Abstract1 e = outWrapper.get();
 		// logger.debug("e = " + e.toString());
-
-		Texpr1Node right_expr = exprOfValue(right);
-		// Abstract1 e_out = e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e);
-		Abstract1 e_out = e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), null);
-		// logger.debug("e_out = " + e_out.toString());
-		// outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
-		outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), null));
-		// logger.debug("outWrapper after handleDef: " + outWrapper.toString());
+		logger.debug("CFG body: ");
+		logger.debug(method.getActiveBody().toString());
+		if(!(right instanceof ParameterRef)) {
+			Texpr1Node right_expr = exprOfValue(right);
+			// Abstract1 e_out = e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e);
+			Abstract1 e_out = e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), null);
+			// logger.debug("e_out = " + e_out.toString());
+			// outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
+			outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), null));
+			// logger.debug("outWrapper after handleDef: " + outWrapper.toString());
+		}
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
@@ -563,8 +566,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			}
 			return new Texpr1BinNode(op, op1_exp, op2_exp);
 		} else {
-			// logger.debug("CFG body: ");
-			// logger.debug(method.getActiveBody().toString());
+
 			int index =((ParameterRef) val).getIndex(); 
 			// logger.debug(method.getBytecodeSignature());
 			// logger.debug("index is " + index);
