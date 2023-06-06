@@ -1,13 +1,10 @@
 package ch.ethz.rse.numerical;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ObjectUtils.Null;
 import org.slf4j.Logger;
@@ -488,7 +485,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 							// s.receive(delivered_amt);
 							if(delivered_amt.isInfty() == 1) {
 								fits_in_reserve_satisfied = false;
-							} else if(delivered_amt.isInfty() == 0) {
+							} else if(delivered_amt.isInfty() == 0 && fits_in_reserve_satisfied) {
 								// this variable stores, in how many loops jInvStmt is contained in,
 								// if it isn't in a loop, loop_depth is 0
 								// if it's in a nested for-loop it's 2, etc.
@@ -506,7 +503,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 									fallOutWrapper.set(e.assignCopy(man, s.getUniqueLabel(), new Texpr1Intern(env, updated_expr), null));
 									// check if received amount is still ok
 									MpqScalar received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, s.getUniqueLabel()).sup();
-									if(!s.checkFitsInReserve(received_amt)) {
+									if(received_amt.isInfty() != 0 || !s.checkFitsInReserve(received_amt)) {
 										fits_in_reserve_satisfied = false;
 									}
 								} else if(loop_depth == 1) {
@@ -584,7 +581,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 											received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, s.getUniqueLabel()).sup();
 											logger.debug("upper bound for received amount is " + received_amt);
-											if(!s.checkFitsInReserve(received_amt)) {
+											if(received_amt.isInfty() != 0 || !s.checkFitsInReserve(received_amt)) {
 												fits_in_reserve_satisfied = false;
 											}
 										} else {
@@ -606,7 +603,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 										received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, s.getUniqueLabel()).sup();
 										logger.debug("upper bound for received amount is " + received_amt);
 										received_amt = new MpqScalar((int) Math.floor(received_amt.get().doubleValue()));
-										if(!s.checkFitsInReserve(received_amt)) {
+										if(received_amt.isInfty() != 0 || !s.checkFitsInReserve(received_amt)) {
 											fits_in_reserve_satisfied = false;
 										}
 									}

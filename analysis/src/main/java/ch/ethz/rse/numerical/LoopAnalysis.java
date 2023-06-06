@@ -11,7 +11,6 @@ import soot.jimple.internal.JNeExpr;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import soot.jimple.ConditionExpr;
@@ -27,8 +26,6 @@ import apron.Texpr1BinNode;
 import apron.Texpr1CstNode;
 import apron.Texpr1Node;
 import apron.Texpr1VarNode;
-import ch.ethz.rse.pointer.StoreInitializer;
-import ch.qos.logback.core.joran.conditional.Condition;
 
 public class LoopAnalysis {
 	private static final Logger logger = LoggerFactory.getLogger(LoopAnalysis.class);
