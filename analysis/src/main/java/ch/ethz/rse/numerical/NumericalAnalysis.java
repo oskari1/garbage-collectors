@@ -232,8 +232,8 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 		// TODO: MAYBE FILL THIS OUT
 		for(StoreInitializer s : pointsTo.getInitializers(this.method)) {
-			// logger.debug("Adding the following store-init to the env ");
-			// logger.debug(s.getUniqueLabel());
+			logger.debug("Adding the following store-init to the env ");
+			logger.debug(s.getUniqueLabel());
 			try {
 				Abstract1 state = ret.get();
 				ret.set(state.assignCopy(man, s.getUniqueLabel(), new Texpr1Intern(env, new Texpr1CstNode(new MpqScalar(0))), null));
@@ -520,7 +520,9 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 									if(loopHeads.get(loop_analysis.loop_head).value == 1) {
 										// the first time we visit this call to get_delivery
 										MpqScalar received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, s.getUniqueLabel()).sup();
-										loop_analysis.set_init_rcvd_amt(received_amt);
+										loop_analysis.set_init_rcvd_amt_map(alreadyInit.size());
+										loop_analysis.set_rhs_expr_of_map(alreadyInit.size());
+										loop_analysis.set_init_rcvd_amt(received_amt, s.getUniqueLabel());
 										loop_analysis.set_rcvd_amt_var(s.getUniqueLabel());
 										loop_analysis.set_arg(delivered_amt);
 										String loop_var_name = loop_analysis.get_loop_var_name();
@@ -552,19 +554,31 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 											second_loop_var = (MpqScalar) fallOutWrapper.get().getBound(man, loop_var_name).inf();
 										}
 										if(second_loop_var.isInfty() == 0) {
-											logger.debug("the second upper bound is " + second_loop_var);
 											loop_analysis.set_second_val_loop_var(int_of(second_loop_var));
 											Abstract1 e = fallOutWrapper.get();
 											logger.debug("fallOutWrapper is initially " + fallOutWrapper);
 											// e.forget(man, s.getUniqueLabel(), false);
 											logger.debug("fallOutWrapper is after forgetting " + e);
-											// Texpr1Node rhs_expr = loop_analysis.get_rhs_expr();
-											loop_analysis.set_rhs_expr();
+											loop_analysis.set_rhs_expr(s.getUniqueLabel());
+											// evaluate the received amount so far based on the loop variable and the constructed equation 
+											Texpr1Node rhs_expr = loop_analysis.get_rhs_expr(s.getUniqueLabel());
+											MpqScalar received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, new Texpr1Intern(env, rhs_expr)).sup();
 											// logger.debug("rhs_expr is " + rhs_expr);
 											// fallOutWrapper.set(e.assignCopy(man, s.getUniqueLabel(), new Texpr1Intern(env, rhs_expr), null));
+											Texpr1Node store_var = new Texpr1VarNode(s.getUniqueLabel());
+											Texpr1Node received_amt_expr = new Texpr1CstNode(received_amt);
+											Tcons1 cons = new Tcons1(env, Tcons1.SUPEQ, new Texpr1BinNode(Texpr1BinNode.OP_SUB, received_amt_expr, store_var)); 
+											Tcons1 cons1 = new Tcons1(env, Tcons1.SUPEQ, new Texpr1BinNode(Texpr1BinNode.OP_SUB, store_var, rhs_expr)); 
+											Abstract1 constraint = new Abstract1(man, new Tcons1[] {cons});
+											// e.meet(man, constraint);
+											logger.debug("fallOutWrapper after meeting: " + e);
+											// fallOutWrapper.set(e.joinCopy(man, constraint));
+											fallOutWrapper.set(e.assignCopy(man, s.getUniqueLabel(), new Texpr1Intern(env, received_amt_expr), null));
 											logger.debug("fallOutWrapper is after creating new equation " + fallOutWrapper);
 											// check if received amount is still ok
-											MpqScalar received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, new Texpr1Intern(env, loop_analysis.rhs_expr)).sup();
+
+											received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, s.getUniqueLabel()).sup();
+											logger.debug("upper bound for received amount is " + received_amt);
 											if(!s.checkFitsInReserve(received_amt)) {
 												fits_in_reserve_satisfied = false;
 											}
@@ -572,16 +586,20 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 											fits_in_reserve_satisfied = false;
 										}
 									} else {
-										// check the value of the loop variable
-										MpqScalar loop_sup = (MpqScalar) fallOutWrapper.get().getBound(man, "i0").sup();
-										MpqScalar loop_inf = (MpqScalar) fallOutWrapper.get().getBound(man, "i0").inf();
-										logger.debug("fallOutWrapper is " + fallOutWrapper);
-										logger.debug("upper bound for loop variable is " + loop_sup);
-										logger.debug("lower bound for loop variable is " + loop_inf);
 										// check if received amount is still ok
-										Texpr1Intern rhs_expr = new Texpr1Intern(env, loop_analysis.rhs_expr);
+										Texpr1Node rhs_expr = loop_analysis.get_rhs_expr(s.getUniqueLabel());
+										MpqScalar received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, new Texpr1Intern(env, rhs_expr)).sup();
+										Texpr1Node store_var = new Texpr1VarNode(s.getUniqueLabel());
+										Texpr1Node received_amt_expr = new Texpr1CstNode(received_amt);
+										Tcons1 cons = new Tcons1(env, Tcons1.SUPEQ, new Texpr1BinNode(Texpr1BinNode.OP_SUB, received_amt_expr, store_var)); 
+										Abstract1 constraint = new Abstract1(man, new Tcons1[] {cons});
+										Abstract1 e = fallOutWrapper.get();
+										// fallOutWrapper.set(e.joinCopy(man, constraint));
+										fallOutWrapper.set(e.assignCopy(man, s.getUniqueLabel(), new Texpr1Intern(env, received_amt_expr), null));
 										logger.debug("rhs_expr is " + rhs_expr);
-										MpqScalar received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, rhs_expr).sup();
+										// MpqScalar received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, rhs_expr).sup();
+										received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, s.getUniqueLabel()).sup();
+										logger.debug("upper bound for received amount is " + received_amt);
 										received_amt = new MpqScalar((int) Math.floor(received_amt.get().doubleValue()));
 										if(!s.checkFitsInReserve(received_amt)) {
 											fits_in_reserve_satisfied = false;

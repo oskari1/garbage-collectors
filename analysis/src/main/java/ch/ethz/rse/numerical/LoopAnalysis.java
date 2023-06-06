@@ -11,6 +11,7 @@ import soot.jimple.internal.JNeExpr;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import soot.jimple.ConditionExpr;
@@ -26,6 +27,7 @@ import apron.Texpr1BinNode;
 import apron.Texpr1CstNode;
 import apron.Texpr1Node;
 import apron.Texpr1VarNode;
+import ch.ethz.rse.pointer.StoreInitializer;
 import ch.qos.logback.core.joran.conditional.Condition;
 
 public class LoopAnalysis {
@@ -38,14 +40,15 @@ public class LoopAnalysis {
     // unique label for Store initializers, since the different
     // stores might have received a different amount, e.g.,
     // due to later initialization
-    private MpqScalar init_rcvd_amt;
+    private HashMap<String, MpqScalar> init_rcvd_amt_of;
     private MpqScalar arg;
     private String rcvd_amt_var;
     private int init_val_loop_var;
     private int second_val_loop_var;
     private String loop_var_name;
     private List<ConditionExpr> loop_conditionals;
-    public Texpr1Node rhs_expr;
+    // public Texpr1Node rhs_expr;
+    public HashMap<String, Texpr1Node> rhs_expr_of;
 
     public LoopAnalysis(Loop loop, JInvokeStmt invStmt, HashMap<Loop, List<Stmt>> stmts_per_loop) {
         this.loop = loop;
@@ -70,8 +73,20 @@ public class LoopAnalysis {
         return loop_depth;
     }
 
-    public void set_init_rcvd_amt(MpqScalar amt) {
-        this.init_rcvd_amt = amt;
+    public void set_init_rcvd_amt_map(int size) {
+        if(this.init_rcvd_amt_of == null) {
+            this.init_rcvd_amt_of = new HashMap<String, MpqScalar>(size);
+        }
+    }
+
+    public void set_rhs_expr_of_map(int size) {
+        if(this.rhs_expr_of == null) {
+            this.rhs_expr_of = new HashMap<String, Texpr1Node>(size);
+        }
+    }
+
+    public void set_init_rcvd_amt(MpqScalar amt, String store_id) {
+        this.init_rcvd_amt_of.put(store_id, amt);
     }
 
     public void set_arg(MpqScalar amt) {
@@ -173,8 +188,8 @@ public class LoopAnalysis {
         }
     }
 
-    public void set_rhs_expr() {
-        Texpr1Node op1 = new Texpr1CstNode(init_rcvd_amt);
+    public void set_rhs_expr(String store_id) {
+        Texpr1Node op1 = new Texpr1CstNode(init_rcvd_amt_of.get(store_id));
         Texpr1Node arg = new Texpr1CstNode(this.arg);
         Texpr1Node const1 = new Texpr1CstNode(new MpqScalar(1));
         Texpr1Node const2 = new Texpr1CstNode(new MpqScalar(init_val_loop_var, second_val_loop_var-init_val_loop_var));
@@ -184,9 +199,11 @@ public class LoopAnalysis {
         Texpr1Node var_expr = new Texpr1BinNode(Texpr1BinNode.OP_MUL, frac1, i_expr);
         Texpr1Node frac = new Texpr1BinNode(Texpr1BinNode.OP_ADD, var_expr, const_expr); 
         Texpr1Node op2 = new Texpr1BinNode(Texpr1BinNode.OP_MUL, arg, frac);
-        this.rhs_expr = new Texpr1BinNode(Texpr1BinNode.OP_ADD, op1, op2);
+        this.rhs_expr_of.put(store_id, new Texpr1BinNode(Texpr1BinNode.OP_ADD, op1, op2));
     }
 
-
+    public Texpr1Node get_rhs_expr(String store_id) {
+        return this.rhs_expr_of.get(store_id);
+    }
     
 }
