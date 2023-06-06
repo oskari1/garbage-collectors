@@ -68,7 +68,7 @@ public class EnvironmentGenerator {
 		for(Local local : locals) {
 			this.ints.add(local.getName());
 		}
-		logger.debug("Added locals are " + locals);
+		// logger.debug("Added locals are " + locals);
 
 		// for debugging purposes, we try to print out the Jimple code:
 		soot.Body body = method.getActiveBody();

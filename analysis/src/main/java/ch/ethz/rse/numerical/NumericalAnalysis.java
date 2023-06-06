@@ -483,8 +483,8 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		// logger.debug("outWrapper = " + outWrapper.toString());
 		Abstract1 e = outWrapper.get();
 		// logger.debug("e = " + e.toString());
-		logger.debug("CFG body: ");
-		logger.debug(method.getActiveBody().toString());
+		// logger.debug("CFG body: ");
+		// logger.debug(method.getActiveBody().toString());
 		if(!(right instanceof ParameterRef)) {
 			Texpr1Node right_expr = exprOfValue(right);
 			// Abstract1 e_out = e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e);
