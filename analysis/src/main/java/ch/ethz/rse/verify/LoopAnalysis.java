@@ -149,7 +149,7 @@ public class LoopAnalysis {
             // the loop-header is a JIfStmt then we know that it's
             // the conditional jump 
             List<ConditionExpr> loop_conditionals = get_loop_conditionals(l);
-            if(loop_conditionals.size() != 1) {
+            if(loop_conditionals.size() == 1) {
                 Stmt header_stmt = (Stmt) (l.getHead());
                 Stmt jmp_back_stmt = (Stmt) (l.getBackJumpStmt());
                 // logger.debug("header_stmt: " + header_stmt);

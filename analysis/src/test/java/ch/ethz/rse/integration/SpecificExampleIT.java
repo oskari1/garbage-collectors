@@ -19,6 +19,7 @@ public class SpecificExampleIT {
 	/**
 	 * Modify the configuration below to run a single example
 	 */
+
 	@Test
 	void specificTest() {
 		String packageName = "ch.ethz.rse.integration.tests.Trolley_Test_Unsafe_7";
@@ -46,7 +47,14 @@ public class SpecificExampleIT {
 		SpecificExampleIT.testOnExample(t);
 	}
 
-
+	@Test
+	void specificTest3() {
+		String packageName = "ch.ethz.rse.integration.tests.Basic_Test_ForLoop_Safe";
+		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
+		boolean expectedIsSafe = true;
+		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
+		SpecificExampleIT.testOnExample(t);
+	}
 
 // 	@Test
 // 	void constantTestTrue() {
