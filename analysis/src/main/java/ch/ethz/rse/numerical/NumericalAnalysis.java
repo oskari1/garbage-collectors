@@ -520,31 +520,36 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 									if(loopHeads.get(loop_analysis.loop_head).value == 1) {
 										// the first time we visit this call to get_delivery
 										MpqScalar received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, s.getUniqueLabel()).sup();
-										loop_analysis.set_init_rcvd_amt_map(alreadyInit.size());
-										loop_analysis.set_rhs_expr_of_map(alreadyInit.size());
-										loop_analysis.set_init_rcvd_amt(received_amt, s.getUniqueLabel());
-										loop_analysis.set_rcvd_amt_var(s.getUniqueLabel());
-										loop_analysis.set_arg(delivered_amt);
-										String loop_var_name = loop_analysis.get_loop_var_name();
-										logger.debug("loop variable is " + loop_var_name);
-										if(loop_var_name != null) {
-											MpqScalar init_loop_var;
-											if(loop_analysis.is_growing_loop_variable()) {
-												init_loop_var = (MpqScalar) fallOutWrapper.get().getBound(man, loop_var_name).sup();
-											} else {
-												init_loop_var = (MpqScalar) fallOutWrapper.get().getBound(man, loop_var_name).inf();
-											}
-											if(init_loop_var.isInfty() == 0) {
-												logger.debug("the initial upper bound is " + init_loop_var);
-												loop_analysis.set_init_val_loop_var(int_of(init_loop_var));
-												loop_analysis.set_loop_var_name(loop_var_name);
+										if(received_amt.isInfty() == 0) {
+											logger.debug("initially received amount is (iteration 1): " + received_amt);
+											loop_analysis.set_init_rcvd_amt_map(alreadyInit.size());
+											loop_analysis.set_rhs_expr_of_map(alreadyInit.size());
+											loop_analysis.set_init_rcvd_amt(received_amt, s.getUniqueLabel());
+											loop_analysis.set_rcvd_amt_var(s.getUniqueLabel());
+											loop_analysis.set_arg(delivered_amt);
+											String loop_var_name = loop_analysis.get_loop_var_name();
+											logger.debug("loop variable is " + loop_var_name);
+											if(loop_var_name != null) {
+												MpqScalar init_loop_var;
+												if(loop_analysis.is_growing_loop_variable()) {
+													init_loop_var = (MpqScalar) fallOutWrapper.get().getBound(man, loop_var_name).sup();
+												} else {
+													init_loop_var = (MpqScalar) fallOutWrapper.get().getBound(man, loop_var_name).inf();
+												}
+												if(init_loop_var.isInfty() == 0) {
+													logger.debug("the initial upper bound is " + init_loop_var);
+													loop_analysis.set_init_val_loop_var(int_of(init_loop_var));
+													loop_analysis.set_loop_var_name(loop_var_name);
+												} else {
+													fits_in_reserve_satisfied = false;
+												}
 											} else {
 												fits_in_reserve_satisfied = false;
 											}
 										} else {
 											fits_in_reserve_satisfied = false;
 										}
-									} else if(loopHeads.get(loop_analysis.loop_head).value == 2) {
+									} else if(loopHeads.get(loop_analysis.loop_head).value == 2 && fits_in_reserve_satisfied) {
 										String loop_var_name = loop_analysis.get_loop_var_name();
 										logger.debug("loop variable is " + loop_var_name);
 										MpqScalar second_loop_var;
@@ -585,7 +590,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 										} else {
 											fits_in_reserve_satisfied = false;
 										}
-									} else {
+									} else if (fits_in_reserve_satisfied){
 										// check if received amount is still ok
 										Texpr1Node rhs_expr = loop_analysis.get_rhs_expr(s.getUniqueLabel());
 										MpqScalar received_amt = (MpqScalar) fallOutWrapper.get().getBound(man, new Texpr1Intern(env, rhs_expr)).sup();

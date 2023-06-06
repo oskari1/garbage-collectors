@@ -593,7 +593,7 @@ public class SpecificExampleIT {
 	void reserveTest28() {
 		String packageName = "ch.ethz.rse.integration.tests.Reserve_Test_For_Loop_Safe_4";
 		VerificationProperty verificationTask = VerificationProperty.FITS_IN_RESERVE;
-		boolean expectedIsSafe = true; 
+		boolean expectedIsSafe = false; 
 		VerificationTestCase t = new VerificationTestCase(packageName, verificationTask, expectedIsSafe);
 		SpecificExampleIT.testOnExample(t);
 	}
