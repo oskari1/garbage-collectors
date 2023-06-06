@@ -68,6 +68,7 @@ public class EnvironmentGenerator {
 		for(Local local : locals) {
 			this.ints.add(local.getName());
 		}
+		// logger.debug("Added locals are " + locals);
 
 		// for debugging purposes, we try to print out the Jimple code:
 		soot.Body body = method.getActiveBody();
@@ -75,9 +76,9 @@ public class EnvironmentGenerator {
 
 		// This should add the method-parameters to the ints
 		// In the description, we assume they can only be of type int, thus we just add all
-		String param = method.getBytecodeParms();
+		// String param = method.getBytecodeParms();
 		// logger.debug("Added method parameters are " + param);
-		this.ints.add(param);
+		// this.ints.add(param);
 
 		// Chain<Local> locals = method.getActiveBody().getLocals(); -- merge confilc
 		// Iterator localItr = locals.iterator(); 
