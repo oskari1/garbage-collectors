@@ -33,10 +33,6 @@ public class StoreInitializer {
 	 */
 	public final int reserve_size;
 
-	// added fields
-	private MpqScalar received_amount;
-
-
 
 	/**
 	 * 
@@ -49,8 +45,6 @@ public class StoreInitializer {
 		this.uniqueNumber = uniqueNumber;
 		this.trolley_size = trolley_size;
 		this.reserve_size = reserve_size;
-		// added initializer
-		this.received_amount = new MpqScalar(0);
 	}
 
 	/**
@@ -81,24 +75,6 @@ public class StoreInitializer {
 		return "AbstractObject" + this.getUniqueNumber();
 	}
 
-	public void receive(MpqScalar amount) {
-		if(amount.isInfty() != 0) {
-			// if delivered amount if infinite, just set the received
-			// amount to that amount
-			this.received_amount = amount;
-		} else if(this.received_amount.isInfty() == 0) {
-			// if delivered and received amount are finite,
-			// just add them up
-			int amount_int = int_of(amount);
-			int received_amount_int = int_of(received_amount);
-			// logger.debug("Object " + uniqueNumber + " has already received " + received_amount_int); 
-			// logger.debug("Object " + uniqueNumber + " is receiving " + amount_int); 
-			this.received_amount = new MpqScalar(received_amount_int + amount_int);
-		}
-		// if the received amount is already +oo or -oo, just keep 
-		// that value, i.e., do nothing
-	}
-
 	public boolean checkFitsInTrolley(MpqScalar amount) {
 		if(amount.isInfty() == 1) {
 			return false;
@@ -112,26 +88,6 @@ public class StoreInitializer {
 			} else {
 				return true;
 			}
-		}
-	}
-
-	public boolean satisfiesFitsInReserve() {
-		if(received_amount.isInfty() == 1) {
-			// if received amount is +oo, it does not satisfy fitsInReserve 
-			// logger.debug("case +oo");
-			return false;
-		} else if(received_amount.isInfty() == -1) {
-			// if the received amount is -oo, it satisfies fitsInReserve
-			// logger.debug("case -oo");
-			return true;
-		} else {
-			// if the received amount if finite, need to compare with 
-			// the reserve_size
-			// logger.debug("case finite");
-			int received_amt_int = int_of(this.received_amount);
-			// logger.debug("received amount is " + received_amt_int);
-			// logger.debug("reserve size is" + reserve_size);
-			return received_amt_int <= reserve_size; 
 		}
 	}
 
