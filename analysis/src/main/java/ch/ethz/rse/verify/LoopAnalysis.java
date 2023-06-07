@@ -369,7 +369,7 @@ public class LoopAnalysis {
         List<ConditionExpr> flipped_conds = conds.stream()
         .map(c -> flip(c)).collect(Collectors.toList());
         ready_conds.addAll(flipped_conds);
-        logger.debug("the conditionals are: " + ready_conds.toString());
+        // logger.debug("the conditionals are: " + ready_conds.toString());
         return ready_conds; 
 	}
 

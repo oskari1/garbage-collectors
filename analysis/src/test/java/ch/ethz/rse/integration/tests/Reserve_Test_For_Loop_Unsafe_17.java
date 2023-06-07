@@ -5,12 +5,12 @@ import ch.ethz.rse.Store;
 // expected results:
 // NON_NEGATIVE SAFE
 // FITS_IN_TROLLEY SAFE
-// FITS_IN_RESERVE SAFE
+// FITS_IN_RESERVE UNSAFE
 
-public class Reserve_Test_For_Loop_Safe_22 {
+public class Reserve_Test_For_Loop_Unsafe_17 {
 
   public static void m1() {
-    Store s = new Store(2, 29); // 28 is UNSAFE, 29 is SAFE 
+    Store s = new Store(2, 28); // 28 is UNSAFE, 29 is SAFE 
     int i = 1;
     // i in [1,1]
     while(i < 30) {
