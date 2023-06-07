@@ -16,7 +16,6 @@ import soot.Local;
 import soot.PointsToAnalysis;
 import soot.SootMethod;
 import soot.Value;
-import soot.JastAddJ.Body;
 import soot.jimple.ParameterRef;
 import soot.jimple.internal.JimpleLocal;
 import soot.util.Chain;

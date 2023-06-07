@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import ch.ethz.rse.pointer.StoreInitializer;
 import java.util.HashMap;
-import java.rmi.NotBoundException;
 import java.util.*;
 import java.util.Collection;
 
