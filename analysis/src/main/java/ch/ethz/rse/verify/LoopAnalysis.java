@@ -47,7 +47,6 @@ import soot.jimple.internal.JGeExpr;
 import soot.jimple.internal.JGotoStmt;
 import soot.jimple.internal.JGtExpr;
 import soot.jimple.internal.JIfStmt;
-import soot.jimple.internal.JInstanceFieldRef;
 import soot.jimple.internal.JInvokeStmt;
 import soot.jimple.internal.JLeExpr;
 import soot.jimple.internal.JLtExpr;
@@ -150,8 +149,6 @@ public class LoopAnalysis {
             // the conditional jump 
             List<ConditionExpr> loop_conditionals = get_loop_conditionals(l);
             if(loop_conditionals.size() == 1) {
-                Stmt header_stmt = (Stmt) (l.getHead());
-                Stmt jmp_back_stmt = (Stmt) (l.getBackJumpStmt());
                 // logger.debug("header_stmt: " + header_stmt);
                 // logger.debug("jmp_back_stmt: " + jmp_back_stmt);
                 // Value cond = ((JIfStmt) header_stmt).getCondition();
@@ -369,7 +366,7 @@ public class LoopAnalysis {
         List<ConditionExpr> flipped_conds = conds.stream()
         .map(c -> flip(c)).collect(Collectors.toList());
         ready_conds.addAll(flipped_conds);
-        logger.debug("the conditionals are: " + ready_conds.toString());
+        // logger.debug("the conditionals are: " + ready_conds.toString());
         return ready_conds; 
 	}
 

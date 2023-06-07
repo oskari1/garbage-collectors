@@ -5,11 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.lang3.ObjectUtils.Null;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.google.common.reflect.Parameter;
 
 import apron.Abstract1;
 import apron.ApronException;
@@ -70,7 +67,6 @@ import soot.jimple.internal.JimpleLocal;
 import soot.jimple.toolkits.annotation.logic.Loop;
 import soot.toolkits.graph.LoopNestTree;
 import soot.toolkits.graph.UnitGraph;
-import soot.toolkits.scalar.FlowSet;
 import soot.toolkits.scalar.ForwardBranchedFlowAnalysis;
 
 /**
@@ -397,26 +393,9 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			// log outcome
 			if (fallOutWrapper != null) {
 				// logger.debug(inWrapper.get() + " " + s + " =>[fallout] " + fallOutWrapper);
-				// logger.debug("type of s is " + s.getClass().getName());
-				if(s instanceof JInvokeStmt) {
-					JInvokeStmt jInvStmt = (JInvokeStmt) s;
-					InvokeExpr invokeExpr = jInvStmt.getInvokeExpr();
-					if(invokeExpr instanceof JVirtualInvokeExpr) {
-						String var = "i0";
-						// logger.debug("Bound for " + var + ": " + fallOutWrapper.get().getBound(man, var).toString());
-						var = "i1";
-						// logger.debug("Bound for " + var + ": " + fallOutWrapper.get().getBound(man, var).toString());
-					}
-				}
-				//
 			}
 			if (branchOutWrapper != null) {
 				// logger.debug(inWrapper.get() + " " + s + " =>[branchout] " + branchOutWrapper);
-				if(s instanceof JVirtualInvokeExpr) {
-					// String var = ((DefinitionStmt) s).getLeftOp().toString();
-					String var = "i0";
-					// logger.debug("Bound for " + var + ": " + fallOutWrapper.get().getBound(man, var).toString());
-				}
 			}
 
 		} catch (ApronException e) {
@@ -427,30 +406,24 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	public void handleInvoke(JInvokeStmt jInvStmt, NumericalStateWrapper fallOutWrapper) throws ApronException {
 		// TODO: MAYBE FILL THIS OUT
 		if(!fallOutWrapper.get().isBottom(man)) {
-			if (this.property == VerificationProperty.FITS_IN_RESERVE || this.property == VerificationProperty.FITS_IN_TROLLEY) {
+			if (this.property == VerificationProperty.FITS_IN_TROLLEY || this.property == VerificationProperty.NON_NEGATIVE) {
 				// TODO: MAYBE FILL THIS OUT
 				Value store_reference = (Value) jInvStmt.getUseBoxes().get(1).getValue();
 				Value arg = jInvStmt.getInvokeExpr().getArg(0);
 				for(StoreInitializer s : pointsTo.pointsTo((Local) store_reference)) {
 					if(alreadyInit.contains(s)) {
-					// if(alreadyInitMap.get_set_of(jInvStmt).contains(s)) {
-						MpqScalar delivered_amt = upper_bound_of(arg, fallOutWrapper); 
-						// alreadyInitMap.receiveat(jInvStmt, s, delivered_amt);
-						if(this.property == VerificationProperty.FITS_IN_RESERVE) {
-							s.receive(delivered_amt);
-						} else {
-							// logger.debug("delivered amount is " + delivered_amt.toString());
+						if(this.property == VerificationProperty.FITS_IN_TROLLEY) {
+							MpqScalar delivered_amt = upper_bound_of(arg, fallOutWrapper); 
 							if(!s.checkFitsInTrolley(delivered_amt)) {
 								fits_in_trolley_satisfied = false;
 							}
+						} else {
+							MpqScalar delivered_amt = lower_bound_of(arg, fallOutWrapper);
+							if(delivered_amt.sgn() == -1) {
+								non_negative_satisfied = false;
+							}
 						}
 					}
-				}
-			} else {
-				Value arg = jInvStmt.getInvokeExpr().getArg(0);
-				MpqScalar delivered_amt = lower_bound_of(arg, fallOutWrapper);
-				if(delivered_amt.sgn() == -1) {
-					non_negative_satisfied = false;
 				}
 			}
 		}
@@ -464,11 +437,6 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		if(!(store_reference instanceof JimpleLocal)) {
 			store_reference = (Value) jInvStmt.getUseBoxes().get(2).getValue();
 		}
-		// logger.debug("type of jInvStmt is" + jInvStmt.getClass().getName());
-		// logger.debug("jInvStmt: " + jInvStmt);
-		// logger.debug("useBoxes: " + jInvStmt.getUseBoxes());
-		// logger.debug("useBoxes.get(0): " + jInvStmt.getUseBoxes().get(0));
-		// logger.debug("type of store_reference is " + store_reference.getClass().getName());
 		for(StoreInitializer s : pointsTo.pointsTo((Local) store_reference)) {
 			if(!fallOutWrapper.get().isBottom(man)) {
 				alreadyInit.add(s);
@@ -479,51 +447,15 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	// returns state of in after assignment
 	private void handleDef(NumericalStateWrapper outWrapper, Value left, Value right) throws ApronException {
 		// TODO: FILL THIS OUT
-		// logger.debug("entered handleDef");
-		// logger.debug("outWrapper = " + outWrapper.toString());
 		Abstract1 e = outWrapper.get();
-		// logger.debug("e = " + e.toString());
-		// logger.debug("CFG body: ");
-		// logger.debug(method.getActiveBody().toString());
 		if(!(right instanceof ParameterRef)) {
 			Texpr1Node right_expr = exprOfValue(right);
-			// Abstract1 e_out = e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e);
 			Abstract1 e_out = e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), null);
-			// logger.debug("e_out = " + e_out.toString());
-			// outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), e));
 			outWrapper.set(e.assignCopy(man, left.toString(), new Texpr1Intern(env, right_expr), null));
-			// logger.debug("outWrapper after handleDef: " + outWrapper.toString());
 		}
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
-	public boolean fitsInReserve() {
-		for(StoreInitializer s : alreadyInit) {
-			if (!s.satisfiesFitsInReserve()) {
-				return false;
-			} 
-		}
-		return true;
-		// return alreadyInitMap.fitsInReserve();
-	}
-
-	// private MpqScalar upper_bound_of(Value val, NumericalStateWrapper outWrapper) {
-	// 	if(val instanceof IntConstant) {
-	// 		return new MpqScalar(((IntConstant) val).value);
-	// 	} else {
-	// 		assert(val instanceof JimpleLocal);
-	// 		Abstract1 out = outWrapper.get();
-	// 		String var_name = ((JimpleLocal) val).getName();
-	// 		try {
-	// 			return (MpqScalar) out.getBound(man, var_name).sup();
-	// 		} catch (ApronException e) {
-	// 			// TODO Auto-generated catch block
-	// 			e.printStackTrace();
-	// 			return new MpqScalar();
-	// 		}
-	// 	}
-	// }
-
 	private MpqScalar upper_bound_of(Value val, NumericalStateWrapper outWrapper) {
 		Texpr1Node val_expr = exprOfValue(val);
 		try {
@@ -546,7 +478,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		return null;
 	}
 
-	private Texpr1Node exprOfValue(Value val) {
+	public static Texpr1Node exprOfValue(Value val) {
 		if(val instanceof IntConstant) {
 			return new Texpr1CstNode(new MpqScalar(((IntConstant) val).value));
 		} else if(val instanceof JimpleLocal) {
@@ -566,13 +498,14 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			}
 			return new Texpr1BinNode(op, op1_exp, op2_exp);
 		} else {
+			return null;
 
-			int index =((ParameterRef) val).getIndex(); 
+			// int index =((ParameterRef) val).getIndex(); 
 			// logger.debug(method.getBytecodeSignature());
 			// logger.debug("index is " + index);
-			String arg_name = this.method.getBytecodeParms();
+			// String arg_name = this.method.getBytecodeParms();
 			// logger.debug(arg_name);
-			return new Texpr1VarNode(arg_name);
+			// return new Texpr1VarNode(arg_name);
 		}
 	}
 

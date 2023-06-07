@@ -6,8 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import javax.sound.sampled.AudioFileFormat.Type;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,25 +14,17 @@ import com.google.common.collect.Multimap;
 
 import apron.Texpr1Node;
 import ch.ethz.rse.utils.Constants;
-import heros.utilities.JsonArray;
 import soot.Local;
 import soot.SootClass;
 import soot.SootMethod;
 import soot.Unit;
 import soot.Value;
-import soot.ValueBox;
-import soot.JastAddJ.Stmt;
-import soot.baf.SpecialInvokeInst;
 import soot.jimple.IntConstant;
 import soot.jimple.InvokeExpr;
-import soot.jimple.internal.JAssignStmt;
 import soot.jimple.internal.JInvokeStmt;
 import soot.jimple.internal.JSpecialInvokeExpr;
-import soot.jimple.internal.JVirtualInvokeExpr;
 import soot.jimple.spark.pag.Node;
 
-import soot.Local;
-import soot.util.Chain;
 
 /**
  * Convenience class which helps determine the {@link StoreInitializer}s

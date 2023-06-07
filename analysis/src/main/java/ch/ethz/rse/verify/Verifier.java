@@ -2,10 +2,7 @@ package ch.ethz.rse.verify;
 
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +17,7 @@ import apron.Polka;
 import apron.Tcons1;
 import apron.Texpr1BinNode;
 import apron.Texpr1CstNode;
+import apron.Texpr1Intern;
 import apron.Texpr1Node;
 import apron.Texpr1VarNode;
 import ch.ethz.rse.VerificationProperty;
@@ -28,40 +26,16 @@ import ch.ethz.rse.numerical.NumericalStateWrapper;
 import ch.ethz.rse.pointer.StoreInitializer;
 import ch.ethz.rse.pointer.PointsToInitializer;
 import ch.ethz.rse.utils.Constants;
-import polyglot.ast.Call;
-import polyglot.frontend.Pass;
-import soot.Body;
 import soot.Local;
 import soot.SootClass;
 import soot.SootHelper;
 import soot.SootMethod;
 import soot.Unit;
 import soot.Value;
-import soot.ValueBox;
-import soot.jimple.Constant;
-import soot.jimple.IntConstant;
-import soot.jimple.InvokeExpr;
-import soot.jimple.VirtualInvokeExpr;
 import soot.jimple.internal.JInvokeStmt;
 import soot.jimple.internal.JSpecialInvokeExpr;
 import soot.jimple.internal.JVirtualInvokeExpr;
-import soot.jimple.internal.JimpleLocal;
-import soot.jimple.internal.JimpleLocalBox;
 import soot.toolkits.graph.UnitGraph;
-import soot.util.Chain;
-import soot.util.Cons;
-
-import java.rmi.NotBoundException;
-// Added imports
-import java.util.*;
-import soot.jimple.IntConstant;
-import soot.jimple.internal.JimpleLocal;
-import apron.Abstract1;
-import apron.ApronException;
-import apron.Environment;
-import apron.Interval;
-import apron.Manager;
-import apron.Tcons1;
 
 /**
  * Main class handling verification
@@ -167,9 +141,6 @@ public class Verifier extends AVerifier {
 			}
 		}
 		return true;
-		// } else {
-		// 	return valid;
-		// }
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
@@ -193,20 +164,14 @@ public class Verifier extends AVerifier {
 	}
 
 	public static MpqScalar upper_bound_of (Value arg, NumericalAnalysis an, Unit u, Manager man) {
-		if (arg instanceof IntConstant) {
-			return new MpqScalar(((IntConstant) arg).value);
-		} else {
-			assert(arg instanceof JimpleLocal);
-			Abstract1 in = an.getFlowBefore(u).get();
-			String arg_name = ((JimpleLocal) arg).getName();
-			try {
-				return (MpqScalar) in.getBound(man, arg_name).sup();
-			} catch (ApronException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return new MpqScalar();
-			} 
+		Texpr1Node val_expr = NumericalAnalysis.exprOfValue(arg);
+		Abstract1 in = an.getFlowBefore(u).get();
+		try {
+			return (MpqScalar) in.getBound(man, new Texpr1Intern(an.env, val_expr)).sup(); 
+		} catch (ApronException e){
+			e.printStackTrace();
 		}
+		return null;
 	}
 
 
