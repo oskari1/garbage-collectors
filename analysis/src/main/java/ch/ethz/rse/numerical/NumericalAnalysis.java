@@ -546,7 +546,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		return null;
 	}
 
-	private Texpr1Node exprOfValue(Value val) {
+	public static Texpr1Node exprOfValue(Value val) {
 		if(val instanceof IntConstant) {
 			return new Texpr1CstNode(new MpqScalar(((IntConstant) val).value));
 		} else if(val instanceof JimpleLocal) {
@@ -566,13 +566,14 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 			}
 			return new Texpr1BinNode(op, op1_exp, op2_exp);
 		} else {
+			return null;
 
-			int index =((ParameterRef) val).getIndex(); 
+			// int index =((ParameterRef) val).getIndex(); 
 			// logger.debug(method.getBytecodeSignature());
 			// logger.debug("index is " + index);
-			String arg_name = this.method.getBytecodeParms();
+			// String arg_name = this.method.getBytecodeParms();
 			// logger.debug(arg_name);
-			return new Texpr1VarNode(arg_name);
+			// return new Texpr1VarNode(arg_name);
 		}
 	}
 

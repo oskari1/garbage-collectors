@@ -20,6 +20,7 @@ import apron.Polka;
 import apron.Tcons1;
 import apron.Texpr1BinNode;
 import apron.Texpr1CstNode;
+import apron.Texpr1Intern;
 import apron.Texpr1Node;
 import apron.Texpr1VarNode;
 import ch.ethz.rse.VerificationProperty;
@@ -193,20 +194,28 @@ public class Verifier extends AVerifier {
 	}
 
 	public static MpqScalar upper_bound_of (Value arg, NumericalAnalysis an, Unit u, Manager man) {
-		if (arg instanceof IntConstant) {
-			return new MpqScalar(((IntConstant) arg).value);
-		} else {
-			assert(arg instanceof JimpleLocal);
-			Abstract1 in = an.getFlowBefore(u).get();
-			String arg_name = ((JimpleLocal) arg).getName();
-			try {
-				return (MpqScalar) in.getBound(man, arg_name).sup();
-			} catch (ApronException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return new MpqScalar();
-			} 
+		Texpr1Node val_expr = NumericalAnalysis.exprOfValue(arg);
+		Abstract1 in = an.getFlowBefore(u).get();
+		try {
+			return (MpqScalar) in.getBound(man, new Texpr1Intern(an.env, val_expr)).sup(); 
+		} catch (ApronException e){
+			e.printStackTrace();
 		}
+		return null;
+		// if (arg instanceof IntConstant) {
+		// 	return new MpqScalar(((IntConstant) arg).value);
+		// } else {
+		// 	assert(arg instanceof JimpleLocal);
+		// 	Abstract1 in = an.getFlowBefore(u).get();
+		// 	String arg_name = ((JimpleLocal) arg).getName();
+		// 	try {
+		// 		return (MpqScalar) in.getBound(man, arg_name).sup();
+		// 	} catch (ApronException e) {
+		// 		// TODO Auto-generated catch block
+		// 		e.printStackTrace();
+		// 		return new MpqScalar();
+		// 	} 
+		// }
 	}
 
 
