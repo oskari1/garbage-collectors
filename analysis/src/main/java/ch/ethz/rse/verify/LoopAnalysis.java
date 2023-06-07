@@ -150,8 +150,6 @@ public class LoopAnalysis {
             // the conditional jump 
             List<ConditionExpr> loop_conditionals = get_loop_conditionals(l);
             if(loop_conditionals.size() == 1) {
-                Stmt header_stmt = (Stmt) (l.getHead());
-                Stmt jmp_back_stmt = (Stmt) (l.getBackJumpStmt());
                 // logger.debug("header_stmt: " + header_stmt);
                 // logger.debug("jmp_back_stmt: " + jmp_back_stmt);
                 // Value cond = ((JIfStmt) header_stmt).getCondition();

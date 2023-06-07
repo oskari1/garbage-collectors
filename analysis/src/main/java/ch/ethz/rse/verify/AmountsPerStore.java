@@ -58,7 +58,6 @@ public class AmountsPerStore {
     public boolean fit_in_reserve(ValueBox store_reference) {
         for(StoreInitializer store : pointsTo.pointsTo((Local) store_reference.getValue())) {
             // logger.debug("Checking fit_in_reserve for StoreInitializer " + store.getUniqueLabel() + " with reserve_size " + store.reserve_size);
-            int stored_amt = this.amts_map.get(store).intValue();
             // logger.debug("and the stored amount is " + stored_amt);
             if(store.reserve_size < this.amts_map.get(store).intValue()) {
                 // received amount exceeds reserve_size, so FITS_IN_RESERVE is UNSAFE

@@ -168,9 +168,6 @@ public class Verifier extends AVerifier {
 			}
 		}
 		return true;
-		// } else {
-		// 	return valid;
-		// }
 	}
 
 	// TODO: MAYBE FILL THIS OUT: add convenience methods
@@ -202,20 +199,6 @@ public class Verifier extends AVerifier {
 			e.printStackTrace();
 		}
 		return null;
-		// if (arg instanceof IntConstant) {
-		// 	return new MpqScalar(((IntConstant) arg).value);
-		// } else {
-		// 	assert(arg instanceof JimpleLocal);
-		// 	Abstract1 in = an.getFlowBefore(u).get();
-		// 	String arg_name = ((JimpleLocal) arg).getName();
-		// 	try {
-		// 		return (MpqScalar) in.getBound(man, arg_name).sup();
-		// 	} catch (ApronException e) {
-		// 		// TODO Auto-generated catch block
-		// 		e.printStackTrace();
-		// 		return new MpqScalar();
-		// 	} 
-		// }
 	}
 
 

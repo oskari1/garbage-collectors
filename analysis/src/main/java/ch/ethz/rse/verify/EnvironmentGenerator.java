@@ -71,7 +71,6 @@ public class EnvironmentGenerator {
 		// logger.debug("Added locals are " + locals);
 
 		// for debugging purposes, we try to print out the Jimple code:
-		soot.Body body = method.getActiveBody();
 		// logger.debug(body.toString());
 
 		// This should add the method-parameters to the ints
